@@ -269,7 +269,17 @@ max-width:500px;
 margin:auto;
 box-shadow:0 25px 60px rgba(0,0,0,0.1);
 }
+  
+<!-- ========================= -->
+<!-- IMAGE MODAL -->
+<!-- ========================= -->
 
+<div id="imageModal" class="image-modal">
+
+<img id="modalImg">
+
+</div>
+  
 footer{
 text-align:center;
 padding:60px;
@@ -295,6 +305,78 @@ width:200px;
 }
 
 }
+
+/* ========================= */
+/* APP CARD HOVER UPGRADE */
+/* ========================= */
+
+.app-card{
+transition:0.25s ease;
+}
+
+.app-card:hover{
+transform:translateY(-10px) scale(1.02);
+box-shadow:0 40px 80px rgba(0,0,0,0.15);
+}
+
+
+/* ========================= */
+/* SCREENSHOT HOVER */
+/* ========================= */
+
+.screenshot-grid img{
+cursor:pointer;
+transition:0.25s;
+}
+
+.screenshot-grid img:hover{
+transform:scale(1.05);
+}
+
+
+/* ========================= */
+/* IMAGE MODAL (확대보기) */
+/* ========================= */
+
+.image-modal{
+
+display:none;
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+width:100%;
+
+height:100%;
+
+background:rgba(0,0,0,0.85);
+
+justify-content:center;
+
+align-items:center;
+
+z-index:9999;
+
+}
+
+.image-modal img{
+
+max-width:90%;
+
+max-height:90%;
+
+border-radius:12px;
+
+}
+
+.image-modal.active{
+
+display:flex;
+
+}  
 
 </style>
 
@@ -410,7 +492,10 @@ screenshots:[
 "family2.png",
 "family3.png",
 "family4.png",
-"family5.png"
+"family5.png",
+"family6.png",
+"family7.png",
+"family8.png"
 ]
 
 },
@@ -425,8 +510,7 @@ screenshots:[
 "ocean1.png",
 "ocean2.png",
 "ocean3.png",
-"ocean4.png",
-"ocean5.png"
+"ocean4.png"
 ]
 
 }
@@ -550,7 +634,32 @@ slider.style.transform=`translateX(-${index*300}px)`;
 };
 
 });
+/* ========================= */
+/* SCREENSHOT CLICK ZOOM */
+/* ========================= */
 
+const modal = document.getElementById("imageModal");
+const modalImg = document.getElementById("modalImg");
+
+document.addEventListener("click",function(e){
+
+if(e.target.closest(".screenshot-grid img")){
+
+modal.classList.add("active");
+
+modalImg.src = e.target.src;
+
+}
+
+});
+
+/* 모달 클릭하면 닫기 */
+
+modal.addEventListener("click",function(){
+
+modal.classList.remove("active");
+
+});
 </script>
 
 </body>

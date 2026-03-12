@@ -339,6 +339,44 @@ font-size:13px;
 
 }
 
+.intro-btn{
+
+display:inline-block;
+
+margin-top:8px;
+
+padding:10px 18px;
+
+background:#f1f3f5;
+
+color:#333;
+
+border-radius:8px;
+
+text-decoration:none;
+
+font-size:13px;
+
+margin-left:6px;
+
+}
+
+.intro-btn:hover{
+background:#e5e7ea;
+}
+
+.coming{
+
+margin-top:16px;
+
+font-size:13px;
+
+color:#888;
+
+line-height:1.5;
+
+}  
+
 </style>
 
 </head>
@@ -536,14 +574,16 @@ const apps = [
 name:"패밀리 루틴",
 desc:"가족 일정, 메모, 지출을 한 앱에서 관리하는 가족 통합 올인원 앱",
 icon:"familyroutine_icon.png",
-link:"https://play.google.com/store/apps/details?id=com.gomsoft.familyroutine"
+link:"https://play.google.com/store/apps/details?id=com.gomsoft.familyroutine",
+intro:"https://gomstyle.github.io/FamilyRoutine_Introduction/",
+status:"live"
 },
 
 {
 name:"바다동물의숲",
 desc:"바다 동물들을 수집하고 키우는 힐링 캐주얼 게임",
 icon:"ocean_forest_icon.png",
-link:"구글플레이링크"
+status:"paused"
 }
 
 ];
@@ -555,6 +595,39 @@ apps.forEach(app=>{
 const card = document.createElement("div");
 
 card.className="app-card";
+
+let buttons="";
+
+/* 앱 상태에 따라 UI 변경 */
+
+if(app.status==="live"){
+
+buttons=`
+
+<a class="store-btn" href="${app.link}" target="_blank">
+Google Play
+</a>
+
+<a class="intro-btn" href="${app.intro}" target="_blank">
+앱 소개 보기
+</a>
+
+`;
+
+}
+
+else if(app.status==="paused"){
+
+buttons=`
+
+<div class="coming">
+현재 리뉴얼 업데이트를 준비 중입니다 <br>
+곧 새로운 모습으로 공개됩니다.
+</div>
+
+`;
+
+}
 
 card.innerHTML=`
 
@@ -568,11 +641,7 @@ ${app.name}
 ${app.desc}
 </div>
 
-<a class="store-btn" href="${app.link}" target="_blank">
-
-Google Play
-
-</a>
+${buttons}
 
 `;
 

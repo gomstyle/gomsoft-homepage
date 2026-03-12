@@ -9,9 +9,9 @@
 
 <style>
 
-/* ================================================= */
+/* ========================= */
 /* 기본 스타일 */
-/* ================================================= */
+/* ========================= */
 
 body{
 margin:0;
@@ -19,29 +19,27 @@ font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
 background:#f5f7fa;
 color:#1d1d1f;
 line-height:1.6;
--webkit-font-smoothing:antialiased;
 }
 
-/* 콘텐츠 폭 제한 */
+/* 페이지 폭 */
 
 .container{
 max-width:1080px;
 margin:auto;
-padding:80px 20px;
+padding:70px 20px;
 }
 
 
-/* ================================================= */
+/* ========================= */
 /* 네비게이션 */
-/* ================================================= */
+/* ========================= */
 
 .navbar{
 position:sticky;
 top:0;
-background:rgba(255,255,255,0.8);
+background:rgba(255,255,255,0.9);
 backdrop-filter:blur(8px);
 border-bottom:1px solid #eee;
-z-index:100;
 }
 
 .nav-inner{
@@ -56,52 +54,43 @@ align-items:center;
 .logo{
 font-size:20px;
 font-weight:700;
-letter-spacing:-0.5px;
 }
 
 .menu a{
-margin-left:24px;
+margin-left:22px;
 text-decoration:none;
 color:#444;
 font-size:14px;
 }
 
-.menu a:hover{
-color:#000;
-}
 
-
-/* ================================================= */
+/* ========================= */
 /* HERO */
-/* ================================================= */
+/* ========================= */
 
 .hero{
 text-align:center;
-padding:100px 20px 40px;
+padding:90px 20px 40px;
 background:linear-gradient(180deg,#f7fbff 0%,#f5f7fa 100%);
 }
 
 .hero h1{
-font-size:58px;
+font-size:52px;
 font-weight:800;
-margin-bottom:12px;
-letter-spacing:-1px;
 }
 
 .hero p{
-font-size:20px;
+font-size:18px;
 color:#6e6e73;
-max-width:600px;
-margin:auto;
 }
 
 .cta{
 
 display:inline-block;
 
-margin-top:30px;
+margin-top:25px;
 
-padding:15px 30px;
+padding:14px 28px;
 
 background:#0071e3;
 
@@ -113,146 +102,79 @@ text-decoration:none;
 
 font-weight:600;
 
-transition:0.25s;
-
-}
-
-.cta:hover{
-
-transform:translateY(-2px);
-
-box-shadow:0 10px 25px rgba(0,0,0,0.15);
-
 }
 
 
-/* ================================================= */
-/* ABOUT */
-/* ================================================= */
-
-.about{
-text-align:center;
-}
-
-.about h2{
-font-size:36px;
-margin-bottom:10px;
-letter-spacing:-0.5px;
-}
-
-.about p{
-color:#6e6e73;
-max-width:700px;
-margin:auto;
-font-size:18px;
-}
-
-
-/* ================================================= */
-/* PHILOSOPHY */
-/* ================================================= */
-
-.philosophy{
-background:white;
-padding:90px 20px;
-text-align:center;
-}
-
-.philosophy h2{
-font-size:34px;
-}
-
-.philosophy p{
-max-width:720px;
-margin:auto;
-color:#6e6e73;
-font-size:18px;
-}
-
-
-/* ================================================= */
+/* ========================= */
 /* 앱 목록 */
-/* ================================================= */
+/* ========================= */
 
 .apps h2{
 text-align:center;
-font-size:38px;
-margin-bottom:60px;
-letter-spacing:-0.5px;
+font-size:34px;
+margin-bottom:50px;
 }
-
-/* 카드 GRID */
 
 .app-grid{
 
 display:grid;
 
-grid-template-columns:repeat(auto-fit,minmax(280px,280px));
+grid-template-columns:repeat(auto-fit,minmax(260px,260px));
 
-gap:40px;
+gap:35px;
 
 justify-content:center;
 
 }
 
-/* 카드 */
-
 .app-card{
 
 background:white;
 
-padding:32px;
+padding:30px;
 
 border-radius:22px;
 
-box-shadow:0 20px 40px rgba(0,0,0,0.06);
+box-shadow:0 20px 50px rgba(0,0,0,0.08);
 
 text-align:center;
 
-transition:0.3s;
+transition:0.25s;
 
 }
 
 .app-card:hover{
 
-transform:translateY(-10px);
+transform:translateY(-8px);
 
-box-shadow:0 30px 60px rgba(0,0,0,0.12);
+box-shadow:0 35px 70px rgba(0,0,0,0.12);
 
 }
-
-/* 아이콘 */
 
 .app-icon{
-width:88px;
-border-radius:22px;
-margin-bottom:16px;
+width:80px;
+border-radius:20px;
+margin-bottom:14px;
 }
 
-/* 앱 이름 */
-
 .app-title{
-font-size:22px;
+font-size:20px;
 font-weight:700;
 }
 
-/* 설명 */
-
 .app-desc{
-font-size:15px;
+font-size:14px;
 color:#6e6e73;
 margin-top:6px;
 }
-
-/* 버튼 */
 
 .store-btn{
 
 display:inline-block;
 
-margin-top:18px;
+margin-top:14px;
 
-padding:10px 20px;
+padding:10px 18px;
 
 background:#0071e3;
 
@@ -262,22 +184,14 @@ border-radius:8px;
 
 text-decoration:none;
 
-font-size:14px;
-
-transition:0.2s;
-
-}
-
-.store-btn:hover{
-
-background:#005fcc;
+font-size:13px;
 
 }
 
 
-/* ================================================= */
+/* ========================= */
 /* CONTACT */
-/* ================================================= */
+/* ========================= */
 
 .contact{
 text-align:center;
@@ -287,52 +201,45 @@ text-align:center;
 
 background:white;
 
-padding:60px;
+padding:50px;
 
 border-radius:24px;
 
-max-width:520px;
+max-width:500px;
 
 margin:auto;
 
-box-shadow:0 20px 50px rgba(0,0,0,0.08);
+box-shadow:0 25px 60px rgba(0,0,0,0.1);
 
 }
-
-.contact h2{
-font-size:34px;
-}
-
-
-/* ================================================= */
-/* FOOTER */
-/* ================================================= */
 
 footer{
-
 text-align:center;
-
-padding:60px 20px;
-
-color:#6e6e73;
-
-font-size:14px;
-
+padding:60px;
+color:#777;
 }
 
 
-/* ================================================= */
+/* ========================= */
 /* 모바일 */
-/* ================================================= */
+/* ========================= */
 
 @media(max-width:900px){
 
 .hero h1{
-font-size:40px;
+font-size:36px;
 }
 
-.about h2{
-font-size:30px;
+.hero p{
+font-size:15px;
+}
+
+.app-title{
+font-size:18px;
+}
+
+.app-desc{
+font-size:13px;
 }
 
 }
@@ -345,9 +252,9 @@ font-size:30px;
 <body>
 
 
-<!-- ================================================= -->
-<!-- 네비게이션 -->
-<!-- ================================================= -->
+<!-- ========================= -->
+<!-- NAVBAR -->
+<!-- ========================= -->
 
 <div class="navbar">
 
@@ -357,7 +264,6 @@ font-size:30px;
 
 <div class="menu">
 
-<a href="#about">About</a>
 <a href="#apps">Apps</a>
 <a href="#contact">Contact</a>
 
@@ -369,138 +275,42 @@ font-size:30px;
 
 
 
-<!-- ================================================= -->
+<!-- ========================= -->
 <!-- HERO -->
-<!-- ================================================= -->
+<!-- ========================= -->
 
 <section class="hero">
 
 <h1>GOMSOFT</h1>
 
 <p>
+
 작은 아이디어가  
 사람들의 일상을 바꾸는 앱이 됩니다.
+
 </p>
 
 <a class="cta" href="#apps">
+
 개발 앱 보기
+
 </a>
 
 </section>
 
 
 
-<!-- ================================================= -->
-<!-- ABOUT -->
-<!-- ================================================= -->
-
-<div class="container about" id="about">
-
-<h2>About GOMSOFT</h2>
-
-<p>
-곰소프트는 실생활에서 바로 사용할 수 있는  
-모바일 앱과 게임을 개발하는 독립 개발 스튜디오입니다.
-
-단순하지만 유용한 앱,  
-그리고 즐거움을 주는 캐주얼 게임을 만듭니다.
-</p>
-
-</div>
-
-
-
-<!-- ================================================= -->
-<!-- PHILOSOPHY -->
-<!-- ================================================= -->
-
-<section class="philosophy">
-
-<h2>Our Philosophy</h2>
-
-<p>
-
-우리는 복잡한 앱을 만들지 않습니다.
-
-누구나 쉽게 사용할 수 있고  
-실제 생활에서 도움이 되는 앱을 만듭니다.
-
-</p>
-
-</section>
-
-
-
-<!-- ================================================= -->
-<!-- 앱 목록 -->
-<!-- ================================================= -->
+<!-- ========================= -->
+<!-- APP LIST -->
+<!-- ========================= -->
 
 <div class="container apps" id="apps">
 
 <h2>Our Apps</h2>
 
-<div class="app-grid">
+<div class="app-grid" id="appGrid">
 
-
-<!-- ================================================= -->
-<!-- 앱 카드 1 -->
-<!-- ================================================= -->
-
-<div class="app-card">
-
-<img class="app-icon" src="app_icon.png">
-
-<div class="app-title">
-패밀리 루틴
-</div>
-
-<div class="app-desc">
-가족 일정, 메모, 지출을  
-한 앱에서 관리하는 가족 통합 관리 앱
-</div>
-
-<a class="store-btn"
-href="https://play.google.com/store/apps/details?id=com.gomsoft.familyroutine"
-target="_blank">
-
-Google Play
-
-</a>
-
-</div>
-
-
-
-<!-- ================================================= -->
-<!-- 앱 카드 2 -->
-<!-- ================================================= -->
-
-<div class="app-card">
-
-<img class="app-icon" src="ocean_forest_icon.png">
-
-<div class="app-title">
-바다동물의숲
-</div>
-
-<div class="app-desc">
-
-바다 동물들과 함께하는  
-힐링 캐주얼 모바일 게임
-
-</div>
-
-<a class="store-btn"
-href="구글플레이링크"
-target="_blank">
-
-Google Play
-
-</a>
-
-</div>
-
-
+<!-- 앱 카드가 자동 생성되는 영역 -->
 
 </div>
 
@@ -508,9 +318,9 @@ Google Play
 
 
 
-<!-- ================================================= -->
+<!-- ========================= -->
 <!-- CONTACT -->
-<!-- ================================================= -->
+<!-- ========================= -->
 
 <div class="container contact" id="contact">
 
@@ -518,27 +328,21 @@ Google Play
 
 <h2>Contact</h2>
 
-<p style="margin-bottom:20px; color:#6e6e73;">
+<p style="color:#6e6e73;">
 협업 · 리뷰 · 문의
 </p>
 
-<div style="display:flex; justify-content:center; align-items:center; gap:10px; margin-bottom:16px;">
+<p>
+gomstyle3339@gmail.com
+</p>
 
-<svg width="20" height="20" viewBox="0 0 24 24" fill="#444">
-<path d="M12 13L2 6.76V18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6.76L12 13zm10-9H2l10 6 10-6z"/>
-</svg>
-
-<span>gomstyle3339@gmail.com</span>
-
-</div>
-
-<div style="color:#6e6e73;font-size:14px;">
+<p style="color:#6e6e73;">
 대표 : 허구슬
-</div>
+</p>
 
-<div style="color:#6e6e73;font-size:14px;">
+<p style="color:#6e6e73;">
 사업자등록번호 : 110-33-91602
-</div>
+</p>
 
 </div>
 
@@ -548,10 +352,94 @@ Google Play
 
 <footer>
 
-© 2026 GOMSOFT  
-Mobile App Studio
+© 2026 GOMSOFT
 
 </footer>
+
+
+
+<!-- ================================================= -->
+<!-- 앱 자동 생성 시스템 -->
+<!-- ================================================= -->
+
+<script>
+
+/*
+========================================
+새 앱 추가 방법
+
+아래 apps 배열에
+
+name
+desc
+icon
+link
+
+만 추가하면
+앱 카드가 자동 생성됩니다
+========================================
+*/
+
+const apps = [
+
+{
+name:"패밀리 루틴",
+desc:"가족 일정, 메모, 지출을 한 앱에서 관리",
+icon:"app_icon.png",
+link:"https://play.google.com/store/apps/details?id=com.gomsoft.familyroutine"
+},
+
+{
+name:"바다동물의숲",
+desc:"바다 동물들과 함께하는 힐링 캐주얼 게임",
+icon:"ocean_forest_icon.png",
+link:"구글플레이링크"
+}
+
+];
+
+
+
+/*
+========================================
+앱 카드 자동 생성 코드
+수정할 필요 없음
+========================================
+*/
+
+const grid = document.getElementById("appGrid");
+
+apps.forEach(app=>{
+
+const card = document.createElement("div");
+
+card.className="app-card";
+
+card.innerHTML=`
+
+<img class="app-icon" src="${app.icon}">
+
+<div class="app-title">
+${app.name}
+</div>
+
+<div class="app-desc">
+${app.desc}
+</div>
+
+<a class="store-btn" href="${app.link}" target="_blank">
+
+Google Play
+
+</a>
+
+`;
+
+grid.appendChild(card);
+
+});
+
+</script>
 
 
 </body>

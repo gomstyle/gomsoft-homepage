@@ -1,1 +1,398 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>GOMSOFT | App Development Studio</title>
+
+<style>
+
+/* ===== 기본 ===== */
+
+body{
+margin:0;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+background:#f6f8fb;
+color:#222;
+line-height:1.6;
+}
+
+.container{
+max-width:1100px;
+margin:auto;
+padding:40px 20px;
+}
+
+/* ===== HERO ===== */
+
+.hero{
+text-align:center;
+padding:100px 20px 60px;
+background:linear-gradient(180deg,#f6fbff 0%,#f6f8fb 100%);
+}
+
+.hero h1{
+font-size:42px;
+margin-bottom:15px;
+font-weight:800;
+}
+
+.hero p{
+font-size:18px;
+color:#555;
+max-width:700px;
+margin:auto;
+}
+
+.cta{
+display:inline-block;
+margin-top:30px;
+padding:16px 28px;
+background:#2e7d32;
+color:white;
+border-radius:12px;
+font-weight:700;
+text-decoration:none;
+transition:0.2s;
+}
+
+.cta:hover{
+transform:translateY(-2px);
+box-shadow:0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* ===== 회사 소개 ===== */
+
+.about{
+text-align:center;
+margin-top:40px;
+}
+
+.about h2{
+font-size:30px;
+margin-bottom:10px;
+}
+
+.about p{
+color:#666;
+max-width:700px;
+margin:auto;
+}
+
+/* ===== 앱 목록 ===== */
+
+.apps{
+margin-top:80px;
+}
+
+.apps h2{
+text-align:center;
+font-size:30px;
+margin-bottom:40px;
+}
+
+.app-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:24px;
+}
+
+.app-card{
+background:white;
+border-radius:16px;
+padding:24px;
+box-shadow:0 10px 25px rgba(0,0,0,0.05);
+transition:0.2s;
+}
+
+.app-card:hover{
+transform:translateY(-4px);
+}
+
+.app-icon{
+width:60px;
+border-radius:14px;
+margin-bottom:12px;
+}
+
+.app-title{
+font-size:18px;
+font-weight:700;
+margin-bottom:6px;
+}
+
+.app-desc{
+font-size:14px;
+color:#666;
+}
+
+.store-btn{
+display:inline-block;
+margin-top:12px;
+padding:10px 14px;
+background:#4CAF50;
+color:white;
+border-radius:8px;
+font-size:13px;
+text-decoration:none;
+}
+
+/* ===== 소개 섹션 ===== */
+
+.feature{
+margin-top:80px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:50px;
+align-items:center;
+}
+
+.feature img{
+width:100%;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+.feature h2{
+font-size:28px;
+margin-bottom:10px;
+}
+
+.feature p{
+color:#666;
+}
+
+/* ===== 문의 ===== */
+
+.contact{
+margin-top:100px;
+text-align:center;
+}
+
+.contact h2{
+font-size:30px;
+}
+
+.contact p{
+color:#666;
+margin-top:10px;
+}
+
+/* ===== footer ===== */
+
+footer{
+margin-top:80px;
+padding:40px;
+text-align:center;
+color:#888;
+font-size:14px;
+}
+
+/* ===== 모바일 ===== */
+
+@media(max-width:900px){
+
+.hero h1{
+font-size:32px;
+}
+
+.app-grid{
+grid-template-columns:1fr 1fr;
+}
+
+.feature{
+grid-template-columns:1fr;
+}
+
+}
+
+@media(max-width:500px){
+
+.app-grid{
+grid-template-columns:1fr;
+}
+
+.hero{
+padding:80px 20px 40px;
+}
+
+.hero h1{
+font-size:28px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+<h1>GOMSOFT</h1>
+
+<p>
+작은 아이디어가 큰 앱이 됩니다.<br>
+곰소프트는 생활을 더 편리하게 만드는 모바일 앱을 개발합니다.
+</p>
+
+<a class="cta" href="#apps">
+개발 앱 보기
+</a>
+
+</section>
+
+
+
+<!-- 회사 소개 -->
+
+<div class="container about">
+
+<h2>About GOMSOFT</h2>
+
+<p>
+곰소프트는 실생활에서 바로 사용할 수 있는 모바일 앱을 만드는
+1인 개발 스튜디오입니다.
+<br><br>
+가족 관리, 생활 관리, 생산성 앱을 중심으로
+사람들의 일상을 더 편리하게 만드는 서비스를 개발하고 있습니다.
+</p>
+
+</div>
+
+
+
+<!-- 앱 목록 -->
+
+<div class="container apps" id="apps">
+
+<h2>Our Apps</h2>
+
+<div class="app-grid">
+
+<!-- 패밀리 루틴 -->
+
+<div class="app-card">
+
+<img class="app-icon" src="app_icon.png">
+
+<div class="app-title">
+패밀리 루틴
+</div>
+
+<div class="app-desc">
+가족 일정, 메모, 지출, 성장기록을 하나의 앱에서 관리하는
+가족 통합 관리 앱
+</div>
+
+<a class="store-btn"
+href="https://play.google.com/store/apps/details?id=com.gomsoft.familyroutine"
+target="_blank">
+Google Play
+</a>
+
+</div>
+
+
+<!-- 앞으로 출시할 앱 -->
+
+<div class="app-card">
+
+<div class="app-title">
+Next App
+</div>
+
+<div class="app-desc">
+곰소프트의 다음 프로젝트가 준비 중입니다.
+</div>
+
+</div>
+
+
+<div class="app-card">
+
+<div class="app-title">
+Coming Soon
+</div>
+
+<div class="app-desc">
+새로운 앱이 곧 공개됩니다.
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- 패밀리 루틴 소개 -->
+
+<div class="container feature">
+
+<div>
+
+<h2>Family Routine</h2>
+
+<p>
+패밀리 루틴은 가족의 하루를 정리하는 앱입니다.
+<br><br>
+
+✔ 가족 구성원별 프로필 관리<br>
+✔ 일정 · 루틴 타임라인<br>
+✔ 메모 · 일기 기록<br>
+✔ 예방접종 기록<br>
+✔ 의류 사이즈 기록<br>
+✔ 월간 지출 관리
+
+<br><br>
+
+여러 앱을 오갈 필요 없이
+가족의 일상을 하나의 시스템으로 관리할 수 있습니다.
+
+</p>
+
+</div>
+
+<img src="main_visual.png">
+
+</div>
+
+
+
+<!-- 문의 -->
+
+<div class="container contact">
+
+<h2>Contact</h2>
+
+<p>
+
+협업 · 리뷰 · 문의는 아래 이메일로 연락주세요.
+
+<br><br>
+
+📧 gomsoft.contact@gmail.com
+
+</p>
+
+</div>
+
+
+
+<footer>
+
+© 2026 GOMSOFT  
+App Development Studio
+
+</footer>
+
+
+</body>
+</html>

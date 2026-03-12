@@ -29,7 +29,6 @@ margin:auto;
 padding:70px 20px;
 }
 
-
 /* ========================= */
 /* 네비게이션 */
 /* ========================= */
@@ -62,6 +61,90 @@ text-decoration:none;
 color:#444;
 font-size:14px;
 }
+
+
+/* ========================= */
+/* HERO */
+/* ========================= */
+
+.hero{
+text-align:center;
+padding:90px 20px 40px;
+background:linear-gradient(180deg,#f7fbff 0%,#f5f7fa 100%);
+}
+
+/* 곰소프트 로고 */
+
+.hero-logo img{
+width:90px;
+margin-bottom:18px;
+}
+
+.hero h1{
+font-size:52px;
+font-weight:800;
+margin-bottom:10px;
+}
+
+.hero p{
+font-size:18px;
+color:#6e6e73;
+}
+
+.cta{
+
+display:inline-block;
+
+margin-top:25px;
+
+padding:14px 28px;
+
+background:#0071e3;
+
+color:white;
+
+border-radius:12px;
+
+text-decoration:none;
+
+font-weight:600;
+
+}
+
+
+/* ========================= */
+/* 앱 스크린샷 showcase */
+/* ========================= */
+
+.app-showcase{
+padding:40px 20px 80px;
+text-align:center;
+}
+
+.showcase-grid{
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:40px;
+
+max-width:900px;
+
+margin:auto;
+
+}
+
+.showcase-grid img{
+
+width:100%;
+
+border-radius:24px;
+
+box-shadow:0 30px 60px rgba(0,0,0,0.15);
+
+}
+
 
 /* ========================= */
 /* ABOUT SECTION */
@@ -110,46 +193,6 @@ max-width:700px;
 margin:auto;
 font-size:17px;
 color:#6e6e73;
-}
-  
-/* ========================= */
-/* HERO */
-/* ========================= */
-
-.hero{
-text-align:center;
-padding:90px 20px 40px;
-background:linear-gradient(180deg,#f7fbff 0%,#f5f7fa 100%);
-}
-
-.hero h1{
-font-size:52px;
-font-weight:800;
-}
-
-.hero p{
-font-size:18px;
-color:#6e6e73;
-}
-
-.cta{
-
-display:inline-block;
-
-margin-top:25px;
-
-padding:14px 28px;
-
-background:#0071e3;
-
-color:white;
-
-border-radius:12px;
-
-text-decoration:none;
-
-font-weight:600;
-
 }
 
 
@@ -282,6 +325,10 @@ font-size:36px;
 font-size:15px;
 }
 
+.showcase-grid{
+grid-template-columns:1fr;
+}
+
 .app-title{
 font-size:18px;
 }
@@ -329,6 +376,11 @@ font-size:13px;
 
 <section class="hero">
 
+<!-- 곰소프트 로고 -->
+<div class="hero-logo">
+<img src="gomsoft_logo.png">
+</div>
+
 <h1>GOMSOFT</h1>
 
 <p>
@@ -345,9 +397,31 @@ font-size:13px;
 </a>
 
 </section>
-<!-- ================================================= -->
-<!-- ABOUT GOMSOFT -->
-<!-- ================================================= -->
+
+
+
+<!-- ========================= -->
+<!-- 앱 스크린샷 -->
+<!-- 여기 이미지 파일만 바꾸면 됨 -->
+<!-- ========================= -->
+
+<section class="app-showcase">
+
+<div class="showcase-grid">
+
+<img src="familyroutine_screen.png">
+
+<img src="oceanforest_screen.png">
+
+</div>
+
+</section>
+
+
+
+<!-- ========================= -->
+<!-- ABOUT -->
+<!-- ========================= -->
 
 <section class="about-section" id="about">
 
@@ -360,8 +434,7 @@ font-size:13px;
 곰소프트는 실생활에서 바로 사용할 수 있는  
 모바일 앱과 게임을 개발하는 독립 개발 스튜디오입니다.
 
-복잡한 기능보다  
-사람들이 매일 사용할 수 있는  
+복잡한 기능보다 사람들이 매일 사용할 수 있는  
 단순하고 유용한 앱을 만드는 것을 목표로 합니다.
 
 </p>
@@ -372,9 +445,9 @@ font-size:13px;
 
 
 
-<!-- ================================================= -->
+<!-- ========================= -->
 <!-- OUR PHILOSOPHY -->
-<!-- ================================================= -->
+<!-- ========================= -->
 
 <section class="philosophy-section">
 
@@ -385,17 +458,16 @@ font-size:13px;
 <p>
 
 우리는 복잡한 앱을 만들지 않습니다.  
-누구나 쉽게 사용할 수 있고  
-실제 생활에서 도움이 되는 앱을 만듭니다.
+누구나 쉽게 사용할 수 있고 실제 생활에서 도움이 되는 앱을 만듭니다.
 
-작은 아이디어가  
-사람들의 일상을 바꿀 수 있다고 믿습니다.
+작은 아이디어가 사람들의 일상을 바꿀 수 있다고 믿습니다.
 
 </p>
 
 </div>
 
 </section>
+
 
 
 <!-- ========================= -->
@@ -408,7 +480,7 @@ font-size:13px;
 
 <div class="app-grid" id="appGrid">
 
-<!-- 앱 카드가 자동 생성되는 영역 -->
+<!-- 앱 카드 자동 생성 -->
 
 </div>
 
@@ -458,22 +530,6 @@ Copyright © 2026 GOMSOFT. 모든 권리 보유.
 
 <script>
 
-/*
-========================================
-새 앱 추가 방법
-
-아래 apps 배열에
-
-name
-desc
-icon
-link
-
-만 추가하면
-앱 카드가 자동 생성됩니다
-========================================
-*/
-
 const apps = [
 
 {
@@ -491,15 +547,6 @@ link:"구글플레이링크"
 }
 
 ];
-
-
-
-/*
-========================================
-앱 카드 자동 생성 코드
-수정할 필요 없음
-========================================
-*/
 
 const grid = document.getElementById("appGrid");
 

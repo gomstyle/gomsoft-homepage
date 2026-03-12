@@ -222,34 +222,106 @@ margin:auto;
 /* ========================= */
 /* APP SCREENSHOT */
 /* ========================= */
+/* APP SCREENSHOT GRID */
+/* ========================= */
+
+.screenshot-grid{
+
+margin-top:40px;
+
+display:grid;
+
+gap:24px;
+
+justify-content:center;
+
+}
+
+/* 세로 스크린샷 (패밀리 루틴) */
+
+.screenshot-portrait{
+
+grid-template-columns:repeat(4,1fr);
+
+max-width:1000px;
+
+margin:auto;
+
+}
+
+.screenshot-portrait img{
+
+width:100%;
+
+max-width:200px;
+
+border-radius:18px;
+
+box-shadow:0 20px 40px rgba(0,0,0,0.15);
+
+transition:0.25s;
+
+}
+
+/* 가로 스크린샷 (바다동물의숲) */
+
+.screenshot-landscape{
+
+grid-template-columns:repeat(2,1fr);
+
+max-width:900px;
+
+margin:auto;
+
+}
+
+.screenshot-landscape img{
+
+width:100%;
+
+border-radius:18px;
+
+box-shadow:0 20px 40px rgba(0,0,0,0.15);
+
+}
+
+/* hover */
+
+.screenshot-grid img:hover{
+
+transform:translateY(-6px);
+
+}
+
+/* ========================= */
+/* MOBILE */
+/* ========================= */
+
+@media(max-width:768px){
 
 .screenshot-grid{
 
 display:flex;
 
-gap:24px;
+overflow-x:auto;
 
-flex-wrap:wrap;
+gap:16px;
 
-justify-content:center;
+padding:10px;
 
-margin-top:40px;
+scroll-snap-type:x mandatory;
 
 }
 
 .screenshot-grid img{
 
-width:240px;
-height:auto;
-border-radius:20px;
-box-shadow:0 20px 40px rgba(0,0,0,0.15);
-transition:0.25s;
+flex:0 0 80%;
+
+scroll-snap-align:center;
+
+max-width:none;
 
 }
-
-.screenshot-grid img:hover{
-
-transform:translateY(-6px);
 
 }
 
@@ -486,6 +558,7 @@ icon:"familyroutine_icon.png",
 link:"https://play.google.com/store/apps/details?id=com.gomsoft.familyroutine",
 intro:"https://gomstyle.github.io/FamilyRoutine_Introduction/",
 status:"live",
+orientation:"portrait",
 
 screenshots:[
 "family1.png",
@@ -505,12 +578,13 @@ name:"바다동물의숲",
 desc:"바다 동물들을 수집하고 키우는 힐링 캐주얼 게임",
 icon:"ocean_forest_icon.png",
 status:"paused",
+orientation:"landscape",
 
 screenshots:[
-"ocean1.png",
-"ocean2.png",
-"ocean3.png",
-"ocean4.png"
+"ocean1.jpg",
+"ocean2.jpg",
+"ocean3.jpg",
+"ocean4.jpg"
 ]
 
 }

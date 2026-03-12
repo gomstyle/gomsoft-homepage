@@ -224,7 +224,9 @@ margin:auto;
 /* ========================= */
 /* APP SCREENSHOT GRID */
 /* ========================= */
-
+.screenshot-grid::-webkit-scrollbar{
+display:none;
+}
 .screenshot-grid{
 
 margin-top:40px;
@@ -297,7 +299,85 @@ transform:translateY(-6px);
 /* MOBILE */
 /* ========================= */
 
+/* ========================= */
+/* MOBILE FIX */
+/* ========================= */
+
 @media(max-width:768px){
+
+/* 전체 폰트 축소 */
+
+body{
+font-size:14px;
+}
+
+.hero h1{
+font-size:28px;
+}
+
+.hero p{
+font-size:14px;
+}
+
+.about h2{
+font-size:26px;
+}
+
+.about p{
+font-size:14px;
+}
+
+.apps h2{
+font-size:28px;
+}
+
+.app-title{
+font-size:16px;
+}
+
+.app-desc{
+font-size:13px;
+}
+
+.app-detail-header h2{
+font-size:26px;
+}
+
+.app-detail-header p{
+font-size:14px;
+}
+
+/* 스크린샷 */
+
+.screenshot-grid{
+
+display:flex;
+
+overflow-x:auto;
+
+gap:16px;
+
+padding:10px 0;
+
+scroll-snap-type:x mandatory;
+
+}
+
+.screenshot-grid img{
+
+flex:0 0 85%;
+
+width:auto;
+
+max-width:none;
+
+height:auto;
+
+scroll-snap-align:center;
+
+}
+
+}
 
 .screenshot-grid{
 
@@ -341,17 +421,7 @@ max-width:500px;
 margin:auto;
 box-shadow:0 25px 60px rgba(0,0,0,0.1);
 }
-  
-<!-- ========================= -->
-<!-- IMAGE MODAL -->
-<!-- ========================= -->
-
-<div id="imageModal" class="image-modal">
-
-<img id="modalImg">
-
-</div>
-  
+   
 footer{
 text-align:center;
 padding:60px;
@@ -370,10 +440,6 @@ font-size:34px;
 
 .hero p{
 font-size:15px;
-}
-
-.phone{
-width:200px;
 }
 
 }
@@ -455,19 +521,20 @@ display:flex;
 </head>
 
 <body>
+  
+<!-- IMAGE MODAL -->
+<div id="imageModal" class="image-modal">
+<img id="modalImg">
+</div>
 
 <!-- NAVBAR -->
-
 <div class="navbar">
 <div class="nav-inner">
-
 <div class="logo">GOMSOFT</div>
-
 <div class="menu">
 <a href="#apps">Apps</a>
 <a href="#contact">Contact</a>
 </div>
-
 </div>
 </div>
 
@@ -496,7 +563,7 @@ display:flex;
 
 <p>곰소프트는 실생활에서 바로 사용할 수 있는</p>
 <p>모바일 앱과 게임을 개발하는 독립 개발 스튜디오입니다.</p>
-
+<p></p>
 <p>단순하지만 유용한 앱,</p>
 <p>그리고 즐거움을 주는 캐주얼 게임을 만듭니다.</p>
 

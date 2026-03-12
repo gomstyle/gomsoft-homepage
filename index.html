@@ -183,8 +183,11 @@ margin-bottom:40px;
 
 .app-grid{
 display:grid;
-grid-template-columns:repeat(3,1fr);
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
 gap:26px;
+justify-content:center;
+max-width:900px;
+margin:auto;
 }
 
 /* 앱 카드 */
@@ -195,6 +198,8 @@ padding:26px;
 border-radius:18px;
 box-shadow:0 12px 28px rgba(0,0,0,0.06);
 transition:0.25s;
+max-width:280px;
+margin:auto;
 }
 
 .app-card:hover{

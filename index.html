@@ -411,41 +411,89 @@ max-width:600px;
 margin:auto;
 }
 
-/* 스크린샷 슬라이드 */
+/* ========================= */
+/* APP SCREENSHOT SLIDER */
+/* ========================= */
+
+.screenshot-wrapper{
+
+position:relative;
+
+max-width:1100px;
+
+margin:auto;
+
+overflow:hidden;
+
+}
 
 .screenshot-slider{
 
 display:flex;
 
-gap:20px;
+transition:transform 0.4s ease;
 
-overflow-x:auto;
-
-padding:20px 10px;
-
-scroll-snap-type:x mandatory;
+gap:24px;
 
 }
 
 .screenshot-slider img{
 
-height:480px;
+height:520px;
 
-border-radius:20px;
+border-radius:22px;
 
-box-shadow:0 25px 50px rgba(0,0,0,0.15);
-
-scroll-snap-align:center;
+box-shadow:0 30px 60px rgba(0,0,0,0.15);
 
 }
 
-/* 가로 이미지 대응 */
+/* 가로 스크린샷 */
 
 .screenshot-slider img.landscape{
 
-height:320px;
+height:340px;
 
-}  
+}
+
+/* 화살표 */
+
+.slider-btn{
+
+position:absolute;
+
+top:50%;
+
+transform:translateY(-50%);
+
+background:white;
+
+border:none;
+
+width:44px;
+
+height:44px;
+
+border-radius:50%;
+
+box-shadow:0 10px 20px rgba(0,0,0,0.15);
+
+cursor:pointer;
+
+font-size:20px;
+
+}
+
+.slider-left{
+
+left:-10px;
+
+}
+
+.slider-right{
+
+right:-10px;
+
+}
   
 </style>
 
@@ -713,17 +761,56 @@ detail.innerHTML=`
 
 </div>
 
+<div class="screenshot-wrapper">
+
+<button class="slider-btn slider-left">‹</button>
+
 <div class="screenshot-slider">
 
 ${screenshotsHTML}
 
 </div>
 
+<button class="slider-btn slider-right">›</button>
+
+</div>
+
+${screenshotsHTML}
+
+</div>
+
+<button class="slider-btn slider-right">›</button>
+
 </div>
 
 `;
 
 detailContainer.appendChild(detail);
+
+});
+document.querySelectorAll(".screenshot-wrapper").forEach(wrapper=>{
+
+const slider = wrapper.querySelector(".screenshot-slider");
+
+let index = 0;
+
+wrapper.querySelector(".slider-right").onclick = () => {
+
+index++;
+
+slider.style.transform = `translateX(-${index*320}px)`;
+
+};
+
+wrapper.querySelector(".slider-left").onclick = () => {
+
+index--;
+
+if(index<0) index=0;
+
+slider.style.transform = `translateX(-${index*320}px)`;
+
+};
 
 });
 

@@ -377,6 +377,76 @@ line-height:1.5;
 
 }  
 
+/* ========================= */
+/* APP DETAIL SECTION */
+/* ========================= */
+
+.app-detail{
+padding:90px 20px;
+background:white;
+}
+
+.app-detail:nth-child(even){
+background:#f8fafc;
+}
+
+.app-detail-inner{
+max-width:1100px;
+margin:auto;
+}
+
+.app-detail-header{
+text-align:center;
+margin-bottom:40px;
+}
+
+.app-detail-header h2{
+font-size:32px;
+margin-bottom:10px;
+}
+
+.app-detail-header p{
+color:#6e6e73;
+max-width:600px;
+margin:auto;
+}
+
+/* 스크린샷 슬라이드 */
+
+.screenshot-slider{
+
+display:flex;
+
+gap:20px;
+
+overflow-x:auto;
+
+padding:20px 10px;
+
+scroll-snap-type:x mandatory;
+
+}
+
+.screenshot-slider img{
+
+height:480px;
+
+border-radius:20px;
+
+box-shadow:0 25px 50px rgba(0,0,0,0.15);
+
+scroll-snap-align:center;
+
+}
+
+/* 가로 이미지 대응 */
+
+.screenshot-slider img.landscape{
+
+height:320px;
+
+}  
+  
 </style>
 
 </head>
@@ -437,26 +507,6 @@ line-height:1.5;
 </section>
 
 
-
-<!-- ========================= -->
-<!-- 앱 스크린샷 -->
-<!-- 여기 이미지 파일만 바꾸면 됨 -->
-<!-- ========================= -->
-
-<section class="app-showcase">
-
-<div class="showcase-grid">
-
-<img src="familyroutine_screen.png">
-
-<img src="oceanforest_screen.png">
-
-</div>
-
-</section>
-
-
-
 <!-- ========================= -->
 <!-- ABOUT -->
 <!-- ========================= -->
@@ -482,32 +532,6 @@ line-height:1.5;
 </section>
 
 
-
-<!-- ========================= -->
-<!-- OUR PHILOSOPHY -->
-<!-- ========================= -->
-
-<section class="philosophy-section">
-
-<div class="container philosophy">
-
-<h2>Our Philosophy</h2>
-
-<p>
-
-우리는 복잡한 앱을 만들지 않습니다.  
-누구나 쉽게 사용할 수 있고 실제 생활에서 도움이 되는 앱을 만듭니다.
-
-작은 아이디어가 사람들의 일상을 바꿀 수 있다고 믿습니다.
-
-</p>
-
-</div>
-
-</section>
-
-
-
 <!-- ========================= -->
 <!-- APP LIST -->
 <!-- ========================= -->
@@ -524,7 +548,7 @@ line-height:1.5;
 
 </div>
 
-
+<div id="appDetailContainer"></div>
 
 <!-- ========================= -->
 <!-- CONTACT -->
@@ -576,29 +600,51 @@ desc:"가족 일정, 메모, 지출을 한 앱에서 관리하는 가족 통합 
 icon:"familyroutine_icon.png",
 link:"https://play.google.com/store/apps/details?id=com.gomsoft.familyroutine",
 intro:"https://gomstyle.github.io/FamilyRoutine_Introduction/",
-status:"live"
+status:"live",
+
+screenshots:[
+"family1.png",
+"family2.png",
+"family3.png",
+"family4.png",
+"family5.png"
+"family6.png"
+"family7.png"
+"family8.png"
+"family9.png"
+]
+
 },
 
 {
 name:"바다동물의숲",
 desc:"바다 동물들을 수집하고 키우는 힐링 캐주얼 게임",
 icon:"ocean_forest_icon.png",
-status:"paused"
+status:"paused",
+
+screenshots:[
+"ocean1.png",
+"ocean2.png",
+"ocean3.png",
+"ocean4.png",
+"ocean5.png"
+]
+
 }
 
 ];
 
 const grid = document.getElementById("appGrid");
+const detailContainer = document.getElementById("appDetailContainer");
 
 apps.forEach(app=>{
 
-const card = document.createElement("div");
+/* 카드 생성 */
 
+const card = document.createElement("div");
 card.className="app-card";
 
 let buttons="";
-
-/* 앱 상태에 따라 UI 변경 */
 
 if(app.status==="live"){
 
@@ -614,15 +660,13 @@ Google Play
 
 `;
 
-}
-
-else if(app.status==="paused"){
+}else{
 
 buttons=`
 
 <div class="coming">
-현재 리뉴얼 업데이트를 준비 중입니다 <br>
-곧 새로운 모습으로 공개됩니다.
+현재 리뉴얼 업데이트 준비 중입니다<br>
+곧 새로운 버전으로 다시 출시됩니다.
 </div>
 
 `;
@@ -633,19 +677,53 @@ card.innerHTML=`
 
 <img class="app-icon" src="${app.icon}">
 
-<div class="app-title">
-${app.name}
-</div>
+<div class="app-title">${app.name}</div>
 
-<div class="app-desc">
-${app.desc}
-</div>
+<div class="app-desc">${app.desc}</div>
 
 ${buttons}
 
 `;
 
 grid.appendChild(card);
+
+
+/* 앱 상세 영역 생성 */
+
+let screenshotsHTML="";
+
+app.screenshots.forEach(src=>{
+
+screenshotsHTML += `<img src="${src}">`;
+
+});
+
+const detail = document.createElement("section");
+detail.className="app-detail";
+
+detail.innerHTML=`
+
+<div class="app-detail-inner">
+
+<div class="app-detail-header">
+
+<h2>${app.name}</h2>
+
+<p>${app.desc}</p>
+
+</div>
+
+<div class="screenshot-slider">
+
+${screenshotsHTML}
+
+</div>
+
+</div>
+
+`;
+
+detailContainer.appendChild(detail);
 
 });
 

@@ -220,63 +220,39 @@ margin:auto;
 }
 
 /* ========================= */
-/* IPHONE MOCKUP SLIDER */
+/* APP SCREENSHOT */
 /* ========================= */
 
-.slider-container{
-position:relative;
-overflow:hidden;
-}
+.screenshot-grid{
 
-.slider{
 display:flex;
-gap:40px;
-transition:transform 0.4s ease;
+
+gap:24px;
+
+flex-wrap:wrap;
+
 justify-content:center;
+
+margin-top:40px;
+
 }
 
-.phone{
-position:relative;
-width:260px;
-flex-shrink:0;
+.screenshot-grid img{
+
+width:240px;
+
+border-radius:20px;
+
+box-shadow:0 20px 40px rgba(0,0,0,0.15);
+
+transition:0.25s;
+
 }
 
-.phone-frame{
-width:100%;
-}
+.screenshot-grid img:hover{
 
-.phone-screen{
-position:absolute;
-top:6%;
-left:6%;
-width:88%;
-height:88%;
-object-fit:cover;
-border-radius:18px;
-}
+transform:translateY(-6px);
 
-/* slider arrows */
-
-.slider-btn{
-position:absolute;
-top:50%;
-transform:translateY(-50%);
-background:white;
-border:none;
-width:44px;
-height:44px;
-border-radius:50%;
-box-shadow:0 10px 20px rgba(0,0,0,0.15);
-cursor:pointer;
-font-size:20px;
-}
-
-.slider-left{
-left:0;
-}
-
-.slider-right{
-right:0;
 }
 
 /* ========================= */
@@ -518,14 +494,7 @@ let screens="";
 
 app.screenshots.forEach(img=>{
 
-screens+=`
-
-<div class="phone">
-<img class="phone-frame" src="iphone_mockup.png">
-<img class="phone-screen" src="${img}">
-</div>
-
-`;
+screens+=`<img src="${img}">`;
 
 });
 
@@ -544,7 +513,9 @@ detail.innerHTML=`
 
 </div>
 
-<div class="slider-container">
+<div class="screenshot-grid">
+${screens}
+</div>
 
 <button class="slider-btn slider-left">‹</button>
 

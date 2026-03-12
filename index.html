@@ -1,42 +1,41 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
 
-<!-- ===================================================== -->
-<!-- 기본 설정 (수정할 필요 없음) -->
-<!-- ===================================================== -->
+<!-- ========================= -->
+<!-- 기본 설정 -->
+<!-- ========================= -->
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>GOMSOFT | App Development Studio</title>
+<title>GOMSOFT | Mobile App Studio</title>
 
 <style>
 
-/* ===================================================== */
+/* ========================= */
 /* 기본 스타일 */
-/* ===================================================== */
+/* ========================= */
 
 body{
 margin:0;
 font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-background:#f6f8fb;
-color:#222;
+background:#f5f7fa;
+color:#1d1d1f;
 line-height:1.6;
 }
 
-/* 전체 콘텐츠 폭 제한 */
+/* 페이지 폭 */
+
 .container{
 max-width:1100px;
 margin:auto;
-padding:80px 20px;
+padding:90px 20px;
 }
 
-
-/* ===================================================== */
-/* 상단 메뉴 */
-/* ===================================================== */
+/* ========================= */
+/* 네비게이션 */
+/* ========================= */
 
 .navbar{
 position:sticky;
@@ -57,52 +56,53 @@ align-items:center;
 
 .logo{
 font-size:20px;
-font-weight:800;
+font-weight:700;
 }
 
 .menu a{
-margin-left:20px;
+margin-left:24px;
 text-decoration:none;
 color:#444;
 font-size:14px;
 }
 
 .menu a:hover{
-color:#2e7d32;
+color:#000;
 }
 
 
-/* ===================================================== */
-/* HERO 영역 */
-/* ===================================================== */
+/* ========================= */
+/* HERO */
+/* ========================= */
 
 .hero{
 text-align:center;
-padding:120px 20px 90px;
-background:linear-gradient(180deg,#f6fbff 0%,#f6f8fb 100%);
+padding:140px 20px 110px;
+background:linear-gradient(180deg,#f7fbff 0%,#f5f7fa 100%);
 }
 
 .hero h1{
-font-size:48px;
+font-size:52px;
 margin-bottom:10px;
+font-weight:800;
 }
 
 .hero p{
 font-size:18px;
-color:#666;
+color:#6e6e73;
 max-width:600px;
 margin:auto;
 }
 
 .cta{
 display:inline-block;
-margin-top:30px;
+margin-top:32px;
 padding:16px 30px;
-background:#2e7d32;
+background:#0071e3;
 color:white;
 border-radius:12px;
 text-decoration:none;
-font-weight:700;
+font-weight:600;
 }
 
 .cta:hover{
@@ -110,89 +110,129 @@ opacity:0.9;
 }
 
 
-/* ===================================================== */
-/* 앱 카드 영역 */
-/* ===================================================== */
+/* ========================= */
+/* 회사 소개 */
+/* ========================= */
+
+.about{
+text-align:center;
+}
+
+.about h2{
+font-size:34px;
+margin-bottom:10px;
+}
+
+.about p{
+color:#6e6e73;
+max-width:650px;
+margin:auto;
+font-size:17px;
+}
+
+
+/* ========================= */
+/* 개발 철학 */
+/* ========================= */
+
+.philosophy{
+background:white;
+padding:90px 20px;
+text-align:center;
+}
+
+.philosophy h2{
+font-size:32px;
+}
+
+.philosophy p{
+max-width:700px;
+margin:auto;
+color:#6e6e73;
+font-size:17px;
+}
+
+
+/* ========================= */
+/* 앱 목록 */
+/* ========================= */
 
 .apps h2{
 text-align:center;
-font-size:30px;
-margin-bottom:40px;
+font-size:36px;
+margin-bottom:50px;
 }
 
-/* ===================================================== */
-/* 앱 카드 GRID */
-/* 핵심 부분 */
-/* 카드 개수 상관없이 가운데 정렬됨 */
-/* ===================================================== */
+/* 카드 grid */
 
 .app-grid{
 
 display:grid;
 
-/* 카드 자동 배치 */
 grid-template-columns:repeat(auto-fit,minmax(260px,260px));
 
-gap:26px;
+gap:30px;
 
 justify-content:center;
 
 }
 
-/* ===================================================== */
-/* 앱 카드 디자인 */
-/* ===================================================== */
+/* 카드 */
 
 .app-card{
 
 background:white;
 
-padding:26px;
+padding:30px;
 
-border-radius:18px;
+border-radius:20px;
 
-box-shadow:0 10px 25px rgba(0,0,0,0.07);
+box-shadow:0 15px 35px rgba(0,0,0,0.06);
 
 text-align:center;
 
-transition:0.2s;
+transition:0.25s;
 
 }
 
 .app-card:hover{
-transform:translateY(-6px);
+transform:translateY(-8px);
 }
 
-/* 앱 아이콘 */
+/* 아이콘 */
+
 .app-icon{
-width:70px;
-border-radius:16px;
-margin-bottom:12px;
+width:80px;
+border-radius:20px;
+margin-bottom:14px;
 }
 
 /* 앱 이름 */
+
 .app-title{
-font-size:18px;
+font-size:20px;
 font-weight:700;
 }
 
-/* 앱 설명 */
+/* 설명 */
+
 .app-desc{
 font-size:14px;
-color:#666;
+color:#6e6e73;
 margin-top:6px;
 }
 
-/* 스토어 버튼 */
+/* 버튼 */
+
 .store-btn{
 
 display:inline-block;
 
 margin-top:14px;
 
-padding:10px 16px;
+padding:10px 18px;
 
-background:#4CAF50;
+background:#0071e3;
 
 color:white;
 
@@ -205,34 +245,64 @@ font-size:13px;
 }
 
 
-/* ===================================================== */
-/* Contact */
-/* ===================================================== */
+/* ========================= */
+/* 앱 소개 */
+/* ========================= */
+
+.feature{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:60px;
+align-items:center;
+}
+
+.feature img{
+width:100%;
+border-radius:20px;
+box-shadow:0 15px 35px rgba(0,0,0,0.08);
+}
+
+.feature h2{
+font-size:30px;
+}
+
+.feature p{
+color:#6e6e73;
+}
+
+
+/* ========================= */
+/* CONTACT */
+/* ========================= */
 
 .contact{
 text-align:center;
 }
 
-.contact-card{
+.contact-box{
 
 background:white;
 
-padding:40px;
+padding:50px;
 
-border-radius:18px;
+border-radius:20px;
 
 max-width:500px;
 
 margin:auto;
 
-box-shadow:0 10px 30px rgba(0,0,0,0.08);
+box-shadow:0 15px 35px rgba(0,0,0,0.08);
 
 }
 
+.contact h2{
+font-size:30px;
+}
 
-/* ===================================================== */
-/* Footer */
-/* ===================================================== */
+
+/* ========================= */
+/* FOOTER */
+/* ========================= */
 
 footer{
 
@@ -240,21 +310,25 @@ text-align:center;
 
 padding:60px 20px;
 
-font-size:14px;
+color:#6e6e73;
 
-color:#888;
+font-size:14px;
 
 }
 
 
-/* ===================================================== */
-/* 모바일 반응형 */
-/* ===================================================== */
+/* ========================= */
+/* 모바일 */
+/* ========================= */
 
-@media(max-width:600px){
+@media(max-width:900px){
+
+.feature{
+grid-template-columns:1fr;
+}
 
 .hero h1{
-font-size:32px;
+font-size:36px;
 }
 
 }
@@ -264,27 +338,23 @@ font-size:32px;
 </head>
 
 
-
 <body>
 
 
 
-<!-- ===================================================== -->
+<!-- ========================= -->
 <!-- 상단 메뉴 -->
-<!-- ===================================================== -->
+<!-- ========================= -->
 
 <div class="navbar">
 
 <div class="nav-inner">
 
-<div class="logo">
-
-GOMSOFT
-
-</div>
+<div class="logo">GOMSOFT</div>
 
 <div class="menu">
 
+<a href="#about">About</a>
 <a href="#apps">Apps</a>
 <a href="#contact">Contact</a>
 
@@ -296,9 +366,9 @@ GOMSOFT
 
 
 
-<!-- ===================================================== -->
+<!-- ========================= -->
 <!-- HERO -->
-<!-- ===================================================== -->
+<!-- ========================= -->
 
 <section class="hero">
 
@@ -306,8 +376,8 @@ GOMSOFT
 
 <p>
 
-실생활을 더 편리하게 만드는  
-모바일 앱을 개발합니다
+작은 아이디어가  
+사람들의 일상을 바꾸는 앱이 됩니다.
 
 </p>
 
@@ -321,9 +391,52 @@ GOMSOFT
 
 
 
-<!-- ===================================================== -->
+<!-- ========================= -->
+<!-- 회사 소개 -->
+<!-- ========================= -->
+
+<div class="container about" id="about">
+
+<h2>About GOMSOFT</h2>
+
+<p>
+
+곰소프트는 실생활에서 바로 사용할 수 있는  
+모바일 앱과 게임을 개발하는 독립 개발 스튜디오입니다.
+
+단순하지만 유용한 앱,  
+그리고 즐거움을 주는 캐주얼 게임을 만듭니다.
+
+</p>
+
+</div>
+
+
+
+<!-- ========================= -->
+<!-- 개발 철학 -->
+<!-- ========================= -->
+
+<section class="philosophy">
+
+<h2>Our Philosophy</h2>
+
+<p>
+
+우리는 복잡한 앱을 만들지 않습니다.  
+
+누구나 쉽게 사용할 수 있고  
+실제 생활에서 도움이 되는 앱을 만듭니다.
+
+</p>
+
+</section>
+
+
+
+<!-- ========================= -->
 <!-- 앱 목록 -->
-<!-- ===================================================== -->
+<!-- ========================= -->
 
 <div class="container apps" id="apps">
 
@@ -332,33 +445,27 @@ GOMSOFT
 <div class="app-grid">
 
 
-<!-- ===================================================== -->
-<!-- 앱 카드 시작 -->
-<!-- ===================================================== -->
-<!-- 앱 추가할 때 이 블록을 그대로 복사해서 사용하면 된다 -->
-<!-- ===================================================== -->
+<!-- ========================= -->
+<!-- 앱 카드 1 : 패밀리 루틴 -->
+<!-- ========================= -->
 
 <div class="app-card">
 
 <img class="app-icon" src="app_icon.png">
 
 <div class="app-title">
-
 패밀리 루틴
-
 </div>
 
 <div class="app-desc">
 
 가족 일정, 메모, 지출을  
-한 앱에서 관리하는 가족 관리 앱
+한 앱에서 관리하는 가족 통합 관리 앱
 
 </div>
 
 <a class="store-btn"
-
 href="https://play.google.com/store/apps/details?id=com.gomsoft.familyroutine"
-
 target="_blank">
 
 Google Play
@@ -368,9 +475,35 @@ Google Play
 </div>
 
 
-<!-- ===================================================== -->
-<!-- 앱 카드 끝 -->
-<!-- ===================================================== -->
+
+<!-- ========================= -->
+<!-- 앱 카드 2 : 바다동물의숲 -->
+<!-- ========================= -->
+
+<div class="app-card">
+
+<img class="app-icon" src="ocean_forest_icon.png">
+
+<div class="app-title">
+바다동물의숲
+</div>
+
+<div class="app-desc">
+
+바다 동물들과 함께하는  
+힐링 캐주얼 모바일 게임
+
+</div>
+
+<a class="store-btn"
+href="구글플레이링크"
+target="_blank">
+
+Google Play
+
+</a>
+
+</div>
 
 
 
@@ -380,19 +513,19 @@ Google Play
 
 
 
-<!-- ===================================================== -->
-<!-- Contact -->
-<!-- ===================================================== -->
+<!-- ========================= -->
+<!-- CONTACT -->
+<!-- ========================= -->
 
 <div class="container contact" id="contact">
 
-<div class="contact-card">
+<div class="contact-box">
 
 <h2>Contact</h2>
 
 <p>
 
-협업 / 리뷰 / 문의
+협업 · 리뷰 · 문의
 
 <br><br>
 
@@ -409,11 +542,10 @@ Google Play
 <footer>
 
 © 2026 GOMSOFT  
-App Development Studio
+Mobile App Studio
 
 </footer>
 
 
 </body>
-
 </html>

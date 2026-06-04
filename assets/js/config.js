@@ -4,8 +4,7 @@ const GOMSOFT_CONFIG = {
   tagline: "Goal Oriented Maker",
   taglineSub: "아이디어를 실제 서비스로 구현하는 디지털 프로덕트 스튜디오",
   headline: "우리는 아이디어를 실제 서비스로 만듭니다.",
-  subHeadline:
-    "앱, 게임, 디지털 미디어,\n현장 서비스를 직접 기획하고 운영합니다.",
+  subHeadline: "앱, 게임, 디지털 미디어, 현장 서비스를 직접 기획하고 운영합니다.",
   founderName: "허구슬",
   domain: "https://gomsoft.kr",
   email: "gomstyle3339@gmail.com",

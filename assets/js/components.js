@@ -336,16 +336,16 @@ function initRevealOnScroll() {
 }
 
 function initHomePage() {
-  const taglineEl = document.getElementById("heroTagline");
-  if (taglineEl) {
-    const sub = GOMSOFT_CONFIG.taglineSub
-      ? `<span class="hero-tagline-sub">${GOMSOFT_CONFIG.taglineSub}</span>`
-      : "";
-    taglineEl.innerHTML = `<span class="hero-tagline-main">${GOMSOFT_CONFIG.tagline}</span>${sub}`;
-  }
-  document.getElementById("heroHeadline").textContent = GOMSOFT_CONFIG.headline;
+  const eyebrow = document.getElementById("heroEyebrow");
+  if (eyebrow) eyebrow.textContent = GOMSOFT_CONFIG.tagline;
+  const headline = document.getElementById("heroHeadline");
+  if (headline) headline.textContent = GOMSOFT_CONFIG.headline;
   const lead = document.getElementById("heroLead");
-  if (lead) lead.textContent = GOMSOFT_CONFIG.subHeadline;
+  if (lead) lead.textContent = GOMSOFT_CONFIG.taglineSub || "";
+  const support = document.getElementById("heroSupport");
+  if (support) {
+    support.textContent = String(GOMSOFT_CONFIG.subHeadline || "").replace(/\s*\n\s*/g, " ");
+  }
   const profile = document.getElementById("companyProfile");
   if (profile) profile.innerHTML = renderCompanyProfile();
 }

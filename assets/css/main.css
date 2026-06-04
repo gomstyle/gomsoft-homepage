@@ -1788,11 +1788,39 @@ a.contact-channel-value:hover {
   word-break: break-all;
 }
 
-.footer-contact-note {
+.footer-contact-kakao {
+  gap: 12px !important;
+}
+
+.footer-kakao-btn {
+  align-self: flex-start;
+  width: 100%;
+  max-width: 280px;
+  min-height: 44px;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: var(--fw-semibold);
+  text-align: center;
+  text-decoration: none;
+  white-space: normal;
+  line-height: 1.35;
+}
+
+.footer-kakao-qr-link {
+  display: inline-block;
+  line-height: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: #fff;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.footer-kakao-qr-link img {
   display: block;
-  font-size: 12px;
-  color: var(--text-secondary);
-  line-height: 1.45;
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
 }
 
 .footer-company {
@@ -1937,8 +1965,17 @@ a.contact-channel-value:hover {
   }
 
   .footer-links a:hover,
-  .footer-contact a:hover {
+  .footer-contact a:not(.footer-kakao-btn):not(.footer-kakao-qr-link):hover {
     color: var(--accent);
+    text-decoration: none;
+  }
+
+  .footer-kakao-qr-link:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .footer-kakao-btn:hover {
     text-decoration: none;
   }
 

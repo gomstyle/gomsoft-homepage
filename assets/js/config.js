@@ -10,7 +10,7 @@ const GOMSOFT_CONFIG = {
   email: "gomstyle3339@gmail.com",
   phone: "010-7930-7586",
   naverFormUrl: "https://naver.me/example",
-  kakaoQrImage: "/assets/images/kakao-qr.png",
+  kakaoQrImage: "/assets/images/kakao-channel-qr.png",
   businessInfo: "대표자 : 허구슬 | 사업자등록번호 : 110-33-91602",
   github: {
     owner: "gomstyle",
@@ -206,8 +206,7 @@ const GOMSOFT_CONFIG = {
     contact: {
       email: "soxos3339@naver.com",
       phone: "010-7930-7586",
-      kakaoLabel: "카카오톡",
-      kakaoNote: "추후 QR 연결 예정",
+      kakaoButtonLabel: "카카오톡 채널 채팅 상담하기",
     },
     company: {
       representative: "허구슬",

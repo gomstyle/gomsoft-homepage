@@ -54,6 +54,8 @@ function renderSiteFooter() {
   const contact = footer.contact || {};
   const company = footer.company || {};
   const kakaoUrl = cfg.contact?.kakaoChannelUrl || "";
+  const kakaoQr = cfg.kakaoQrImage || "/assets/images/kakao-channel-qr.png";
+  const kakaoBtnLabel = contact.kakaoButtonLabel || "카카오톡 채널 채팅 상담하기";
   const email = contact.email || cfg.email;
   const phone = contact.phone || cfg.phone;
   const navPages = [
@@ -102,14 +104,15 @@ function renderSiteFooter() {
               <span class="footer-contact-label">전화번호</span>
               <a href="tel:${phone.replace(/\s/g, "")}">${phone}</a>
             </li>
-            <li>
-              <span class="footer-contact-label">카카오톡</span>
+            <li class="footer-contact-kakao">
               ${
                 kakaoUrl
-                  ? `<a href="${kakaoUrl}" target="_blank" rel="noopener noreferrer">${contact.kakaoLabel || "카카오톡"}</a>`
-                  : `<span>${contact.kakaoLabel || "카카오톡"}</span>`
+                  ? `<a href="${kakaoUrl}" class="btn btn-kakao footer-kakao-btn" target="_blank" rel="noopener noreferrer">${kakaoBtnLabel}</a>
+              <a href="${kakaoUrl}" class="footer-kakao-qr-link" target="_blank" rel="noopener noreferrer" aria-label="카카오톡 채널 QR 코드 — 스캔하여 채팅 상담">
+                <img src="${kakaoQr}" alt="카카오톡 채널 QR 코드" width="120" height="120" loading="lazy" decoding="async">
+              </a>`
+                  : `<span class="btn btn-kakao btn-kakao-pending">${kakaoBtnLabel}</span>`
               }
-              ${contact.kakaoNote ? `<span class="footer-contact-note">${contact.kakaoNote}</span>` : ""}
             </li>
           </ul>
         </div>

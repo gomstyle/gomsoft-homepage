@@ -35,6 +35,39 @@ function isOperatingStatus(status) {
   return String(status).includes("운영");
 }
 
+function hasPlayStoreLink(post) {
+  const links = Array.isArray(post.links) ? post.links : [];
+  return links.some((l) => l && /play\.google\.com/i.test(String(l.url)));
+}
+
+/** 출시 서비스: status「운영」+ 앱은 Play 링크, 미디어·현장은 실서비스 운영 */
+function isLaunchedService(post) {
+  const p = normalizePost(post);
+  const status = String(p.status || "");
+  if (!status.includes("운영")) return false;
+  if (p.projectType === "app") return hasPlayStoreLink(p);
+  if (p.projectType === "media" || p.projectType === "welding") return true;
+  return false;
+}
+
+/** 운영 프로젝트: 현재 진행 중(운영·준비·리뉴얼) */
+function isOperatingProject(post) {
+  const status = String(post.status || "");
+  if (!status) return false;
+  return status.includes("운영") || status.includes("준비") || status.includes("리뉴얼");
+}
+
+function computeAboutStats(allPosts) {
+  const all = allPosts.map(normalizePost);
+  const types = new Set(all.map((p) => p.projectType).filter(Boolean));
+  return {
+    launched: all.filter(isLaunchedService).length,
+    operating: all.filter(isOperatingProject).length,
+    areas: types.size,
+    founder: 1,
+  };
+}
+
 function computeProjectStats(allPosts, filteredPosts) {
   const all = allPosts.map(normalizePost);
   const types = new Set(all.map((p) => p.projectType).filter(Boolean));

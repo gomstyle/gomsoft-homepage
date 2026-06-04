@@ -86,7 +86,7 @@ function renderProjectStats(statsEl, stats, options = {}) {
         <span class="stat-label">Founder</span>
       </div>`
     : "";
-  const statsClass = showFounder ? "projects-stats" : "projects-stats projects-stats--three";
+  const statsClass = "projects-stats";
   const filterNote =
     showFilterNote && stats.total !== stats.totalAll
       ? `<p class="projects-stats-note">현재 필터: <strong>${stats.total}</strong>개 표시</p>`
@@ -111,14 +111,54 @@ function renderProjectStats(statsEl, stats, options = {}) {
     ${filterNote}`;
 }
 
+function renderAboutStats(statsEl, stats) {
+  if (!statsEl) return;
+  const items = [
+    {
+      value: stats.launched,
+      label: "출시 서비스",
+      desc: "Play 출시·웹 실서비스",
+    },
+    {
+      value: stats.operating,
+      label: "운영 프로젝트",
+      desc: "현재 진행 중",
+    },
+    {
+      value: stats.areas,
+      label: "서비스 분야",
+      desc: "App·Media·Welding",
+    },
+    {
+      value: stats.founder,
+      label: "Founder",
+      desc: "1인 개발·운영",
+    },
+  ];
+
+  statsEl.innerHTML = `
+    <div class="projects-stats about-stats">
+      ${items
+        .map(
+          (item) => `
+      <div class="stat-item">
+        <span class="stat-value">${item.value}</span>
+        <span class="stat-label">${item.label}</span>
+        <span class="stat-desc">${item.desc}</span>
+      </div>`
+        )
+        .join("")}
+    </div>`;
+}
+
 async function initAboutBusinessStats() {
   const statsEl = document.getElementById("aboutProjectStats");
   if (!statsEl) return;
   try {
     const data = await loadPostsIndex();
     const allPosts = getAllProjectPosts(data);
-    const stats = computeProjectStats(allPosts, allPosts);
-    renderProjectStats(statsEl, stats, { showFounder: false, showFilterNote: false });
+    const stats = computeAboutStats(allPosts);
+    renderAboutStats(statsEl, stats);
   } catch {
     statsEl.innerHTML = "";
   }

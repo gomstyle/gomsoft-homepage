@@ -109,7 +109,7 @@ function renderSiteFooter() {
                 kakaoUrl
                   ? `<a href="${kakaoUrl}" class="btn btn-kakao footer-kakao-btn" target="_blank" rel="noopener noreferrer">${kakaoBtnLabel}</a>
               <a href="${kakaoUrl}" class="footer-kakao-qr-link" target="_blank" rel="noopener noreferrer" aria-label="카카오톡 채널 QR 코드 — 스캔하여 채팅 상담">
-                <img src="${kakaoQr}" alt="카카오톡 채널 QR 코드" width="120" height="120" loading="lazy" decoding="async">
+                <img src="${kakaoQr}" alt="카카오톡 채널 QR 코드" width="88" height="88" loading="lazy" decoding="async">
               </a>`
                   : `<span class="btn btn-kakao btn-kakao-pending">${kakaoBtnLabel}</span>`
               }

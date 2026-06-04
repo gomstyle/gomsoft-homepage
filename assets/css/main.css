@@ -1484,10 +1484,23 @@ body {
   margin: 0;
 }
 
+.page-hero,
+.contact-hero {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  background: #ffffff;
+  isolation: isolate;
+}
+
 .page-hero {
   padding: 28px var(--container-pad) 32px;
-  text-align: center;
-  background: var(--bg-subtle);
+}
+
+.page-hero .container,
+.contact-hero .container {
+  position: relative;
+  z-index: 1;
 }
 
 .page-hero h1 {
@@ -1504,9 +1517,7 @@ body {
 
 /* ——— Contact page ——— */
 .contact-hero {
-  text-align: center;
   padding: 40px var(--container-pad) 48px;
-  background: var(--bg-subtle);
 }
 
 .contact-hero-title {

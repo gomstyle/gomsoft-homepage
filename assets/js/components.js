@@ -1,3 +1,12 @@
+function renderHeroAuroraMarkup() {
+  return `
+    <div class="hero-aurora" aria-hidden="true">
+      <span class="hero-aurora-layer hero-aurora-layer--cyan"></span>
+      <span class="hero-aurora-layer hero-aurora-layer--blue"></span>
+      <span class="hero-aurora-layer hero-aurora-layer--purple"></span>
+    </div>`;
+}
+
 function renderSiteHeader(activePage) {
   const pages = [
     { id: "home", label: "Home", href: "/" },
@@ -499,6 +508,7 @@ function renderContactPageContent() {
 
   return `
     <header class="contact-hero">
+      ${renderHeroAuroraMarkup()}
       <div class="container">
         <h1 class="contact-hero-title">${hero.title || "프로젝트를 함께 만들어보세요"}</h1>
         <p class="contact-hero-lead">${hero.lead || ""}</p>

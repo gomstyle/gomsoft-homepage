@@ -19,12 +19,7 @@
 <body>
   <div id="siteHeader"></div>
 
-  <section class="hero">
-    <div class="hero-aurora" aria-hidden="true">
-      <span class="hero-aurora-layer hero-aurora-layer--cyan"></span>
-      <span class="hero-aurora-layer hero-aurora-layer--blue"></span>
-      <span class="hero-aurora-layer hero-aurora-layer--purple"></span>
-    </div>
+  <section class="hero" id="homeHero">
     <div class="hero-inner">
       <div class="hero-logo">
         <img src="/assets/images/gomsoft-logo.png" alt="GOMSOFT" decoding="async">
@@ -69,6 +64,8 @@
   <script>
     document.getElementById("siteHeader").innerHTML = renderSiteHeader("home");
     document.getElementById("siteFooter").innerHTML = renderSiteFooter();
+    const homeHero = document.getElementById("homeHero");
+    if (homeHero) homeHero.insertAdjacentHTML("afterbegin", renderHeroAuroraMarkup());
     initHomePage();
     initNavigation();
     initHomeProjectsPreview();

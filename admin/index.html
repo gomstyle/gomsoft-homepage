@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="robots" content="noindex, nofollow">
   <link rel="stylesheet" href="/assets/css/main.css">
   <title>관리자 | GOMSOFT CMS</title>
@@ -61,10 +61,11 @@
       <div class="admin-panel" id="editorPanel" style="display:none">
         <h2 id="editorTitle">게시글 작성</h2>
         <input type="hidden" id="editSlug">
+        <input type="hidden" id="previousCategory">
         <div class="form-group">
-          <label>카테고리</label>
-          <select id="postCategory">
-            <option value="apps">Apps</option>
+          <label>프로젝트 유형</label>
+          <select id="postProjectType">
+            <option value="app">App</option>
             <option value="media">Media</option>
             <option value="welding">Welding</option>
           </select>
@@ -78,12 +79,21 @@
           <input type="date" id="postDate">
         </div>
         <div class="form-group">
-          <label>요약</label>
-          <textarea id="postSummary" rows="2"></textarea>
+          <label>운영 상태</label>
+          <select id="postStatus">
+            <option value="운영 중">운영 중</option>
+            <option value="준비 중">준비 중</option>
+            <option value="리뉴얼 준비">리뉴얼 준비</option>
+            <option value="">미지정</option>
+          </select>
         </div>
         <div class="form-group">
-          <label>썸네일 URL</label>
-          <input type="text" id="postThumbnail" placeholder="/familyroutine_icon.png">
+          <label>요약 설명</label>
+          <textarea id="postSummary" rows="3" placeholder="카드와 목록에 표시되는 짧은 소개"></textarea>
+        </div>
+        <div class="form-group">
+          <label>썸네일 이미지</label>
+          <input type="text" id="postThumbnail" placeholder="/familyroutine_icon.png 또는 업로드">
           <input type="file" id="thumbUpload" accept="image/*" style="margin-top:8px">
         </div>
         <div class="form-group">
@@ -96,8 +106,9 @@
           <input type="file" id="imageUpload" accept="image/*" multiple style="margin-top:8px">
         </div>
         <div class="form-group">
-          <label>외부 링크</label>
-          <input type="url" id="postLink" placeholder="https://">
+          <label>프로젝트 링크</label>
+          <textarea id="postLinksText" rows="4" placeholder="한 줄에 하나씩: 라벨|URL&#10;Google Play|https://play.google.com/...&#10;문의하기|/contact/"></textarea>
+          <small style="color:var(--text-secondary);font-size:12px">상세 페이지 하단 버튼으로 표시됩니다.</small>
         </div>
         <div class="form-row">
           <button type="button" class="btn btn-primary" id="btnSave">저장 (GitHub 커밋)</button>
@@ -108,6 +119,8 @@
   </div>
 
   <script src="/assets/js/config.js"></script>
+  <script src="/assets/js/project-types.js"></script>
+  <script src="/assets/js/post-links.js"></script>
   <script src="/assets/js/components.js"></script>
   <script src="/assets/js/markdown.js"></script>
   <script src="/assets/js/github-cms.js"></script>
@@ -233,7 +246,7 @@
           .map(
             (p) => `
           <li>
-            <span><strong>[${p.category}]</strong> ${p.title} <small>${p.date}</small></span>
+            <span><strong>[${projectTypeLabel((p.projectType || projectTypeFromCategory(p.category)))}]</strong> ${p.title} <small>${p.status || ""} · ${p.date}</small></span>
             <span class="actions">
               <button type="button" class="btn-small btn-muted" data-edit="${p.category}|${p.slug}">수정</button>
               <button type="button" class="btn-small btn-danger" data-del="${p.category}|${p.slug}">삭제</button>
@@ -270,14 +283,18 @@
       editorPanel.style.display = "block";
       document.getElementById("editSlug").value = slug || "";
       document.getElementById("editorTitle").textContent = slug ? "게시글 수정" : "게시글 작성";
-      document.getElementById("postCategory").value = category || "apps";
+      const projectType = projectTypeFromCategory(category || "apps");
+      document.getElementById("postProjectType").value = projectType;
+      document.getElementById("previousCategory").value = category || categoryFromProjectType(projectType);
       if (!slug) {
+        document.getElementById("previousCategory").value = "";
         document.getElementById("postTitle").value = "";
         document.getElementById("postSummary").value = "";
         document.getElementById("postThumbnail").value = "";
         document.getElementById("postBody").value = "";
         document.getElementById("postImages").value = "";
-        document.getElementById("postLink").value = "";
+        document.getElementById("postLinksText").value = "";
+        document.getElementById("postStatus").value = "운영 중";
         document.getElementById("postDate").value = new Date().toISOString().slice(0, 10);
         return;
       }
@@ -285,12 +302,16 @@
       getFileContent(path)
         .then(({ content }) => {
           const { meta, body } = parseFrontmatter(content);
+          const pt = meta.projectType || projectTypeFromCategory(category);
+          document.getElementById("postProjectType").value = pt;
+          document.getElementById("previousCategory").value = category;
           document.getElementById("postTitle").value = meta.title || "";
           document.getElementById("postDate").value = meta.date || "";
+          document.getElementById("postStatus").value = meta.status || "";
           document.getElementById("postSummary").value = meta.summary || "";
           document.getElementById("postThumbnail").value = meta.thumbnail || "";
           document.getElementById("postBody").value = body;
-          document.getElementById("postLink").value = meta.link || "";
+          document.getElementById("postLinksText").value = linksToText(parseProjectLinks(meta));
           const imgs = Array.isArray(meta.images) ? meta.images : [];
           document.getElementById("postImages").value = imgs.join("\n");
         })
@@ -307,7 +328,7 @@
       if (!file) return;
       try {
         showMsg("썸네일 업로드 중…", "success");
-        const url = await uploadImageToRepo(file, document.getElementById("postCategory").value);
+        const url = await uploadImageToRepo(file, document.getElementById("postProjectType").value);
         document.getElementById("postThumbnail").value = url;
         showMsg("썸네일이 업로드되었습니다.", "success");
       } catch (err) {
@@ -318,12 +339,12 @@
     document.getElementById("imageUpload").onchange = async (e) => {
       const files = [...e.target.files];
       if (!files.length) return;
-      const cat = document.getElementById("postCategory").value;
+      const pt = document.getElementById("postProjectType").value;
       const urls = [];
       try {
         for (const file of files) {
           showMsg(`${file.name} 업로드 중…`, "success");
-          urls.push(await uploadImageToRepo(file, cat));
+          urls.push(await uploadImageToRepo(file, pt));
         }
         const prev = document.getElementById("postImages").value.trim();
         document.getElementById("postImages").value = (prev ? prev + "\n" : "") + urls.join("\n");
@@ -345,15 +366,19 @@
         .map((s) => s.trim())
         .filter(Boolean);
 
+      const links = parseLinksText(document.getElementById("postLinksText").value);
+
       const formData = {
-        category: document.getElementById("postCategory").value,
+        projectType: document.getElementById("postProjectType").value,
+        previousCategory: document.getElementById("previousCategory").value,
         title,
         date: document.getElementById("postDate").value,
+        status: document.getElementById("postStatus").value,
         summary: document.getElementById("postSummary").value.trim(),
         thumbnail: document.getElementById("postThumbnail").value.trim(),
         body: document.getElementById("postBody").value,
         images,
-        link: document.getElementById("postLink").value.trim(),
+        links,
       };
 
       try {

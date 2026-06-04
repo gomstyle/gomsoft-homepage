@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="description" content="GOMSOFT — 아이디어를 실제 서비스로 만드는 디지털 프로덕트 스튜디오. 앱, 게임, AI, 디지털 미디어를 직접 기획·개발합니다.">
   <meta property="og:title" content="GOMSOFT | 디지털 프로덕트 스튜디오">
   <meta property="og:description" content="우리는 아이디어를 실제 서비스로 만듭니다.">
@@ -35,9 +35,11 @@
     <div class="container">
       <div class="section-header">
         <h2>Projects</h2>
-        <p>운영·개발 중인 핵심 프로젝트</p>
+        <p>최신 프로젝트 소식</p>
       </div>
-      <div id="projectsPreview"></div>
+      <div id="projectsPreview">
+        <div class="empty-state"><p>불러오는 중…</p></div>
+      </div>
       <p class="section-footer-link">
         <a href="/projects/">전체 프로젝트 보기 →</a>
       </p>
@@ -53,12 +55,16 @@
   <div id="siteFooter"></div>
 
   <script src="/assets/js/config.js"></script>
+  <script src="/assets/js/project-types.js"></script>
+  <script src="/assets/js/post-links.js"></script>
   <script src="/assets/js/components.js"></script>
+  <script src="/assets/js/posts.js"></script>
   <script>
     document.getElementById("siteHeader").innerHTML = renderSiteHeader("home");
     document.getElementById("siteFooter").innerHTML = renderSiteFooter();
     initHomePage();
     initNavigation();
+    initHomeProjectsPreview();
   </script>
 </body>
 </html>

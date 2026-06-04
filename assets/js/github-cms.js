@@ -228,18 +228,36 @@ function removePostFromIndex(index, category, slug) {
 }
 
 async function publishPost(formData, existingSlug) {
-  const category = formData.category;
+  const projectType = formData.projectType || "app";
+  const category = categoryFromProjectType(projectType);
   const date = formData.date || new Date().toISOString().slice(0, 10);
   const slug = existingSlug || slugify(formData.title, date);
   const mdPath = `content/${category}/${slug}.md`;
 
+  if (existingSlug && formData.previousCategory && formData.previousCategory !== category) {
+    try {
+      const oldPath = `content/${formData.previousCategory}/${existingSlug}.md`;
+      const { sha } = await getFileContent(oldPath);
+      await deleteFile(oldPath, `CMS: 유형 변경으로 ${existingSlug} 이동`, sha);
+      const index = await loadPostsIndexFromGithub();
+      removePostFromIndex(index, formData.previousCategory, existingSlug);
+      await savePostsIndex(index);
+    } catch {
+      /* 이전 파일 없음 */
+    }
+  }
+
+  const links = formData.links || [];
   const md = buildFrontmatter({
     title: formData.title,
     date,
     summary: formData.summary,
     thumbnail: formData.thumbnail,
     images: formData.images,
-    link: formData.link,
+    status: formData.status,
+    link: links[0] ? links[0].url : "",
+    links,
+    projectType,
     body: formData.body,
   });
 
@@ -257,14 +275,18 @@ async function publishPost(formData, existingSlug) {
   upsertPostInIndex(index, {
     id: `${category}-${slug}`,
     category,
+    projectType,
     slug,
     title: formData.title,
     summary: formData.summary,
     thumbnail: formData.thumbnail,
+    status: formData.status || "",
+    links,
     date,
     path: mdPath,
   });
   await savePostsIndex(index);
+  if (typeof invalidatePostsCache === "function") invalidatePostsCache();
   return slug;
 }
 
@@ -276,9 +298,11 @@ async function removePost(category, slug) {
   const index = await loadPostsIndexFromGithub();
   removePostFromIndex(index, category, slug);
   await savePostsIndex(index);
+  if (typeof invalidatePostsCache === "function") invalidatePostsCache();
 }
 
-async function uploadImageToRepo(file, category) {
+async function uploadImageToRepo(file, projectType) {
+  const category = categoryFromProjectType(projectType || "app");
   const ext = file.name.split(".").pop() || "png";
   const name = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
   const path = `assets/uploads/${category}/${name}`;

@@ -3,7 +3,6 @@ function renderSiteHeader(activePage) {
     { id: "home", label: "Home", href: "/" },
     { id: "about", label: "About", href: "/about/" },
     { id: "projects", label: "Projects", href: "/projects/" },
-    { id: "media", label: "Media", href: "/media/" },
     { id: "contact", label: "Contact", href: "/contact/" },
   ];
 
@@ -18,7 +17,7 @@ function renderSiteHeader(activePage) {
 <header class="site-header">
   <div class="nav-inner">
     <a href="/" class="logo">${GOMSOFT_CONFIG.siteName}</a>
-    <button type="button" class="nav-toggle" aria-label="메뉴" id="navToggle">
+    <button type="button" class="nav-toggle" aria-label="메뉴 열기" aria-expanded="false" id="navToggle">
       <span></span><span></span><span></span>
     </button>
     <ul class="nav-menu" id="navMenu">${navLinks}</ul>
@@ -41,11 +40,25 @@ function initNavigation() {
   if (!toggle || !menu) return;
 
   toggle.addEventListener("click", () => {
-    menu.classList.toggle("open");
+    const open = menu.classList.toggle("open");
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    document.body.style.overflow = open && window.innerWidth < 768 ? "hidden" : "";
   });
 
   menu.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => menu.classList.remove("open"));
+    link.addEventListener("click", () => {
+      menu.classList.remove("open");
+      toggle.setAttribute("aria-expanded", "false");
+      document.body.style.overflow = "";
+    });
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      menu.classList.remove("open");
+      toggle.setAttribute("aria-expanded", "false");
+      document.body.style.overflow = "";
+    }
   });
 }
 
@@ -222,6 +235,4 @@ function initHomePage() {
   if (actions) actions.innerHTML = renderHeroActions();
   const profile = document.getElementById("companyProfile");
   if (profile) profile.innerHTML = renderCompanyProfile();
-  const preview = document.getElementById("projectsPreview");
-  if (preview) preview.innerHTML = `<div class="project-grid">${renderProjectCards(false)}</div>`;
 }

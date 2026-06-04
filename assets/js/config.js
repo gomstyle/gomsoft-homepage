@@ -14,10 +14,10 @@ const GOMSOFT_CONFIG = {
     repo: "gomsoft-homepage",
     branch: "main",
   },
-  categories: {
-    apps: { label: "Apps", path: "content/apps", listUrl: "/apps/" },
-    media: { label: "Media", path: "content/media", listUrl: "/media/" },
-    welding: { label: "Welding", path: "content/welding", listUrl: "/welding/" },
+  projectTypes: {
+    app: { label: "App", category: "apps" },
+    media: { label: "Media", category: "media" },
+    welding: { label: "Welding", category: "welding" },
   },
   companyProfile: {
     title: "Company Profile",
@@ -121,7 +121,7 @@ const GOMSOFT_CONFIG = {
       desc: "AI·Apps·Tech 트렌드를 다루는 디지털 미디어·리뷰 채널",
       thumbnail: "/gomsoft_logo.png",
       highlights: ["Tech 리뷰", "AI·앱 트렌드", "콘텐츠 IP"],
-      link: "/media/",
+      link: "/projects/?type=media",
       postSlug: "2026-06-04-넥스트리뷰",
       postCategory: "media",
     },

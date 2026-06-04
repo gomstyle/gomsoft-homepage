@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <link rel="stylesheet" href="/assets/css/main.css">
   <title>게시글 | GOMSOFT</title>
 </head>
@@ -17,9 +17,9 @@
       </header>
       <div class="post-content" id="postContent"></div>
       <div id="postGallery"></div>
-      <div id="postLink"></div>
+      <div id="postLinks"></div>
       <p style="text-align:center;margin-top:48px">
-        <a href="javascript:history.back()" class="btn btn-secondary">목록으로</a>
+        <a href="/projects/" class="btn btn-secondary" id="postBackLink">Projects 목록</a>
       </p>
     </div>
   </article>
@@ -27,6 +27,8 @@
   <div id="siteFooter"></div>
 
   <script src="/assets/js/config.js"></script>
+  <script src="/assets/js/project-types.js"></script>
+  <script src="/assets/js/post-links.js"></script>
   <script src="/assets/js/components.js"></script>
   <script src="/assets/js/markdown.js"></script>
   <script src="/assets/js/posts.js"></script>
@@ -35,7 +37,7 @@
     const category = params.get("category");
     const slug = params.get("slug");
 
-    document.getElementById("siteHeader").innerHTML = renderSiteHeader(category || "home");
+    document.getElementById("siteHeader").innerHTML = renderSiteHeader("projects");
     document.getElementById("siteFooter").innerHTML = renderSiteFooter();
     initNavigation();
 

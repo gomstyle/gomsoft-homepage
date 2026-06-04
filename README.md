@@ -12,8 +12,7 @@
 |------|------|
 | `/` | Home — Hero, Company Profile, Projects 미리보기 |
 | `/about/` | 회사·대표·역량·비전 |
-| `/projects/` | 4개 프로젝트 포트폴리오 |
-| `/media/` | Media 게시판 (CMS) |
+| `/projects/` | 프로젝트 게시판 (통계 · 필터 · 카드 · 상세 링크) |
 | `/post.html` | 게시글 상세 |
 | `/contact/` | 문의 |
 | `/admin/` | CMS 관리자 |
@@ -21,9 +20,7 @@
 ## 콘텐츠 저장
 
 ```
-content/apps/*.md
-content/media/*.md
-content/welding/*.md
+content/{apps|media|welding}/*.md  ← CMS `projectType`으로 분류
 data/posts.json   ← 목록 인덱스 (관리자 저장 시 자동 갱신)
 ```
 
@@ -33,7 +30,8 @@ data/posts.json   ← 목록 인덱스 (관리자 저장 시 자동 갱신)
 2. `https://gomsoft.kr/admin/` 접속 후 Token 입력
 3. **7일간 기억하기** 체크 시 `localStorage`, 미체크 시 `sessionStorage`(탭/브라우저 종료 시 해제)
 4. GitHub API로 저장소 권한 확인 후 CMS 표시 (로그인 계정명 표시)
-5. 저장 시 GitHub에 자동 커밋 → Pages 재배포 (1~2분)
+5. CMS에서 썸네일·요약·운영 상태·프로젝트 링크(라벨\|URL) 입력
+6. 저장 시 GitHub에 자동 커밋 → Pages 재배포 (1~2분)
 
 ## 설정 변경
 

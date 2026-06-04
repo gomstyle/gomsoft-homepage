@@ -38,7 +38,10 @@ function renderMarkdownSimple(text) {
   html = html.replace(/^# (.+)$/gm, "<h2>$1</h2>");
   html = html.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
   html = html.replace(/\*(.+?)\*/g, "<em>$1</em>");
-  html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" loading="lazy">');
+  html = html.replace(
+    /!\[([^\]]*)\]\(([^)]+)\)/g,
+    '<img src="$2" alt="$1" width="720" height="405" loading="lazy" decoding="async">'
+  );
   html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
   html = html.replace(/(?:^|\n\n)([^\n<]+)(?=\n\n|$)/g, (m, p) => {
     if (p.trim().startsWith("<")) return m;
@@ -66,7 +69,10 @@ function buildFrontmatter(data) {
     `summary: "${escapeYaml(data.summary)}"`,
     `thumbnail: "${data.thumbnail || ""}"`,
     `images: ${JSON.stringify(images)}`,
-    `link: "${data.link || ""}"`,
+    `status: "${escapeYaml(data.status || "")}"`,
+    `link: "${data.link || (data.links && data.links[0] ? data.links[0].url : "")}"`,
+    `links: ${JSON.stringify(data.links || [])}`,
+    `projectType: "${data.projectType || "app"}"`,
     "---",
     "",
   ];

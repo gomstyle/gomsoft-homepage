@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <link rel="stylesheet" href="/assets/css/main.css">
   <title>Projects | GOMSOFT</title>
 </head>
@@ -12,43 +12,37 @@
   <header class="page-hero">
     <div class="container">
       <h1>Projects</h1>
-      <p>패밀리루틴 · 바다동물의숲 · 넥스트리뷰 · 24시 출장 용접</p>
+      <p>App · Media · Welding — 프로젝트 포트폴리오</p>
     </div>
   </header>
 
   <section class="section">
     <div class="container">
-      <div class="section-header">
-        <h2>포트폴리오</h2>
-        <p>기획부터 개발·운영까지 직접 수행한 프로젝트입니다.</p>
+      <div id="projectsStats"></div>
+      <nav class="project-filter-tabs" id="projectFilterTabs" aria-label="프로젝트 유형 필터"></nav>
+      <div id="projectsPostList">
+        <div class="empty-state"><p>불러오는 중…</p></div>
       </div>
-      <div class="project-grid" id="projectGrid"></div>
-    </div>
-  </section>
-
-  <section class="section section-alt">
-    <div class="container content-narrow trust-note">
-      <p>
-        각 프로젝트의 상세 소개·스크린샷·링크는 카드의 <strong>상세 소개</strong>에서 확인할 수 있습니다.
-        미디어 콘텐츠는 <a href="/media/">Media</a> 게시판에서 지속 업데이트됩니다.
-      </p>
     </div>
   </section>
 
   <div id="siteFooter"></div>
 
   <script src="/assets/js/config.js"></script>
+  <script src="/assets/js/project-types.js"></script>
+  <script src="/assets/js/post-links.js"></script>
   <script src="/assets/js/components.js"></script>
+  <script src="/assets/js/posts.js"></script>
   <script>
     document.getElementById("siteHeader").innerHTML = renderSiteHeader("projects");
     document.getElementById("siteFooter").innerHTML = renderSiteFooter();
-    document.getElementById("projectGrid").innerHTML = renderProjectCards(true);
     setPageMeta({
       title: "Projects",
-      description: "GOMSOFT 프로젝트 포트폴리오 — 앱, 게임, 미디어, 현장 서비스",
+      description: "GOMSOFT 프로젝트 — App, Media, Welding",
       path: "/projects/",
     });
     initNavigation();
+    initProjectsBoard();
   </script>
 </body>
 </html>

@@ -27,37 +27,91 @@ function parseFrontmatter(raw) {
   return { meta, body: match[2].trim() };
 }
 
-function renderMarkdownSimple(text) {
-  let html = text
+function escapeHtml(text) {
+  return String(text)
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;");
+}
 
-  html = html.replace(/^### (.+)$/gm, "<h3>$1</h3>");
-  html = html.replace(/^## (.+)$/gm, "<h2>$1</h2>");
-  html = html.replace(/^# (.+)$/gm, "<h2>$1</h2>");
-  html = html.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
-  html = html.replace(/\*(.+?)\*/g, "<em>$1</em>");
+function applyInlineMarkdown(text) {
+  let html = escapeHtml(text);
   html = html.replace(
     /!\[([^\]]*)\]\(([^)]+)\)/g,
-    '<img src="$2" alt="$1" width="720" height="405" loading="lazy" decoding="async">'
+    '<img src="$2" alt="$1" width="600" loading="lazy" decoding="async">'
   );
   html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
-  html = html.replace(/(?:^|\n\n)([^\n<]+)(?=\n\n|$)/g, (m, p) => {
-    if (p.trim().startsWith("<")) return m;
-    return `\n\n<p>${p.trim()}</p>`;
-  });
-  html = html.replace(/\n\n/g, "\n");
+  html = html.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+  html = html.replace(/(?<!\*)\*([^*]+?)\*(?!\*)/g, "<em>$1</em>");
+  return html;
+}
 
-  const blocks = html.split(/\n{2,}/).filter(Boolean);
-  return blocks
-    .map((b) => {
-      const t = b.trim();
-      if (t.startsWith("<h") || t.startsWith("<p") || t.startsWith("<img") || t.startsWith("<a")) return t;
-      if (t.includes("<img") || t.includes("<a href")) return t;
-      return `<p>${t.replace(/\n/g, "<br>")}</p>`;
-    })
-    .join("\n");
+function renderMarkdownSimple(text) {
+  const lines = String(text || "").replace(/\r\n/g, "\n").split("\n");
+  const blocks = [];
+  let paragraphLines = [];
+  let listItems = [];
+
+  function flushParagraph() {
+    if (!paragraphLines.length) return;
+    const inner = paragraphLines.map((line) => applyInlineMarkdown(line)).join("<br>\n");
+    blocks.push(`<p>${inner}</p>`);
+    paragraphLines = [];
+  }
+
+  function flushList() {
+    if (!listItems.length) return;
+    blocks.push(`<ul>${listItems.map((item) => `<li>${applyInlineMarkdown(item)}</li>`).join("")}</ul>`);
+    listItems = [];
+  }
+
+  function flushAll() {
+    flushParagraph();
+    flushList();
+  }
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+
+    if (!trimmed) {
+      flushAll();
+      continue;
+    }
+
+    const h3 = trimmed.match(/^### (.+)$/);
+    if (h3) {
+      flushAll();
+      blocks.push(`<h3>${applyInlineMarkdown(h3[1])}</h3>`);
+      continue;
+    }
+
+    const h2 = trimmed.match(/^## (.+)$/);
+    if (h2) {
+      flushAll();
+      blocks.push(`<h2>${applyInlineMarkdown(h2[1])}</h2>`);
+      continue;
+    }
+
+    const h1 = trimmed.match(/^# (.+)$/);
+    if (h1) {
+      flushAll();
+      blocks.push(`<h2>${applyInlineMarkdown(h1[1])}</h2>`);
+      continue;
+    }
+
+    const listItem = trimmed.match(/^[-*] (.+)$/);
+    if (listItem) {
+      flushParagraph();
+      listItems.push(listItem[1]);
+      continue;
+    }
+
+    flushList();
+    paragraphLines.push(line);
+  }
+
+  flushAll();
+  return blocks.join("\n");
 }
 
 function buildFrontmatter(data) {

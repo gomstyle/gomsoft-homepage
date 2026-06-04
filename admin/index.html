@@ -103,7 +103,18 @@
         </div>
         <div class="form-group">
           <label>본문 (Markdown)</label>
-          <textarea id="postBody" rows="10"></textarea>
+          <textarea id="postBody" rows="10" placeholder="상세 페이지에 그대로 반영됩니다. 줄바꿈·빈 줄은 미리보기와 동일하게 표시됩니다."></textarea>
+          <div class="markdown-help" aria-label="본문 Markdown 작성 안내">
+            <span class="markdown-help-title">본문 작성 안내 (상세 페이지와 동일한 줄 간격)</span>
+            <ul>
+              <li><code>**글자**</code> — <strong>굵게 강조</strong> (서비스명·핵심 키워드에 사용)</li>
+              <li><code>## 제목</code> — <strong>중간 소제목</strong> (예: 주요 기능, 서비스 소개)</li>
+              <li><code>### 제목</code> — <strong>작은 소제목</strong> (##보다 한 단계 작은 제목)</li>
+              <li><code>- 항목</code> — 불릿 목록 (줄 앞에 <code>- </code>와 공백)</li>
+              <li><strong>Enter 한 번</strong> — 같은 문단 안 줄바꿈 (상세 페이지에서도 같은 위치에서 줄이 바뀜)</li>
+              <li><strong>빈 줄 한 번</strong> — 문단 구분 (위·아래 여백이 넓어짐)</li>
+            </ul>
+          </div>
         </div>
         <div class="form-group">
           <label>추가 이미지 URL (줄바꿈으로 구분)</label>

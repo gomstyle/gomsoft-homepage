@@ -1082,8 +1082,64 @@ textarea {
   max-width: 720px;
   margin: 0 auto;
   padding: 0 var(--container-pad);
-  font-size: 17px;
-  line-height: 1.6;
+  font-size: 16px;
+  line-height: 1.65;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+
+.post-content p {
+  margin: 0 0 1em;
+}
+
+.post-content p:last-child {
+  margin-bottom: 0;
+}
+
+.post-content h2 {
+  font-size: 22px;
+  font-weight: var(--fw-bold);
+  letter-spacing: -0.02em;
+  line-height: 1.35;
+  margin: 1.5em 0 0.65em;
+  color: var(--text);
+}
+
+.post-content h2:first-child {
+  margin-top: 0;
+}
+
+.post-content h3 {
+  font-size: 18px;
+  font-weight: var(--fw-semibold);
+  letter-spacing: -0.02em;
+  line-height: 1.4;
+  margin: 1.25em 0 0.5em;
+  color: var(--text);
+}
+
+.post-content ul {
+  margin: 0 0 1em;
+  padding-left: 1.25em;
+  list-style: disc;
+}
+
+.post-content li {
+  margin: 0 0 0.35em;
+  line-height: 1.65;
+}
+
+.post-content li:last-child {
+  margin-bottom: 0;
+}
+
+.post-content strong {
+  font-weight: var(--fw-semibold);
+  color: var(--text);
+}
+
+.post-content a {
+  color: var(--accent);
 }
 
 .post-content img {
@@ -2048,9 +2104,62 @@ a.contact-channel-value:hover {
   width: 100%;
   padding: 12px 14px;
   font-size: 16px;
+  line-height: 1.65;
+  letter-spacing: -0.01em;
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   background: #fff;
+}
+
+#postBody {
+  min-height: 220px;
+  resize: vertical;
+}
+
+.markdown-help {
+  margin: 10px 0 0;
+  padding: 14px 16px;
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.markdown-help-title {
+  display: block;
+  margin: 0 0 10px;
+  font-size: 13px;
+  font-weight: var(--fw-semibold);
+  color: var(--text);
+}
+
+.markdown-help ul {
+  margin: 0;
+  padding-left: 1.15em;
+}
+
+.markdown-help li {
+  margin: 0 0 8px;
+}
+
+.markdown-help li:last-child {
+  margin-bottom: 0;
+}
+
+.markdown-help code {
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #fff;
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.markdown-help strong {
+  font-weight: var(--fw-semibold);
+  color: var(--text);
 }
 
 .form-row {

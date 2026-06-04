@@ -56,10 +56,15 @@ function renderPostCards(posts, container) {
       const summary = escapeHtml(p.summary || "프로젝트 상세 내용을 확인해 보세요.");
       const badgeClass = projectTypeBadgeClass(p.projectType);
       const typeLabel = projectTypeLabel(p.projectType);
+      const statusOverlay = getPostStatusOverlayLabel(p.status);
+      const statusBadge = statusOverlay
+        ? `<span class="post-card-status-overlay">${escapeHtml(statusOverlay)}</span>`
+        : "";
       return `
       <article class="post-card">
         <a class="post-card-thumb-link" href="${url}" tabindex="-1" aria-hidden="true">
           <div class="post-card-thumb">
+            ${statusBadge}
             <img src="${thumb}" alt="" width="640" height="360" loading="lazy" decoding="async">
           </div>
         </a>

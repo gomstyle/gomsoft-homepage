@@ -16,7 +16,9 @@ function renderSiteHeader(activePage) {
   return `
 <header class="site-header">
   <div class="nav-inner">
-    <a href="/" class="logo">${GOMSOFT_CONFIG.siteName}</a>
+    <a href="/" class="logo logo-image" aria-label="${GOMSOFT_CONFIG.siteName} 홈">
+      <img src="${GOMSOFT_CONFIG.logoImage || "/assets/images/gomsoft-logo.png"}" alt="${GOMSOFT_CONFIG.siteName}" width="140" height="32" decoding="async">
+    </a>
     <button type="button" class="nav-toggle" aria-label="메뉴 열기" aria-expanded="false" id="navToggle">
       <span></span><span></span><span></span>
     </button>
@@ -146,16 +148,21 @@ function renderProjectCards(linkToDetail) {
 
       let actions = "";
       if (proj.link) {
-        actions += `<a href="${proj.link}" class="project-link" target="_blank" rel="noopener">서비스 보기</a>`;
+        const external = /^https?:\/\//i.test(proj.link);
+        actions += `<a href="${proj.link}" class="btn btn-primary project-card-btn"${external ? ' target="_blank" rel="noopener"' : ""}>서비스 보기</a>`;
       }
       if (detailUrl) {
-        actions += `<a href="${detailUrl}" class="project-link project-link-muted">상세 소개</a>`;
+        actions += `<a href="${detailUrl}" class="btn btn-secondary project-card-btn">상세 소개</a>`;
       }
+
+      const statusOverlay = typeof getPostStatusOverlayLabel === "function" ? getPostStatusOverlayLabel(proj.status) : "";
+      const statusBadge = statusOverlay ? `<span class="post-card-status-overlay">${statusOverlay}</span>` : "";
 
       return `
       <article class="project-card">
-        <div class="project-card-visual">
-          <img src="${proj.thumbnail}" alt="${proj.name}" width="80" height="80" loading="lazy">
+        <div class="project-card-media">
+          ${statusBadge}
+          <img src="${proj.thumbnail}" alt="${proj.name}" width="112" height="112" loading="lazy" decoding="async">
         </div>
         <div class="project-card-body">
           <div class="project-card-meta">
@@ -259,17 +266,42 @@ function renderAboutPageContent() {
     </section>`;
 }
 
-function renderContactInquiryCards() {
-  const items = GOMSOFT_CONFIG.contactInquiries || [];
-  return items
-    .map(
-      (item) => `
-      <button type="button" class="inquiry-card" data-target="${item.target}">
-        <h3>${item.title}</h3>
-        <p>${item.desc}</p>
-      </button>`
-    )
-    .join("");
+function formatTelHref(phone) {
+  return "tel:" + String(phone).replace(/[^\d+]/g, "");
+}
+
+function renderContactChannels() {
+  const c = GOMSOFT_CONFIG.contact || {};
+  const project = c.project || {};
+  const welding = c.welding || {};
+  const kakaoUrl = (welding.kakaoChannelUrl || "").trim();
+  const kakaoBtn = kakaoUrl
+    ? `<a href="${kakaoUrl}" class="btn btn-kakao" target="_blank" rel="noopener">카카오 상담</a>`
+    : `<span class="btn btn-kakao btn-kakao-pending" role="status">카카오 상담<span class="btn-kakao-note">채널 연결 예정</span></span>`;
+
+  return `
+    <div class="contact-channels">
+      <article class="contact-channel-card" id="contact-project">
+        <h2 class="contact-channel-title">${project.title || "프로젝트 · 지원사업 · 협업 문의"}</h2>
+        <ul class="contact-channel-list">
+          <li>
+            <span class="contact-channel-label">이메일</span>
+            <a href="mailto:${project.email}">${project.email}</a>
+          </li>
+          <li>
+            <span class="contact-channel-label">전화</span>
+            <a href="${formatTelHref(project.phone)}">${project.phone}</a>
+          </li>
+        </ul>
+      </article>
+      <article class="contact-channel-card" id="contact-welding">
+        <h2 class="contact-channel-title">${welding.title || "용접 서비스"}</h2>
+        <div class="contact-channel-actions">
+          ${kakaoBtn}
+          <a href="${formatTelHref(welding.phone)}" class="contact-channel-phone">${welding.phone}</a>
+        </div>
+      </article>
+    </div>`;
 }
 
 function initRevealOnScroll() {
@@ -303,22 +335,14 @@ function initRevealOnScroll() {
   els.forEach((el) => observer.observe(el));
 }
 
-function initContactInquiryScroll() {
-  document.querySelectorAll(".inquiry-card").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const id = btn.dataset.target;
-      const target = document.getElementById(id);
-      if (target) {
-        target.scrollIntoView({ behavior: "smooth", block: "start" });
-        target.classList.add("contact-highlight");
-        setTimeout(() => target.classList.remove("contact-highlight"), 1200);
-      }
-    });
-  });
-}
-
 function initHomePage() {
-  document.getElementById("heroTagline").textContent = GOMSOFT_CONFIG.tagline;
+  const taglineEl = document.getElementById("heroTagline");
+  if (taglineEl) {
+    const sub = GOMSOFT_CONFIG.taglineSub
+      ? `<span class="hero-tagline-sub">${GOMSOFT_CONFIG.taglineSub}</span>`
+      : "";
+    taglineEl.innerHTML = `<span class="hero-tagline-main">${GOMSOFT_CONFIG.tagline}</span>${sub}`;
+  }
   document.getElementById("heroHeadline").textContent = GOMSOFT_CONFIG.headline;
   const lead = document.getElementById("heroLead");
   if (lead) lead.textContent = GOMSOFT_CONFIG.subHeadline;

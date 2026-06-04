@@ -32,3 +32,10 @@ function normalizePost(post) {
   const category = post.category || categoryFromProjectType(projectType);
   return { ...post, projectType, category };
 }
+
+function getPostStatusOverlayLabel(status) {
+  const s = String(status || "");
+  if (s.includes("리뉴얼")) return "리뉴얼 중";
+  if (s.includes("준비") && !s.includes("운영")) return "준비 중";
+  return "";
+}

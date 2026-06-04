@@ -113,8 +113,22 @@ textarea {
   z-index: 1001;
 }
 
+.logo-image {
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+}
+
+.logo-image img {
+  height: 26px;
+  width: auto;
+  max-width: 132px;
+  display: block;
+}
+
 .logo:hover {
   text-decoration: none;
+  opacity: 0.85;
 }
 
 .nav-toggle {
@@ -199,12 +213,28 @@ textarea {
 }
 
 .hero-eyebrow {
-  font-size: 12px;
-  font-weight: var(--fw-semibold);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  margin: 0 auto 16px;
+  max-width: 28em;
+  padding: 0 4px;
+}
+
+.hero-tagline-main {
+  display: block;
+  font-size: clamp(20px, 5.5vw, 32px);
+  font-weight: var(--fw-bold);
+  letter-spacing: -0.02em;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.hero-tagline-sub {
+  display: block;
+  margin-top: 10px;
+  font-size: clamp(15px, 4vw, 22px);
+  font-weight: var(--fw-light);
   color: var(--text-secondary);
-  margin: 0 0 10px;
+  line-height: 1.45;
+  letter-spacing: -0.01em;
 }
 
 .hero h1 {
@@ -404,22 +434,26 @@ textarea {
   width: 100%;
 }
 
-/* ——— Project cards (static About) ——— */
+/* ——— Project cards (About · 진행 중인 사업) ——— */
 .project-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--grid-gap);
+  max-width: 960px;
+  margin: 0 auto;
 }
 
 .project-card {
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 22px;
+  padding: 18px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: flex-start;
   gap: 16px;
   height: 100%;
+  min-width: 0;
   transition: box-shadow 0.25s ease, transform 0.25s ease;
 }
 
@@ -427,22 +461,134 @@ textarea {
   background: #fff;
 }
 
-.project-card-visual img {
-  width: 64px;
-  height: 64px;
-  border-radius: 14px;
+.project-card-media {
+  position: relative;
+  flex-shrink: 0;
+  width: 88px;
+  height: 88px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--bg-subtle);
+}
+
+.project-card-media .post-card-status-overlay {
+  top: 6px;
+  right: 6px;
+  font-size: 9px;
+  padding: 4px 7px;
+}
+
+.project-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.project-card-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
 }
 
 .project-card h3 {
-  font-size: 19px;
+  font-size: 17px;
   font-weight: var(--fw-bold);
   margin: 0;
+  letter-spacing: -0.02em;
 }
 
-.project-card > .project-card-body > p {
+.project-card-body > p {
   font-size: 14px;
   color: var(--text-secondary);
   margin: 6px 0 0;
+  line-height: 1.45;
+}
+
+.project-card-meta {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.project-tag,
+.project-status {
+  font-size: 11px;
+  font-weight: var(--fw-semibold);
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: var(--bg-subtle);
+  color: var(--text-secondary);
+}
+
+.project-status {
+  color: var(--text);
+}
+
+.project-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.project-chip {
+  font-size: 11px;
+  color: var(--text-secondary);
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+}
+
+.project-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+  width: 100%;
+}
+
+.project-card-btn {
+  min-height: 38px;
+  padding: 8px 18px;
+  font-size: 14px;
+  text-decoration: none;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+@media (min-width: 480px) {
+  .project-card {
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .project-card-media {
+    width: 104px;
+    height: 104px;
+    border-radius: 12px;
+  }
+
+  .project-card h3 {
+    font-size: 19px;
+  }
+
+  .project-card-btn {
+    flex: 0 1 auto;
+    width: auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .project-card-media {
+    width: 112px;
+    height: 112px;
+  }
 }
 
 /* ——— Post / Projects grid ——— */
@@ -475,10 +621,27 @@ textarea {
 }
 
 .post-card-thumb {
+  position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
   background: var(--bg-subtle);
   overflow: hidden;
+}
+
+.post-card-status-overlay {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  font-size: 10px;
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.02em;
+  color: #fff;
+  background: rgba(29, 29, 31, 0.78);
+  backdrop-filter: blur(8px);
+  padding: 5px 10px;
+  border-radius: 6px;
+  pointer-events: none;
 }
 
 .post-card-thumb img {
@@ -920,90 +1083,114 @@ textarea {
 }
 
 /* ——— Contact ——— */
-.inquiry-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--grid-gap);
-  max-width: 960px;
-  margin: 0 auto 8px;
-}
-
-.inquiry-card {
-  text-align: left;
-  padding: 20px 18px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: var(--bg);
-  cursor: pointer;
-  font-family: var(--font);
-  transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.2s;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.inquiry-card h3 {
-  font-size: 15px;
-  font-weight: var(--fw-semibold);
-  margin: 0 0 6px;
-  color: var(--text);
-}
-
-.inquiry-card p {
-  font-size: 13px;
-  color: var(--text-secondary);
-  margin: 0;
-  line-height: 1.45;
-}
-
-.contact-highlight {
-  box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.35);
-  transition: box-shadow 0.3s ease;
-}
-
-.contact-item-wide {
-  grid-column: 1 / -1;
-}
-
-.contact-grid {
+.contact-channels {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--grid-gap);
-  max-width: 960px;
+  max-width: 880px;
   margin: 0 auto;
 }
 
-.contact-item {
-  text-align: center;
-  padding: 28px 20px;
+.contact-channel-card {
+  padding: 28px 24px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--bg);
+  text-align: center;
+  transition: box-shadow 0.25s ease;
 }
 
-.contact-item h3 {
-  font-size: 16px;
-  font-weight: var(--fw-semibold);
-  margin: 0 0 10px;
+.contact-channel-title {
+  font-size: clamp(18px, 4.5vw, 22px);
+  font-weight: var(--fw-bold);
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin: 0 0 20px;
+  line-height: 1.35;
 }
 
-.contact-item p,
-.contact-item a {
-  font-size: 14px;
-  color: var(--text-secondary);
-  word-break: break-word;
-}
-
-.qr-placeholder {
-  width: 120px;
-  height: 120px;
-  margin: 12px auto 0;
-  background: var(--bg-subtle);
-  border: 1px dashed var(--border);
-  border-radius: var(--radius-sm);
+.contact-channel-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: flex;
+  flex-direction: column;
+  gap: 14px;
   align-items: center;
-  justify-content: center;
-  font-size: 11px;
+}
+
+.contact-channel-list li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.contact-channel-label {
+  font-size: 12px;
+  font-weight: var(--fw-medium);
   color: var(--text-secondary);
+  letter-spacing: 0.02em;
+}
+
+.contact-channel-list a,
+.contact-channel-phone {
+  font-size: 17px;
+  font-weight: var(--fw-semibold);
+  color: var(--text);
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.contact-channel-list a:hover,
+.contact-channel-phone:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.contact-channel-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.btn-kakao {
+  background: #fee500;
+  color: #191919;
+  min-width: 200px;
+}
+
+.btn-kakao:hover {
+  background: #f5dc00;
+  text-decoration: none;
+  color: #191919;
+}
+
+.btn-kakao-pending {
+  opacity: 0.92;
+  cursor: default;
+  flex-direction: column;
+  gap: 2px;
+  pointer-events: none;
+}
+
+.btn-kakao-note {
+  display: block;
+  font-size: 11px;
+  font-weight: var(--fw-regular);
+  opacity: 0.75;
+}
+
+@media (min-width: 768px) {
+  .contact-channels {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  .contact-channel-card {
+    padding: 32px 28px;
+  }
 }
 
 /* ——— Footer ——— */
@@ -1047,13 +1234,9 @@ textarea {
 
   .post-card:hover,
   .project-card:hover,
-  .inquiry-card:hover {
+  .contact-channel-card:hover {
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
     transform: translateY(-3px);
-  }
-
-  .inquiry-card:hover {
-    border-color: rgba(0, 113, 227, 0.35);
   }
 
   .post-card-title a:hover {
@@ -1171,14 +1354,6 @@ textarea {
     gap: 16px;
   }
 
-  .inquiry-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .contact-item-wide {
-    grid-column: span 2;
-  }
-
   .stat-item {
     padding: 24px 16px;
   }
@@ -1197,8 +1372,9 @@ textarea {
     --max-width: 1200px;
   }
 
-  .logo {
-    font-size: 21px;
+  .logo-image img {
+    height: 30px;
+    max-width: 156px;
   }
 
   .nav-menu {
@@ -1227,10 +1403,6 @@ textarea {
 
   .capability-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .contact-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .project-grid {
@@ -1580,19 +1752,6 @@ textarea {
   color: var(--text-secondary);
 }
 
-.project-tag,
-.project-status,
-.project-chips,
-.project-card-actions,
-.project-link {
-  font-size: 12px;
-}
-
-.project-card-meta {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
 
 .post-gallery {
   display: flex;

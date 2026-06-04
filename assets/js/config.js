@@ -1,6 +1,8 @@
 const GOMSOFT_CONFIG = {
   siteName: "GOMSOFT",
-  tagline: "AI와 소프트웨어를 만드는 디지털 프로덕트 스튜디오",
+  logoImage: "/assets/images/gomsoft-logo.png",
+  tagline: "Goal Oriented Maker",
+  taglineSub: "아이디어를 실제 서비스로 구현하는 디지털 프로덕트 스튜디오",
   headline: "우리는 아이디어를 실제 서비스로 만듭니다.",
   subHeadline:
     "앱, 게임, 디지털 미디어,\n현장 서비스를 직접 기획하고 운영합니다.",
@@ -146,10 +148,16 @@ const GOMSOFT_CONFIG = {
       postCategory: "welding",
     },
   ],
-  contactInquiries: [
-    { id: "general", title: "프로젝트 문의", desc: "지원사업·협업·투자 제안", target: "contact-general" },
-    { id: "app", title: "앱 개발 협업", desc: "모바일 앱·게임 개발 문의", target: "contact-app" },
-    { id: "partner", title: "광고 및 제휴 문의", desc: "미디어·마케팅 제휴", target: "contact-partner" },
-    { id: "welding", title: "용접 서비스 문의", desc: "24시 출장 용접·견적", target: "contact-welding" },
-  ],
+  contact: {
+    project: {
+      title: "프로젝트 · 지원사업 · 협업 문의",
+      email: "soxos3339@naver.com",
+      phone: "010-7930-7586",
+    },
+    welding: {
+      title: "용접 서비스",
+      phone: "010-7680-7581",
+      kakaoChannelUrl: "",
+    },
+  },
 };

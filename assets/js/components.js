@@ -13,16 +13,30 @@ function renderSiteHeader(activePage) {
     )
     .join("");
 
+  const mobileCategoryLinks = pages
+    .map(
+      (p) =>
+        `<a href="${p.href}" class="mobile-category-link${activePage === p.id ? " active" : ""}">${p.label}</a>`
+    )
+    .join("");
+
   return `
-<header class="site-header">
-  <div class="nav-inner">
-    <a href="/" class="logo">${GOMSOFT_CONFIG.siteName}</a>
-    <button type="button" class="nav-toggle" aria-label="메뉴 열기" aria-expanded="false" id="navToggle">
-      <span></span><span></span><span></span>
-    </button>
-    <ul class="nav-menu" id="navMenu">${navLinks}</ul>
-  </div>
-</header>`;
+<div class="site-header-stack">
+  <header class="site-header">
+    <div class="nav-inner">
+      <a href="/" class="logo">${GOMSOFT_CONFIG.siteName}</a>
+      <button type="button" class="nav-toggle" aria-label="메뉴 열기" aria-expanded="false" id="navToggle">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+      <ul class="nav-menu" id="navMenu">${navLinks}</ul>
+    </div>
+  </header>
+  <nav class="mobile-category-nav" id="mobileCategoryNav" aria-label="카테고리 메뉴">
+    <div class="mobile-category-nav-inner">${mobileCategoryLinks}</div>
+  </nav>
+</div>`;
 }
 
 function footerProjectHref(proj) {
@@ -122,23 +136,23 @@ function initNavigation() {
   toggle.addEventListener("click", () => {
     const open = menu.classList.toggle("open");
     toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    toggle.classList.toggle("is-open", open);
     document.body.style.overflow = open && window.innerWidth < 768 ? "hidden" : "";
   });
 
+  const closeMenu = () => {
+    menu.classList.remove("open");
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.classList.remove("is-open");
+    document.body.style.overflow = "";
+  };
+
   menu.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => {
-      menu.classList.remove("open");
-      toggle.setAttribute("aria-expanded", "false");
-      document.body.style.overflow = "";
-    });
+    link.addEventListener("click", closeMenu);
   });
 
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      menu.classList.remove("open");
-      toggle.setAttribute("aria-expanded", "false");
-      document.body.style.overflow = "";
-    }
+    if (e.key === "Escape") closeMenu();
   });
 }
 

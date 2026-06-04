@@ -15,6 +15,8 @@
   --radius: 18px;
   --radius-sm: 12px;
   --nav-height: 52px;
+  --mobile-category-nav-height: 48px;
+  --header-stack-height: calc(var(--nav-height) + var(--mobile-category-nav-height));
   --container-pad: 20px;
   --max-width: 100%;
   --section-pad: 56px;
@@ -81,7 +83,11 @@ textarea {
   padding: 0 var(--container-pad);
 }
 
-/* ——— Nav (mobile: hamburger) ——— */
+/* ——— Nav (mobile: fixed stack · desktop: sticky header) ——— */
+.site-header-stack {
+  display: contents;
+}
+
 .site-header {
   position: sticky;
   top: 0;
@@ -91,6 +97,10 @@ textarea {
   backdrop-filter: saturate(180%) blur(20px);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   border-bottom: 1px solid var(--border);
+}
+
+.mobile-category-nav {
+  display: none;
 }
 
 .nav-inner {
@@ -119,30 +129,48 @@ textarea {
 
 .nav-toggle {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-width: 44px;
-  min-height: 44px;
-  margin: 0 -8px 0 0;
-  background: none;
-  border: none;
-  padding: 8px;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
   cursor: pointer;
   z-index: 1001;
+  flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.2s ease, border-color 0.2s ease;
 }
 
-.nav-toggle span {
+.nav-toggle-bar {
   display: block;
-  width: 22px;
+  width: 18px;
   height: 2px;
   background: var(--text);
-  margin: 5px 0;
-  transition: 0.2s;
+  border-radius: 1px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.nav-toggle.is-open .nav-toggle-bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle.is-open .nav-toggle-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle.is-open .nav-toggle-bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
 }
 
 .nav-menu {
   position: fixed;
-  top: var(--nav-height);
+  top: var(--header-stack-height);
   left: 0;
   right: 0;
   list-style: none;
@@ -182,6 +210,100 @@ textarea {
 .nav-menu a.active {
   color: var(--text);
   text-decoration: none;
+}
+
+/* Mobile: fixed header + category tabs */
+@media (max-width: 767px) {
+  .site-header-stack {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+  }
+
+  .site-header {
+    position: relative;
+    top: auto;
+    border-bottom: none;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .mobile-category-nav {
+    display: block;
+    height: var(--mobile-category-nav-height);
+    border-top: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.98);
+  }
+
+  .mobile-category-nav-inner {
+    display: flex;
+    align-items: stretch;
+    gap: 6px;
+    height: 100%;
+    padding: 6px var(--container-pad);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .mobile-category-nav-inner::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mobile-category-link {
+    flex: 1 0 auto;
+    min-width: 4.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 12px;
+    font-size: 13px;
+    font-weight: var(--fw-medium);
+    letter-spacing: -0.01em;
+    color: var(--text-secondary);
+    text-decoration: none;
+    background: var(--bg-subtle);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    white-space: nowrap;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .mobile-category-link.active {
+    color: #fff;
+    background: var(--text);
+    border-color: var(--text);
+  }
+
+  body {
+    padding-top: var(--header-stack-height);
+  }
+
+  .post-detail {
+    padding-top: 32px;
+  }
+
+  .page-hero {
+    padding-top: 28px;
+  }
+
+  .contact-hero {
+    padding-top: 40px;
+  }
+
+  .admin-wrap {
+    padding-top: calc(var(--header-stack-height) + 24px);
+  }
 }
 
 /* ——— Hero ——— */
@@ -1861,8 +1983,17 @@ a.contact-channel-value:hover {
     display: none;
   }
 
+  .mobile-category-nav {
+    display: none !important;
+  }
+
+  body {
+    padding-top: 0;
+  }
+
   .nav-menu {
     position: static;
+    top: auto;
     display: flex;
     flex-direction: row;
     align-items: center;

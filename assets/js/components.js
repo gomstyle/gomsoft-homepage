@@ -34,11 +34,6 @@ function renderSiteHeader(activePage) {
   <header class="site-header">
     <div class="nav-inner">
       <a href="/" class="logo">${GOMSOFT_CONFIG.siteName}</a>
-      <button type="button" class="nav-toggle" aria-label="메뉴 열기" aria-expanded="false" id="navToggle">
-        <span class="nav-toggle-bar"></span>
-        <span class="nav-toggle-bar"></span>
-        <span class="nav-toggle-bar"></span>
-      </button>
       <ul class="nav-menu" id="navMenu">${navLinks}</ul>
     </div>
   </header>
@@ -141,31 +136,7 @@ function renderSiteFooter() {
 }
 
 function initNavigation() {
-  const toggle = document.getElementById("navToggle");
-  const menu = document.getElementById("navMenu");
-  if (!toggle || !menu) return;
-
-  toggle.addEventListener("click", () => {
-    const open = menu.classList.toggle("open");
-    toggle.setAttribute("aria-expanded", open ? "true" : "false");
-    toggle.classList.toggle("is-open", open);
-    document.body.style.overflow = open && window.innerWidth < 768 ? "hidden" : "";
-  });
-
-  const closeMenu = () => {
-    menu.classList.remove("open");
-    toggle.setAttribute("aria-expanded", "false");
-    toggle.classList.remove("is-open");
-    document.body.style.overflow = "";
-  };
-
-  menu.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", closeMenu);
-  });
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeMenu();
-  });
+  /* 모바일: mobile-category-nav · PC: nav-menu */
 }
 
 function setPageMeta({ title, description, path, image }) {

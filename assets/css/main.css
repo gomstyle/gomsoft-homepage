@@ -139,93 +139,23 @@ body {
   text-decoration: none;
 }
 
-.nav-toggle {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  width: 44px;
-  height: 44px;
-  margin: 0;
-  padding: 0;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  cursor: pointer;
-  z-index: 1001;
-  flex-shrink: 0;
-  -webkit-tap-highlight-color: transparent;
-  transition: background 0.2s ease, border-color 0.2s ease;
-}
-
-.nav-toggle-bar {
-  display: block;
-  width: 18px;
-  height: 2px;
-  background: var(--text);
-  border-radius: 1px;
-  transition: transform 0.2s ease, opacity 0.2s ease;
-}
-
-.nav-toggle.is-open .nav-toggle-bar:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
-}
-
-.nav-toggle.is-open .nav-toggle-bar:nth-child(2) {
-  opacity: 0;
-}
-
-.nav-toggle.is-open .nav-toggle-bar:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
-}
-
 .nav-menu {
-  position: fixed;
-  top: var(--header-stack-height);
-  left: 0;
-  right: 0;
+  display: none;
   list-style: none;
   margin: 0;
-  padding: 20px var(--container-pad) 28px;
-  background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: saturate(180%) blur(20px);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-  flex-direction: column;
-  align-items: stretch;
-  gap: 4px;
-  border-bottom: 1px solid var(--border);
-  transform: translateY(-110%);
-  opacity: 0;
-  pointer-events: none;
-  transition: transform 0.28s ease, opacity 0.28s ease;
-}
-
-.nav-menu.open {
-  transform: translateY(0);
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.nav-menu a {
-  display: block;
-  padding: 14px 4px;
-  font-size: 17px;
-  font-weight: var(--fw-medium);
-  color: var(--text-secondary);
-  text-decoration: none;
-  min-height: 44px;
-  line-height: 44px;
-}
-
-.nav-menu a:hover,
-.nav-menu a.active {
-  color: var(--text);
-  text-decoration: none;
+  padding: 0;
 }
 
 /* Mobile: category tabs below header */
 @media (max-width: 767px) {
+  .nav-inner {
+    justify-content: center;
+  }
+
+  .nav-menu {
+    display: none !important;
+  }
+
   .mobile-category-nav {
     display: block;
     height: var(--mobile-category-nav-height);
@@ -2141,8 +2071,8 @@ a.contact-channel-value:hover {
     font-size: 17px;
   }
 
-  .nav-toggle {
-    display: none;
+  .nav-inner {
+    justify-content: space-between;
   }
 
   .mobile-category-nav {

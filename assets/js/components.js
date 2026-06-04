@@ -346,9 +346,6 @@ function initHomePage() {
   document.getElementById("heroHeadline").textContent = GOMSOFT_CONFIG.headline;
   const lead = document.getElementById("heroLead");
   if (lead) lead.textContent = GOMSOFT_CONFIG.subHeadline;
-  const actions = document.getElementById("heroActions");
-  if (actions) actions.innerHTML = renderHeroActions();
   const profile = document.getElementById("companyProfile");
   if (profile) profile.innerHTML = renderCompanyProfile();
-  if (typeof updateHeroRunningCount === "function") updateHeroRunningCount();
 }

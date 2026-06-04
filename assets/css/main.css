@@ -201,7 +201,7 @@ textarea {
 /* ——— Hero ——— */
 .hero {
   text-align: center;
-  padding: 48px var(--container-pad) 40px;
+  padding: 48px var(--container-pad) 56px;
   background: var(--bg-subtle);
 }
 
@@ -250,37 +250,11 @@ textarea {
   font-size: clamp(16px, 4.2vw, 24px);
   color: var(--text-secondary);
   max-width: 36em;
-  margin: 0 auto 16px;
+  margin: 0 auto;
   font-weight: var(--fw-light);
   line-height: 1.5;
   padding: 0 4px;
   white-space: pre-line;
-}
-
-.hero-running {
-  font-size: 14px;
-  font-weight: var(--fw-semibold);
-  letter-spacing: 0.02em;
-  color: var(--text);
-  margin: 0 auto 20px;
-  padding: 8px 16px;
-  display: inline-block;
-  background: rgba(0, 113, 227, 0.08);
-  border-radius: 980px;
-}
-
-.hero-actions {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 10px;
-  max-width: 320px;
-  margin: 0 auto;
-}
-
-.hero-actions .btn {
-  width: 100%;
-  text-align: center;
 }
 
 /* ——— Buttons ——— */
@@ -342,14 +316,26 @@ textarea {
 
 /* ——— Company Profile ——— */
 .profile-section {
-  padding-top: 0;
+  padding: 28px 0 var(--section-pad);
+  background: var(--bg);
+}
+
+.profile-section .container {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  max-width: 960px;
 }
 
 .profile-card {
-  background: var(--bg-subtle);
+  background: #fff;
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 28px 20px;
+  padding: 32px 22px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+}
+
+.profile-intro {
+  padding-bottom: 8px;
 }
 
 .profile-label {
@@ -379,24 +365,46 @@ textarea {
 .profile-facts {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 18px;
-  margin: 0 0 28px;
+  gap: 12px;
+  margin: 28px 0;
+  padding: 20px 16px;
+  background: linear-gradient(165deg, rgba(0, 113, 227, 0.07) 0%, rgba(0, 113, 227, 0.02) 100%);
+  border: 1px solid rgba(0, 113, 227, 0.14);
+  border-radius: var(--radius-sm);
+}
+
+.profile-fact {
+  padding: 16px 18px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
 }
 
 .profile-fact-label {
   display: block;
   font-size: 11px;
-  font-weight: var(--fw-medium);
-  color: var(--text-secondary);
+  font-weight: var(--fw-semibold);
+  color: var(--accent);
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  margin-bottom: 4px;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
 }
 
 .profile-fact-value {
   display: block;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: var(--fw-semibold);
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.profile-strengths {
+  margin-top: 8px;
+  padding: 20px 16px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
 }
 
 .profile-strengths-title {
@@ -420,14 +428,18 @@ textarea {
   font-weight: var(--fw-medium);
   padding: 8px 14px;
   background: #fff;
-  border: 1px solid var(--border);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 980px;
+  color: var(--text);
 }
 
 .profile-cta {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
 }
 
 .profile-cta .btn {
@@ -1296,15 +1308,13 @@ textarea {
     height: 72px;
   }
 
-  .hero-actions {
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
-    max-width: none;
+  .profile-section {
+    padding-top: 40px;
   }
 
-  .hero-actions .btn {
-    width: auto;
+  .profile-section .container {
+    padding-top: 16px;
+    padding-bottom: 16px;
   }
 
   .profile-card {
@@ -1313,7 +1323,8 @@ textarea {
 
   .profile-facts {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 24px 32px;
+    gap: 14px;
+    padding: 24px 20px;
   }
 
   .profile-cta {
@@ -1382,11 +1393,20 @@ textarea {
   }
 
   .hero {
-    padding: 100px var(--container-pad) 80px;
+    padding: 100px var(--container-pad) 88px;
+  }
+
+  .profile-section {
+    padding-top: 48px;
+  }
+
+  .profile-card {
+    padding: 48px 44px;
   }
 
   .profile-facts {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    padding: 28px 24px;
   }
 
   .post-grid {

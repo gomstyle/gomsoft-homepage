@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <title>관리자 | GOMSOFT CMS</title>
+</head>
+<body>
+  <div id="siteHeader"></div>
+
+  <div class="admin-wrap">
+    <h1 style="font-size:28px;margin-bottom:8px">CMS 관리자</h1>
+    <p style="color:var(--text-secondary);margin-bottom:32px">
+      게시글 저장 시 GitHub 저장소에 Markdown이 커밋되며, GitHub Pages가 자동 배포됩니다.
+    </p>
+
+    <div id="adminMsg" class="admin-msg"></div>
+
+    <section class="admin-panel" id="loginPanel">
+      <h2>GitHub 로그인</h2>
+      <div class="form-group">
+        <label>GitHub Owner</label>
+        <input type="text" id="ghOwner" placeholder="gomstyle">
+      </div>
+      <div class="form-group">
+        <label>Repository</label>
+        <input type="text" id="ghRepo" placeholder="gomsoft-homepage">
+      </div>
+      <div class="form-group">
+        <label>Branch</label>
+        <input type="text" id="ghBranch" value="main">
+      </div>
+      <div class="form-group">
+        <label>GitHub Personal Access Token</label>
+        <input type="password" id="ghToken" placeholder="Fine-grained · Contents Read & Write" autocomplete="off">
+        <small style="color:var(--text-secondary);font-size:12px">
+          <a href="https://github.com/settings/tokens?type=beta" target="_blank" rel="noopener">Fine-grained Token 발급</a>
+        </small>
+        <label class="admin-remember">
+          <input type="checkbox" id="rememberToken">
+          이 브라우저에서 7일간 기억하기
+        </label>
+      </div>
+      <button type="button" class="btn btn-primary" id="btnLogin">연결하기</button>
+    </section>
+
+    <section id="dashboardPanel" style="display:none">
+      <div class="admin-session-bar">
+        <span>로그인 계정: <strong id="githubUserDisplay">—</strong></span>
+        <button type="button" class="btn btn-muted btn-small" id="btnLogout">로그아웃</button>
+      </div>
+
+      <div class="admin-panel">
+        <h2>게시글 목록</h2>
+        <ul class="admin-post-list" id="postListAdmin"></ul>
+        <button type="button" class="btn btn-secondary" id="btnNewPost" style="margin-top:16px">새 게시글</button>
+      </div>
+
+      <div class="admin-panel" id="editorPanel" style="display:none">
+        <h2 id="editorTitle">게시글 작성</h2>
+        <input type="hidden" id="editSlug">
+        <div class="form-group">
+          <label>카테고리</label>
+          <select id="postCategory">
+            <option value="apps">Apps</option>
+            <option value="media">Media</option>
+            <option value="welding">Welding</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>제목</label>
+          <input type="text" id="postTitle" required>
+        </div>
+        <div class="form-group">
+          <label>작성일</label>
+          <input type="date" id="postDate">
+        </div>
+        <div class="form-group">
+          <label>요약</label>
+          <textarea id="postSummary" rows="2"></textarea>
+        </div>
+        <div class="form-group">
+          <label>썸네일 URL</label>
+          <input type="text" id="postThumbnail" placeholder="/familyroutine_icon.png">
+          <input type="file" id="thumbUpload" accept="image/*" style="margin-top:8px">
+        </div>
+        <div class="form-group">
+          <label>본문 (Markdown)</label>
+          <textarea id="postBody" rows="10"></textarea>
+        </div>
+        <div class="form-group">
+          <label>추가 이미지 URL (줄바꿈으로 구분)</label>
+          <textarea id="postImages" rows="3" placeholder="/ocean1.jpg"></textarea>
+          <input type="file" id="imageUpload" accept="image/*" multiple style="margin-top:8px">
+        </div>
+        <div class="form-group">
+          <label>외부 링크</label>
+          <input type="url" id="postLink" placeholder="https://">
+        </div>
+        <div class="form-row">
+          <button type="button" class="btn btn-primary" id="btnSave">저장 (GitHub 커밋)</button>
+          <button type="button" class="btn btn-muted" id="btnCancelEdit">취소</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="/assets/js/config.js"></script>
+  <script src="/assets/js/components.js"></script>
+  <script src="/assets/js/markdown.js"></script>
+  <script src="/assets/js/github-cms.js"></script>
+  <script>
+    document.getElementById("siteHeader").innerHTML = renderSiteHeader("home");
+    initNavigation();
+
+    const msgEl = document.getElementById("adminMsg");
+    const loginPanel = document.getElementById("loginPanel");
+    const dashboardPanel = document.getElementById("dashboardPanel");
+    const editorPanel = document.getElementById("editorPanel");
+    const btnLogin = document.getElementById("btnLogin");
+
+    function showMsg(text, type) {
+      msgEl.textContent = text;
+      msgEl.className = "admin-msg show " + type;
+      setTimeout(() => msgEl.classList.remove("show"), 5000);
+    }
+
+    function initLoginForm() {
+      document.getElementById("ghOwner").value = GOMSOFT_CONFIG.github.owner;
+      document.getElementById("ghRepo").value = GOMSOFT_CONFIG.github.repo;
+      document.getElementById("ghBranch").value = GOMSOFT_CONFIG.github.branch;
+      document.getElementById("rememberToken").checked = false;
+      document.getElementById("postDate").value = new Date().toISOString().slice(0, 10);
+    }
+
+    function updateGithubUserDisplay() {
+      const s = getCmsSettings();
+      document.getElementById("githubUserDisplay").textContent =
+        getGithubDisplayName(s) || "—";
+    }
+
+    function enterDashboard() {
+      loginPanel.style.display = "none";
+      dashboardPanel.style.display = "block";
+      updateGithubUserDisplay();
+      refreshPostList();
+    }
+
+    function exitDashboard() {
+      loginPanel.style.display = "block";
+      dashboardPanel.style.display = "none";
+      editorPanel.style.display = "none";
+      document.getElementById("ghToken").value = "";
+      document.getElementById("rememberToken").checked = false;
+    }
+
+    function getLoginPayload() {
+      return {
+        owner: document.getElementById("ghOwner").value.trim(),
+        repo: document.getElementById("ghRepo").value.trim(),
+        branch: document.getElementById("ghBranch").value.trim() || "main",
+        token: document.getElementById("ghToken").value.trim(),
+      };
+    }
+
+    async function connectCms(fromStored) {
+      const payload = fromStored ? getCmsSettings() : getLoginPayload();
+      if (!payload.token) {
+        showMsg("GitHub Token을 입력해 주세요.", "error");
+        return false;
+      }
+
+      btnLogin.disabled = true;
+      btnLogin.textContent = "권한 확인 중…";
+
+      try {
+        const user = await verifyGithubCmsAccess(payload);
+        const remember = fromStored
+          ? !!payload.remember
+          : document.getElementById("rememberToken").checked;
+
+        saveCmsSettings(
+          {
+            ...payload,
+            githubLogin: user.githubLogin,
+            githubName: user.githubName,
+          },
+          remember
+        );
+
+        enterDashboard();
+        showMsg(
+          remember
+            ? "연결되었습니다. 이 브라우저에 7일간 저장됩니다."
+            : "연결되었습니다. 브라우저를 닫으면 로그인이 해제됩니다.",
+          "success"
+        );
+        return true;
+      } catch (e) {
+        if (fromStored) {
+          clearCmsSettings();
+          exitDashboard();
+        }
+        showMsg(e.message || "저장소 접근 권한을 확인할 수 없습니다.", "error");
+        return false;
+      } finally {
+        btnLogin.disabled = false;
+        btnLogin.textContent = "연결하기";
+      }
+    }
+
+    btnLogin.onclick = () => connectCms(false);
+
+    document.getElementById("btnLogout").onclick = () => {
+      clearCmsSettings();
+      exitDashboard();
+      showMsg("로그아웃되었습니다.", "success");
+    };
+
+    async function refreshPostList() {
+      const list = document.getElementById("postListAdmin");
+      list.innerHTML = "<li>불러오는 중…</li>";
+      try {
+        const index = await loadPostsIndexFromGithub();
+        const posts = (index.posts || []).sort((a, b) => new Date(b.date) - new Date(a.date));
+        if (!posts.length) {
+          list.innerHTML = "<li>등록된 게시글이 없습니다.</li>";
+          return;
+        }
+        list.innerHTML = posts
+          .map(
+            (p) => `
+          <li>
+            <span><strong>[${p.category}]</strong> ${p.title} <small>${p.date}</small></span>
+            <span class="actions">
+              <button type="button" class="btn-small btn-muted" data-edit="${p.category}|${p.slug}">수정</button>
+              <button type="button" class="btn-small btn-danger" data-del="${p.category}|${p.slug}">삭제</button>
+            </span>
+          </li>`
+          )
+          .join("");
+
+        list.querySelectorAll("[data-edit]").forEach((btn) => {
+          btn.onclick = () => {
+            const [cat, slug] = btn.dataset.edit.split("|");
+            openEditor(cat, slug);
+          };
+        });
+        list.querySelectorAll("[data-del]").forEach((btn) => {
+          btn.onclick = async () => {
+            if (!confirm("삭제하시겠습니까?")) return;
+            const [cat, slug] = btn.dataset.del.split("|");
+            try {
+              await removePost(cat, slug);
+              showMsg("삭제되었습니다.", "success");
+              refreshPostList();
+            } catch (e) {
+              showMsg(e.message, "error");
+            }
+          };
+        });
+      } catch (e) {
+        list.innerHTML = `<li>${e.message}</li>`;
+      }
+    }
+
+    function openEditor(category, slug) {
+      editorPanel.style.display = "block";
+      document.getElementById("editSlug").value = slug || "";
+      document.getElementById("editorTitle").textContent = slug ? "게시글 수정" : "게시글 작성";
+      document.getElementById("postCategory").value = category || "apps";
+      if (!slug) {
+        document.getElementById("postTitle").value = "";
+        document.getElementById("postSummary").value = "";
+        document.getElementById("postThumbnail").value = "";
+        document.getElementById("postBody").value = "";
+        document.getElementById("postImages").value = "";
+        document.getElementById("postLink").value = "";
+        document.getElementById("postDate").value = new Date().toISOString().slice(0, 10);
+        return;
+      }
+      const path = `content/${category}/${slug}.md`;
+      getFileContent(path)
+        .then(({ content }) => {
+          const { meta, body } = parseFrontmatter(content);
+          document.getElementById("postTitle").value = meta.title || "";
+          document.getElementById("postDate").value = meta.date || "";
+          document.getElementById("postSummary").value = meta.summary || "";
+          document.getElementById("postThumbnail").value = meta.thumbnail || "";
+          document.getElementById("postBody").value = body;
+          document.getElementById("postLink").value = meta.link || "";
+          const imgs = Array.isArray(meta.images) ? meta.images : [];
+          document.getElementById("postImages").value = imgs.join("\n");
+        })
+        .catch((e) => showMsg(e.message, "error"));
+    }
+
+    document.getElementById("btnNewPost").onclick = () => openEditor("apps", null);
+    document.getElementById("btnCancelEdit").onclick = () => {
+      editorPanel.style.display = "none";
+    };
+
+    document.getElementById("thumbUpload").onchange = async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      try {
+        showMsg("썸네일 업로드 중…", "success");
+        const url = await uploadImageToRepo(file, document.getElementById("postCategory").value);
+        document.getElementById("postThumbnail").value = url;
+        showMsg("썸네일이 업로드되었습니다.", "success");
+      } catch (err) {
+        showMsg(err.message, "error");
+      }
+    };
+
+    document.getElementById("imageUpload").onchange = async (e) => {
+      const files = [...e.target.files];
+      if (!files.length) return;
+      const cat = document.getElementById("postCategory").value;
+      const urls = [];
+      try {
+        for (const file of files) {
+          showMsg(`${file.name} 업로드 중…`, "success");
+          urls.push(await uploadImageToRepo(file, cat));
+        }
+        const prev = document.getElementById("postImages").value.trim();
+        document.getElementById("postImages").value = (prev ? prev + "\n" : "") + urls.join("\n");
+        showMsg("이미지 업로드 완료", "success");
+      } catch (err) {
+        showMsg(err.message, "error");
+      }
+    };
+
+    document.getElementById("btnSave").onclick = async () => {
+      const title = document.getElementById("postTitle").value.trim();
+      if (!title) {
+        showMsg("제목을 입력해 주세요.", "error");
+        return;
+      }
+      const images = document
+        .getElementById("postImages")
+        .value.split("\n")
+        .map((s) => s.trim())
+        .filter(Boolean);
+
+      const formData = {
+        category: document.getElementById("postCategory").value,
+        title,
+        date: document.getElementById("postDate").value,
+        summary: document.getElementById("postSummary").value.trim(),
+        thumbnail: document.getElementById("postThumbnail").value.trim(),
+        body: document.getElementById("postBody").value,
+        images,
+        link: document.getElementById("postLink").value.trim(),
+      };
+
+      try {
+        showMsg("GitHub에 저장 중… (1~2분 후 사이트 반영)", "success");
+        const slug = await publishPost(formData, document.getElementById("editSlug").value || null);
+        document.getElementById("editSlug").value = slug;
+        showMsg("저장 완료! GitHub Pages 배포가 진행됩니다.", "success");
+        editorPanel.style.display = "none";
+        refreshPostList();
+      } catch (e) {
+        showMsg(e.message, "error");
+      }
+    };
+
+    initLoginForm();
+    (async () => {
+      const s = getCmsSettings();
+      if (s.token) {
+        await connectCms(true);
+      }
+    })();
+  </script>
+</body>
+</html>

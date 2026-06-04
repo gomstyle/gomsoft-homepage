@@ -1,0 +1,44 @@
+{
+  "posts": [
+    {
+      "id": "apps-2026-06-04-패밀리루틴",
+      "category": "apps",
+      "slug": "2026-06-04-패밀리루틴",
+      "title": "패밀리루틴 — 가족 라이프스타일 앱",
+      "summary": "가족 일정·메모·지출을 한 앱에서 관리하는 올인원 라이프스타일 서비스",
+      "thumbnail": "/familyroutine_icon.png",
+      "date": "2026-06-04",
+      "path": "content/apps/2026-06-04-패밀리루틴.md"
+    },
+    {
+      "id": "apps-2026-06-04-바다동물의숲",
+      "category": "apps",
+      "slug": "2026-06-04-바다동물의숲",
+      "title": "바다동물의숲 — 유아용 힐링 게임",
+      "summary": "바다 동물을 수집하고 키우는 캐주얼 모바일 게임",
+      "thumbnail": "/ocean_forest_icon.png",
+      "date": "2026-06-04",
+      "path": "content/apps/2026-06-04-바다동물의숲.md"
+    },
+    {
+      "id": "media-2026-06-04-넥스트리뷰",
+      "category": "media",
+      "slug": "2026-06-04-넥스트리뷰",
+      "title": "넥스트리뷰 — AI·Apps·Tech 미디어",
+      "summary": "디지털 트렌드와 제품 리뷰를 다루는 콘텐츠 채널",
+      "thumbnail": "/gomsoft_logo.png",
+      "date": "2026-06-04",
+      "path": "content/media/2026-06-04-넥스트리뷰.md"
+    },
+    {
+      "id": "welding-2026-06-04-24시출장용접",
+      "category": "welding",
+      "slug": "2026-06-04-24시출장용접",
+      "title": "24시 출장 용접 서비스",
+      "summary": "긴급 현장 대응이 가능한 출장 용접·보수 서비스",
+      "thumbnail": "/gomsoft_logo.png",
+      "date": "2026-06-04",
+      "path": "content/welding/2026-06-04-24시출장용접.md"
+    }
+  ]
+}

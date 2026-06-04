@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <title>Apps | GOMSOFT</title>
+</head>
+<body>
+  <div id="siteHeader"></div>
+
+  <header class="page-hero">
+    <div class="container">
+      <h1>Apps</h1>
+      <p>앱 · 게임 소식 (CMS)</p>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container" id="postList">
+      <div class="empty-state"><p>불러오는 중…</p></div>
+    </div>
+  </section>
+
+  <div id="siteFooter"></div>
+
+  <script src="/assets/js/config.js"></script>
+  <script src="/assets/js/components.js"></script>
+  <script src="/assets/js/markdown.js"></script>
+  <script src="/assets/js/posts.js"></script>
+  <script>
+    document.getElementById("siteHeader").innerHTML = renderSiteHeader("projects");
+    document.getElementById("siteFooter").innerHTML = renderSiteFooter();
+    setPageMeta({ title: "Apps", description: "GOMSOFT 앱·게임 소식", path: "/apps/" });
+    initNavigation();
+    initCategoryList("apps");
+  </script>
+</body>
+</html>

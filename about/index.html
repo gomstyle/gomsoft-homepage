@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <title>About | GOMSOFT</title>
+</head>
+<body>
+  <div id="siteHeader"></div>
+
+  <header class="page-hero">
+    <div class="container">
+      <h1>About</h1>
+      <p>회사 소개 · 대표 · 역량 · 비전</p>
+    </div>
+  </header>
+
+  <div id="aboutContent"></div>
+
+  <section class="cta-band">
+    <h2>프로젝트와 함께 검토해 보세요</h2>
+    <p>진행 중인 4개 사업의 상세 내용을 Projects에서 확인할 수 있습니다.</p>
+    <a href="/projects/" class="btn btn-primary">Projects</a>
+  </section>
+
+  <div id="siteFooter"></div>
+
+  <script src="/assets/js/config.js"></script>
+  <script src="/assets/js/components.js"></script>
+  <script>
+    document.getElementById("siteHeader").innerHTML = renderSiteHeader("about");
+    document.getElementById("siteFooter").innerHTML = renderSiteFooter();
+    document.getElementById("aboutContent").innerHTML = renderAboutPageContent();
+    setPageMeta({
+      title: "About",
+      description: "GOMSOFT 회사 소개, 대표 허구슬, 주요 역량 및 향후 비전",
+      path: "/about/",
+    });
+    initNavigation();
+  </script>
+</body>
+</html>

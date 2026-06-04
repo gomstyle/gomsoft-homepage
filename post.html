@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <title>게시글 | GOMSOFT</title>
+</head>
+<body>
+  <div id="siteHeader"></div>
+
+  <article class="post-detail">
+    <div class="container">
+      <header class="post-detail-header">
+        <h1 id="postTitle">불러오는 중…</h1>
+        <p class="post-detail-meta" id="postDate"></p>
+      </header>
+      <div class="post-content" id="postContent"></div>
+      <div id="postGallery"></div>
+      <div id="postLink"></div>
+      <p style="text-align:center;margin-top:48px">
+        <a href="javascript:history.back()" class="btn btn-secondary">목록으로</a>
+      </p>
+    </div>
+  </article>
+
+  <div id="siteFooter"></div>
+
+  <script src="/assets/js/config.js"></script>
+  <script src="/assets/js/components.js"></script>
+  <script src="/assets/js/markdown.js"></script>
+  <script src="/assets/js/posts.js"></script>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const category = params.get("category");
+    const slug = params.get("slug");
+
+    document.getElementById("siteHeader").innerHTML = renderSiteHeader(category || "home");
+    document.getElementById("siteFooter").innerHTML = renderSiteFooter();
+    initNavigation();
+
+    if (!category || !slug) {
+      document.getElementById("postTitle").textContent = "잘못된 접근입니다.";
+    } else {
+      renderPostDetail(category, slug).catch(() => {
+        document.getElementById("postTitle").textContent = "게시글을 찾을 수 없습니다.";
+        document.getElementById("postContent").innerHTML = "";
+      });
+    }
+  </script>
+</body>
+</html>

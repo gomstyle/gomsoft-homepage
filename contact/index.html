@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <title>Contact | GOMSOFT</title>
+</head>
+<body>
+  <div id="siteHeader"></div>
+
+  <header class="page-hero">
+    <div class="container">
+      <h1>Contact</h1>
+      <p>협업 · 지원사업 · 서비스 문의</p>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <div class="contact-grid" id="contactGrid"></div>
+    </div>
+  </section>
+
+  <div id="siteFooter"></div>
+
+  <script src="/assets/js/config.js"></script>
+  <script src="/assets/js/components.js"></script>
+  <script>
+    document.getElementById("siteHeader").innerHTML = renderSiteHeader("contact");
+    document.getElementById("siteFooter").innerHTML = renderSiteFooter();
+    setPageMeta({ title: "Contact", description: "GOMSOFT 문의 — 이메일, 전화, 카카오톡", path: "/contact/" });
+    initNavigation();
+
+    const qr = GOMSOFT_CONFIG.kakaoQrImage;
+    document.getElementById("contactGrid").innerHTML = `
+      <div class="contact-item">
+        <h3>이메일</h3>
+        <p><a href="mailto:${GOMSOFT_CONFIG.email}">${GOMSOFT_CONFIG.email}</a></p>
+      </div>
+      <div class="contact-item">
+        <h3>전화</h3>
+        <p><a href="tel:${GOMSOFT_CONFIG.phone.replace(/-/g, "")}">${GOMSOFT_CONFIG.phone}</a></p>
+      </div>
+      <div class="contact-item">
+        <h3>카카오톡</h3>
+        <p>QR 코드로 채널·상담 연결</p>
+        <div class="qr-placeholder" id="kakaoQr">
+          <img src="${qr}" alt="카카오톡 QR" style="width:100%;height:100%;object-fit:contain;border-radius:12px" onerror="this.parentElement.innerHTML='QR 이미지를<br>assets/images/kakao-qr.png에<br>등록해 주세요'">
+        </div>
+      </div>
+      <div class="contact-item">
+        <h3>네이버 폼</h3>
+        <p>온라인 문의·견적 요청</p>
+        <p style="margin-top:16px">
+          <a href="${GOMSOFT_CONFIG.naverFormUrl}" class="btn btn-primary" target="_blank" rel="noopener">네이버 폼 열기</a>
+        </p>
+      </div>`;
+  </script>
+</body>
+</html>

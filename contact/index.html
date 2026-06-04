@@ -18,6 +18,19 @@
 
   <section class="section">
     <div class="container">
+      <div class="section-header">
+        <h2>문의 유형</h2>
+        <p>아래에서 유형을 선택하면 해당 연락 방법으로 이동합니다.</p>
+      </div>
+      <div class="inquiry-grid" id="inquiryTypes"></div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <h2>연락처</h2>
+      </div>
       <div class="contact-grid" id="contactGrid"></div>
     </div>
   </section>
@@ -32,29 +45,46 @@
     setPageMeta({ title: "Contact", description: "GOMSOFT 문의 — 이메일, 전화, 카카오톡", path: "/contact/" });
     initNavigation();
 
+    document.getElementById("inquiryTypes").innerHTML = renderContactInquiryCards();
+    initContactInquiryScroll();
+
     const qr = GOMSOFT_CONFIG.kakaoQrImage;
+    const email = GOMSOFT_CONFIG.email;
+    const phone = GOMSOFT_CONFIG.phone;
+    const formUrl = GOMSOFT_CONFIG.naverFormUrl;
+
     document.getElementById("contactGrid").innerHTML = `
-      <div class="contact-item">
+      <div class="contact-item" id="contact-general">
         <h3>이메일</h3>
-        <p><a href="mailto:${GOMSOFT_CONFIG.email}">${GOMSOFT_CONFIG.email}</a></p>
+        <p>프로젝트 · 지원사업 · 협업 문의</p>
+        <p><a href="mailto:${email}">${email}</a></p>
       </div>
-      <div class="contact-item">
-        <h3>전화</h3>
-        <p><a href="tel:${GOMSOFT_CONFIG.phone.replace(/-/g, "")}">${GOMSOFT_CONFIG.phone}</a></p>
+      <div class="contact-item" id="contact-app">
+        <h3>앱 개발 협업</h3>
+        <p>모바일 앱·게임 개발 문의</p>
+        <p><a href="mailto:${email}">${email}</a></p>
       </div>
-      <div class="contact-item">
+      <div class="contact-item" id="contact-partner">
+        <h3>광고 및 제휴</h3>
+        <p>미디어·마케팅 제휴 문의</p>
+        <p style="margin-top:16px">
+          <a href="${formUrl}" class="btn btn-primary" target="_blank" rel="noopener">네이버 폼 열기</a>
+        </p>
+      </div>
+      <div class="contact-item" id="contact-welding">
+        <h3>용접 서비스</h3>
+        <p>24시 출장 용접·견적 문의</p>
+        <p><a href="tel:${phone.replace(/-/g, "")}">${phone}</a></p>
+        <p style="margin-top:12px">
+          <a href="${formUrl}" class="btn btn-secondary" target="_blank" rel="noopener">온라인 견적 요청</a>
+        </p>
+      </div>
+      <div class="contact-item contact-item-wide">
         <h3>카카오톡</h3>
         <p>QR 코드로 채널·상담 연결</p>
         <div class="qr-placeholder" id="kakaoQr">
-          <img src="${qr}" alt="카카오톡 QR" style="width:100%;height:100%;object-fit:contain;border-radius:12px" onerror="this.parentElement.innerHTML='QR 이미지를<br>assets/images/kakao-qr.png에<br>등록해 주세요'">
+          <img src="${qr}" alt="카카오톡 QR" width="120" height="120" loading="lazy" style="width:100%;height:100%;object-fit:contain;border-radius:12px" onerror="this.parentElement.innerHTML='QR 이미지를<br>assets/images/kakao-qr.png에<br>등록해 주세요'">
         </div>
-      </div>
-      <div class="contact-item">
-        <h3>네이버 폼</h3>
-        <p>온라인 문의·견적 요청</p>
-        <p style="margin-top:16px">
-          <a href="${GOMSOFT_CONFIG.naverFormUrl}" class="btn btn-primary" target="_blank" rel="noopener">네이버 폼 열기</a>
-        </p>
       </div>`;
   </script>
 </body>

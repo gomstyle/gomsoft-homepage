@@ -71,7 +71,7 @@
           </select>
         </div>
         <div class="form-group">
-          <label>제목</label>
+          <label>프로젝트 제목</label>
           <input type="text" id="postTitle" required>
         </div>
         <div class="form-group">
@@ -92,9 +92,14 @@
           <textarea id="postSummary" rows="3" placeholder="카드와 목록에 표시되는 짧은 소개"></textarea>
         </div>
         <div class="form-group">
-          <label>썸네일 이미지</label>
+          <label>썸네일 이미지 (카드용, 16:9 권장)</label>
           <input type="text" id="postThumbnail" placeholder="/familyroutine_icon.png 또는 업로드">
           <input type="file" id="thumbUpload" accept="image/*" style="margin-top:8px">
+        </div>
+        <div class="form-group">
+          <label>대표 이미지 (상세 상단)</label>
+          <input type="text" id="postCoverImage" placeholder="비우면 썸네일 사용">
+          <input type="file" id="coverUpload" accept="image/*" style="margin-top:8px">
         </div>
         <div class="form-group">
           <label>본문 (Markdown)</label>
@@ -106,9 +111,9 @@
           <input type="file" id="imageUpload" accept="image/*" multiple style="margin-top:8px">
         </div>
         <div class="form-group">
-          <label>프로젝트 링크</label>
-          <textarea id="postLinksText" rows="4" placeholder="한 줄에 하나씩: 라벨|URL&#10;Google Play|https://play.google.com/...&#10;문의하기|/contact/"></textarea>
-          <small style="color:var(--text-secondary);font-size:12px">상세 페이지 하단 버튼으로 표시됩니다.</small>
+          <label>외부 링크</label>
+          <textarea id="postLinksText" rows="4" placeholder="한 줄에 하나씩: 라벨|URL&#10;플레이스토어 방문|https://play.google.com/...&#10;홈페이지 방문|https://...&#10;문의하기|/contact/&#10;전화걸기|tel:01000000000"></textarea>
+          <small style="color:var(--text-secondary);font-size:12px">상세 페이지 하단 「프로젝트 링크」 버튼으로 표시됩니다.</small>
         </div>
         <div class="form-row">
           <button type="button" class="btn btn-primary" id="btnSave">저장 (GitHub 커밋)</button>
@@ -291,6 +296,7 @@
         document.getElementById("postTitle").value = "";
         document.getElementById("postSummary").value = "";
         document.getElementById("postThumbnail").value = "";
+        document.getElementById("postCoverImage").value = "";
         document.getElementById("postBody").value = "";
         document.getElementById("postImages").value = "";
         document.getElementById("postLinksText").value = "";
@@ -310,6 +316,7 @@
           document.getElementById("postStatus").value = meta.status || "";
           document.getElementById("postSummary").value = meta.summary || "";
           document.getElementById("postThumbnail").value = meta.thumbnail || "";
+          document.getElementById("postCoverImage").value = meta.coverImage || "";
           document.getElementById("postBody").value = body;
           document.getElementById("postLinksText").value = linksToText(parseProjectLinks(meta));
           const imgs = Array.isArray(meta.images) ? meta.images : [];
@@ -321,6 +328,19 @@
     document.getElementById("btnNewPost").onclick = () => openEditor("apps", null);
     document.getElementById("btnCancelEdit").onclick = () => {
       editorPanel.style.display = "none";
+    };
+
+    document.getElementById("coverUpload").onchange = async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      try {
+        showMsg("대표 이미지 업로드 중…", "success");
+        const url = await uploadImageToRepo(file, document.getElementById("postProjectType").value);
+        document.getElementById("postCoverImage").value = url;
+        showMsg("대표 이미지가 업로드되었습니다.", "success");
+      } catch (err) {
+        showMsg(err.message, "error");
+      }
     };
 
     document.getElementById("thumbUpload").onchange = async (e) => {
@@ -376,6 +396,7 @@
         status: document.getElementById("postStatus").value,
         summary: document.getElementById("postSummary").value.trim(),
         thumbnail: document.getElementById("postThumbnail").value.trim(),
+        coverImage: document.getElementById("postCoverImage").value.trim(),
         body: document.getElementById("postBody").value,
         images,
         links,

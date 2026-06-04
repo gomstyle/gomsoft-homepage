@@ -54,18 +54,20 @@ function renderPostCards(posts, container) {
       const url = postDetailUrl(p);
       const title = escapeHtml(p.title);
       const summary = escapeHtml(p.summary || "프로젝트 상세 내용을 확인해 보세요.");
+      const badgeClass = projectTypeBadgeClass(p.projectType);
+      const typeLabel = projectTypeLabel(p.projectType);
       return `
       <article class="post-card">
-        <a class="post-card-media" href="${url}" tabindex="-1" aria-hidden="true">
+        <a class="post-card-thumb-link" href="${url}" tabindex="-1" aria-hidden="true">
           <div class="post-card-thumb">
             <img src="${thumb}" alt="" width="640" height="360" loading="lazy" decoding="async">
           </div>
-          <span class="post-card-badge">${projectTypeLabel(p.projectType)}</span>
         </a>
         <div class="post-card-body">
+          <span class="post-card-badge ${badgeClass}">${typeLabel}</span>
           <h2 class="post-card-title"><a href="${url}">${title}</a></h2>
           <p class="post-card-summary">${summary}</p>
-          <a href="${url}" class="btn btn-secondary post-card-cta">자세히 보기</a>
+          <a href="${url}" class="btn btn-secondary post-card-cta">자세히 보기 →</a>
         </div>
       </article>`;
     })
@@ -80,18 +82,39 @@ function renderProjectStats(statsEl, stats) {
     <div class="projects-stats">
       <div class="stat-item">
         <span class="stat-value">${stats.totalAll}</span>
-        <span class="stat-label">총 프로젝트</span>
+        <span class="stat-label">총 프로젝트 수</span>
       </div>
       <div class="stat-item">
         <span class="stat-value">${stats.operating}</span>
-        <span class="stat-label">운영 중</span>
+        <span class="stat-label">운영 중 프로젝트</span>
       </div>
       <div class="stat-item">
         <span class="stat-value">${stats.areas}</span>
         <span class="stat-label">서비스 분야</span>
       </div>
+      <div class="stat-item">
+        <span class="stat-value">${stats.founder}</span>
+        <span class="stat-label">Founder</span>
+      </div>
     </div>
     ${stats.total !== stats.totalAll ? `<p class="projects-stats-note">현재 필터: <strong>${stats.total}</strong>개 표시</p>` : ""}`;
+}
+
+function countOperatingProjects(posts) {
+  return posts.filter((p) => isOperatingStatus(p.status)).length;
+}
+
+async function updateHeroRunningCount() {
+  const el = document.getElementById("heroRunning");
+  if (!el) return;
+  try {
+    const data = await loadPostsIndex();
+    const count = countOperatingProjects(getAllProjectPosts(data));
+    el.textContent = count > 0 ? `현재 운영 프로젝트 ${count}개` : "";
+    el.hidden = count === 0;
+  } catch {
+    el.hidden = true;
+  }
 }
 
 function escapeHtml(str) {
@@ -117,7 +140,9 @@ function renderDetailLinkButtons(links) {
           .map((l) => {
             const external = /^https?:\/\//i.test(l.url);
             const safeUrl = String(l.url).replace(/"/g, "&quot;");
-            return `<a href="${safeUrl}" class="btn ${external ? "btn-primary" : "btn-secondary"}" ${external ? 'target="_blank" rel="noopener"' : ""}>${escapeHtml(l.label)}</a>`;
+            const btnClass = external ? "btn-primary" : "btn-secondary";
+            const targetAttr = external ? ' target="_blank" rel="noopener"' : "";
+            return `<a href="${safeUrl}" class="btn ${btnClass}"${targetAttr}>${escapeHtml(l.label)}</a>`;
           })
           .join("")}
       </div>
@@ -132,13 +157,26 @@ async function renderPostDetail(category, slug) {
   const projectType = meta.projectType || projectTypeFromCategory(category);
   const images = Array.isArray(meta.images) ? meta.images : meta.images ? [meta.images] : [];
   const links = parseProjectLinks(meta);
+  const coverSrc = meta.coverImage || meta.thumbnail;
 
   setPageMeta({
     title,
     description: meta.summary || GOMSOFT_CONFIG.headline,
     path: `/post.html?category=${category}&slug=${slug}`,
-    image: meta.thumbnail,
+    image: coverSrc || meta.thumbnail,
   });
+
+  const coverEl = document.getElementById("postCover");
+  if (coverEl) {
+    if (coverSrc) {
+      coverEl.innerHTML = `<img src="${coverSrc}" alt="" width="1200" height="675" loading="eager" decoding="async">`;
+      coverEl.className = "post-cover";
+      coverEl.hidden = false;
+    } else {
+      coverEl.innerHTML = "";
+      coverEl.hidden = true;
+    }
+  }
 
   document.getElementById("postTitle").textContent = title;
   const metaEl = document.getElementById("postDate");
@@ -217,21 +255,33 @@ function initProjectsBoard() {
         const url = activeType === "all" ? "/projects/" : `/projects/?type=${activeType}`;
         history.replaceState(null, "", url);
         renderTabs();
-        renderList();
+        renderList(true);
       };
     });
   }
 
-  async function renderList() {
-    listEl.innerHTML = `<div class="empty-state"><p>불러오는 중…</p></div>`;
+  async function renderList(animate) {
+    if (animate) listEl.classList.add("is-filtering");
+    if (!animate) listEl.innerHTML = `<div class="empty-state"><p>불러오는 중…</p></div>`;
     try {
       const data = await loadPostsIndex();
       allPosts = getAllProjectPosts(data);
       const posts = getPostsByProjectType(data, activeType);
       const stats = computeProjectStats(allPosts, posts);
       renderProjectStats(statsEl, stats);
-      renderPostCards(posts, listEl);
+
+      const paint = () => {
+        renderPostCards(posts, listEl);
+        requestAnimationFrame(() => listEl.classList.remove("is-filtering"));
+      };
+
+      if (animate) {
+        setTimeout(paint, 180);
+      } else {
+        paint();
+      }
     } catch {
+      listEl.classList.remove("is-filtering");
       listEl.innerHTML = `<div class="empty-state"><p>프로젝트를 불러올 수 없습니다.</p></div>`;
     }
   }

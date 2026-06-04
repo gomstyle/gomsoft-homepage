@@ -68,6 +68,7 @@ function buildFrontmatter(data) {
     `date: "${data.date}"`,
     `summary: "${escapeYaml(data.summary)}"`,
     `thumbnail: "${data.thumbnail || ""}"`,
+    `coverImage: "${data.coverImage || ""}"`,
     `images: ${JSON.stringify(images)}`,
     `status: "${escapeYaml(data.status || "")}"`,
     `link: "${data.link || (data.links && data.links[0] ? data.links[0].url : "")}"`,

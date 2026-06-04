@@ -1,7 +1,7 @@
 const PROJECT_TYPES = {
-  app: { label: "App", category: "apps" },
-  media: { label: "Media", category: "media" },
-  welding: { label: "Welding", category: "welding" },
+  app: { label: "App", category: "apps", color: "app" },
+  media: { label: "Media", category: "media", color: "media" },
+  welding: { label: "Welding", category: "welding", color: "welding" },
 };
 
 const CATEGORY_TO_TYPE = {
@@ -20,6 +20,11 @@ function projectTypeFromCategory(category) {
 
 function projectTypeLabel(projectType) {
   return PROJECT_TYPES[projectType]?.label || projectType;
+}
+
+function projectTypeBadgeClass(projectType) {
+  const color = PROJECT_TYPES[projectType]?.color || "app";
+  return `badge-${color}`;
 }
 
 function normalizePost(post) {

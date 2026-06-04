@@ -2,7 +2,9 @@ const GOMSOFT_CONFIG = {
   siteName: "GOMSOFT",
   tagline: "AI와 소프트웨어를 만드는 디지털 프로덕트 스튜디오",
   headline: "우리는 아이디어를 실제 서비스로 만듭니다.",
-  subHeadline: "앱, 게임, AI 서비스, 디지털 미디어를 직접 기획하고 개발합니다.",
+  subHeadline:
+    "앱, 게임, 디지털 미디어,\n현장 서비스를 직접 기획하고 운영합니다.",
+  founderName: "허구슬",
   domain: "https://gomsoft.kr",
   email: "gomstyle3339@gmail.com",
   phone: "010-0000-0000",
@@ -51,22 +53,21 @@ const GOMSOFT_CONFIG = {
     representative: {
       title: "대표 소개",
       name: "허구슬",
-      role: "대표 · 1인 개발자",
+      role: "1인 개발자이자 창업가",
       bio: [
-        "기획, UI/UX, 프론트엔드·백엔드 개발, 배포·운영까지 **제품 전 과정을 직접 수행**합니다.",
-        "정부지원사업 제안서 작성, 프로토타입 제작, MVP 출시까지 **실무 중심**으로 프로젝트를 이끕니다.",
-        "협업 시에도 기술 의사결정과 일정 관리를 명확히 하여 **신뢰할 수 있는 파트너** 역할을 지향합니다.",
+        "Unity 기반 모바일 앱·게임 개발, 인터넷신문 운영, AI 활용 콘텐츠 제작, 현장 서비스 사업을 직접 수행하고 있습니다.",
+        "기획 → 개발 → 운영 → 마케팅까지 **전 과정을 직접 수행**하는 것이 강점입니다.",
       ],
     },
     capabilities: {
       title: "주요 역량",
       items: [
-        { title: "모바일 앱 개발", desc: "Android/iOS 크로스 플랫폼, 가족·라이프스타일 도메인" },
-        { title: "게임 개발", desc: "유아·캐주얼 힐링 게임 기획 및 클라이언트 개발" },
-        { title: "AI·디지털 서비스", desc: "AI 활용 서비스 설계, 프로토타입 및 PoC" },
-        { title: "콘텐츠·미디어", desc: "Tech·App 리뷰 채널 기획·운영 (넥스트리뷰)" },
-        { title: "현장 서비스 연계", desc: "24시 출장 용접 등 O2O 서비스 디지털화" },
-        { title: "인프라·배포", desc: "GitHub Pages, 정적·클라우드 배포, Git 기반 CMS" },
+        { title: "앱 개발", desc: "모바일 앱 기획·개발·스토어 출시" },
+        { title: "게임 개발", desc: "Unity 캐주얼·유아용 게임" },
+        { title: "AI 활용", desc: "AI 기반 서비스·콘텐츠 제작" },
+        { title: "콘텐츠 제작", desc: "기획·편집·디지털 콘텐츠" },
+        { title: "미디어 운영", desc: "인터넷신문·Tech 미디어 채널" },
+        { title: "현장 서비스", desc: "출장 용접 등 O2O 운영" },
       ],
     },
     businesses: {
@@ -137,5 +138,11 @@ const GOMSOFT_CONFIG = {
       postSlug: "2026-06-04-24시출장용접",
       postCategory: "welding",
     },
+  ],
+  contactInquiries: [
+    { id: "general", title: "프로젝트 문의", desc: "지원사업·협업·투자 제안", target: "contact-general" },
+    { id: "app", title: "앱 개발 협업", desc: "모바일 앱·게임 개발 문의", target: "contact-app" },
+    { id: "partner", title: "광고 및 제휴 문의", desc: "미디어·마케팅 제휴", target: "contact-partner" },
+    { id: "welding", title: "용접 서비스 문의", desc: "24시 출장 용접·견적", target: "contact-welding" },
   ],
 };

@@ -227,12 +227,41 @@ function renderAboutPageContent() {
     </section>`;
 }
 
+function renderContactInquiryCards() {
+  const items = GOMSOFT_CONFIG.contactInquiries || [];
+  return items
+    .map(
+      (item) => `
+      <button type="button" class="inquiry-card" data-target="${item.target}">
+        <h3>${item.title}</h3>
+        <p>${item.desc}</p>
+      </button>`
+    )
+    .join("");
+}
+
+function initContactInquiryScroll() {
+  document.querySelectorAll(".inquiry-card").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const id = btn.dataset.target;
+      const target = document.getElementById(id);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        target.classList.add("contact-highlight");
+        setTimeout(() => target.classList.remove("contact-highlight"), 1200);
+      }
+    });
+  });
+}
+
 function initHomePage() {
   document.getElementById("heroTagline").textContent = GOMSOFT_CONFIG.tagline;
   document.getElementById("heroHeadline").textContent = GOMSOFT_CONFIG.headline;
-  document.getElementById("heroLead").textContent = GOMSOFT_CONFIG.subHeadline;
+  const lead = document.getElementById("heroLead");
+  if (lead) lead.textContent = GOMSOFT_CONFIG.subHeadline;
   const actions = document.getElementById("heroActions");
   if (actions) actions.innerHTML = renderHeroActions();
   const profile = document.getElementById("companyProfile");
   if (profile) profile.innerHTML = renderCompanyProfile();
+  if (typeof updateHeroRunningCount === "function") updateHeroRunningCount();
 }

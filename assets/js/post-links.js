@@ -43,5 +43,6 @@ function computeProjectStats(allPosts, filteredPosts) {
     totalAll: all.length,
     operating: all.filter((p) => isOperatingStatus(p.status)).length,
     areas: types.size,
+    founder: 1,
   };
 }

@@ -24,9 +24,9 @@ const GOMSOFT_CONFIG = {
   },
   companyProfile: {
     title: "Company Profile",
-    oneLiner: "기획·개발·운영을 한 흐름으로 수행하는 1인 디지털 프로덕트 스튜디오",
+    oneLiner: "기획·개발·운영을 한 흐름으로 수행하는\n1인 디지털 프로덕트 스튜디오",
     summary:
-      "모바일 앱, 게임, AI·디지털 미디어, 현장 서비스까지 아이디어를 직접 제품화합니다. 정부지원사업·투자·B2B 협업 제안을 환영합니다.",
+      "모바일 앱, 게임, AI·디지털 미디어, 현장 서비스까지 아이디어를 직접 제품화합니다.\n정부지원사업·투자·B2B 협업 제안을 환영합니다.",
     facts: [
       { label: "상호", value: "곰소프트 (GOMSOFT)" },
       { label: "대표", value: "허구슬" },
@@ -148,15 +148,14 @@ const GOMSOFT_CONFIG = {
     },
   ],
   contact: {
+    kakaoChannelUrl: "https://pf.kakao.com/_TPxmGX",
     project: {
       title: "프로젝트 · 지원사업 · 협업 문의",
       email: "soxos3339@naver.com",
-      phone: "010-7930-7586",
     },
     welding: {
       title: "용접 서비스",
       phone: "010-7680-7581",
-      kakaoChannelUrl: "",
     },
   },
 };

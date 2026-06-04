@@ -91,7 +91,7 @@ function renderProjectStats(statsEl, stats, options = {}) {
         <span class="stat-label">Founder</span>
       </div>`
     : "";
-  const statsClass = "projects-stats";
+  const statsClass = showFounder ? "projects-stats" : "projects-stats projects-stats--three";
   const filterNote =
     showFilterNote && stats.total !== stats.totalAll
       ? `<p class="projects-stats-note">현재 필터: <strong>${stats.total}</strong>개 표시</p>`
@@ -337,7 +337,7 @@ function initProjectsBoard() {
       allPosts = getAllProjectPosts(data);
       const posts = getPostsByProjectType(data, activeType);
       const stats = computeProjectStats(allPosts, posts);
-      renderProjectStats(statsEl, stats);
+      renderProjectStats(statsEl, stats, { showFounder: false });
 
       const paint = () => {
         renderPostCards(posts, listEl);

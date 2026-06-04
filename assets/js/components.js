@@ -16,9 +16,7 @@ function renderSiteHeader(activePage) {
   return `
 <header class="site-header">
   <div class="nav-inner">
-    <a href="/" class="logo logo-image" aria-label="${GOMSOFT_CONFIG.siteName} 홈">
-      <img src="${GOMSOFT_CONFIG.logoImage || "/assets/images/gomsoft-logo.png"}" alt="${GOMSOFT_CONFIG.siteName}" width="140" height="32" decoding="async">
-    </a>
+    <a href="/" class="logo">${GOMSOFT_CONFIG.siteName}</a>
     <button type="button" class="nav-toggle" aria-label="메뉴 열기" aria-expanded="false" id="navToggle">
       <span></span><span></span><span></span>
     </button>
@@ -98,6 +96,15 @@ function formatRichText(text) {
   return text.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
 }
 
+function formatLineBreaks(text) {
+  if (!text) return "";
+  const escaped = String(text)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+  return escaped.replace(/\n/g, "<br>");
+}
+
 function renderHeroActions() {
   return `
     <div class="hero-actions">
@@ -119,8 +126,8 @@ function renderCompanyProfile() {
       <div class="profile-card">
         <div class="profile-intro">
           <p class="profile-label">${p.title}</p>
-          <h2 class="profile-headline">${p.oneLiner}</h2>
-          <p class="profile-summary">${p.summary}</p>
+          <h2 class="profile-headline">${formatLineBreaks(p.oneLiner)}</h2>
+          <p class="profile-summary">${formatLineBreaks(p.summary)}</p>
         </div>
         <div class="profile-facts">${facts}</div>
         <div class="profile-strengths">
@@ -203,7 +210,9 @@ function renderAboutPageContent() {
         <header class="about-section-head">
           <h2 class="about-section-title">${a.company.title}</h2>
         </header>
-        <div class="about-section-body">${companyParas}</div>
+        <div class="about-prose-rail">
+          <div class="about-section-body">${companyParas}</div>
+        </div>
       </div>
     </section>
     <section class="content-section section-alt founder-section about-page-section" id="founder-profile">
@@ -211,6 +220,7 @@ function renderAboutPageContent() {
         <header class="about-section-head">
           <h2 class="about-section-title">${rep.title}</h2>
         </header>
+        <div class="about-prose-rail">
         <div class="founder-profile">
           <div class="founder-profile-text reveal-on-scroll">
             <p class="founder-role-line">${rep.roleLine}</p>
@@ -232,6 +242,7 @@ function renderAboutPageContent() {
               <span class="founder-caption-role">${rep.roleTitle}</span>
             </figcaption>
           </figure>
+        </div>
         </div>
       </div>
     </section>
@@ -258,9 +269,11 @@ function renderAboutPageContent() {
         <header class="about-section-head">
           <h2 class="about-section-title">${a.vision.title}</h2>
         </header>
-        <div class="about-section-body">
-          ${visionParas}
-          <ul class="vision-list">${goals}</ul>
+        <div class="about-prose-rail">
+          <div class="about-section-body">
+            ${visionParas}
+            <ul class="vision-list">${goals}</ul>
+          </div>
         </div>
       </div>
     </section>`;
@@ -270,37 +283,57 @@ function formatTelHref(phone) {
   return "tel:" + String(phone).replace(/[^\d+]/g, "");
 }
 
+function renderContactKakaoButton(kakaoUrl) {
+  const url = (kakaoUrl || "").trim();
+  if (!url) {
+    return `<span class="btn btn-kakao btn-kakao-pending" role="status">카카오 채널 채팅 상담</span>`;
+  }
+  const safeUrl = url.replace(/"/g, "&quot;");
+  return `<a href="${safeUrl}" class="btn btn-kakao contact-channel-kakao" target="_blank" rel="noopener">카카오 채널 채팅 상담</a>`;
+}
+
+function renderContactChannelCard({ id, title, primaryLabel, primaryText, primaryHref, kakaoUrl }) {
+  const primaryLink = primaryHref
+    ? `<a href="${primaryHref}" class="contact-channel-value">${primaryText}</a>`
+    : `<span class="contact-channel-value">${primaryText}</span>`;
+
+  return `
+      <article class="contact-channel-card" id="${id}">
+        <h2 class="contact-channel-title">${title}</h2>
+        <div class="contact-channel-body">
+          <div class="contact-channel-row">
+            <span class="contact-channel-label">${primaryLabel}</span>
+            ${primaryLink}
+          </div>
+          ${renderContactKakaoButton(kakaoUrl)}
+        </div>
+      </article>`;
+}
+
 function renderContactChannels() {
   const c = GOMSOFT_CONFIG.contact || {};
   const project = c.project || {};
   const welding = c.welding || {};
-  const kakaoUrl = (welding.kakaoChannelUrl || "").trim();
-  const kakaoBtn = kakaoUrl
-    ? `<a href="${kakaoUrl}" class="btn btn-kakao" target="_blank" rel="noopener">카카오 상담</a>`
-    : `<span class="btn btn-kakao btn-kakao-pending" role="status">카카오 상담<span class="btn-kakao-note">채널 연결 예정</span></span>`;
+  const defaultKakao = c.kakaoChannelUrl || "https://pf.kakao.com/_TPxmGX";
 
   return `
     <div class="contact-channels">
-      <article class="contact-channel-card" id="contact-project">
-        <h2 class="contact-channel-title">${project.title || "프로젝트 · 지원사업 · 협업 문의"}</h2>
-        <ul class="contact-channel-list">
-          <li>
-            <span class="contact-channel-label">이메일</span>
-            <a href="mailto:${project.email}">${project.email}</a>
-          </li>
-          <li>
-            <span class="contact-channel-label">전화</span>
-            <a href="${formatTelHref(project.phone)}">${project.phone}</a>
-          </li>
-        </ul>
-      </article>
-      <article class="contact-channel-card" id="contact-welding">
-        <h2 class="contact-channel-title">${welding.title || "용접 서비스"}</h2>
-        <div class="contact-channel-actions">
-          ${kakaoBtn}
-          <a href="${formatTelHref(welding.phone)}" class="contact-channel-phone">${welding.phone}</a>
-        </div>
-      </article>
+      ${renderContactChannelCard({
+        id: "contact-project",
+        title: project.title || "프로젝트 · 지원사업 · 협업 문의",
+        primaryLabel: "이메일",
+        primaryText: project.email || "",
+        primaryHref: project.email ? `mailto:${project.email}` : "",
+        kakaoUrl: project.kakaoChannelUrl || defaultKakao,
+      })}
+      ${renderContactChannelCard({
+        id: "contact-welding",
+        title: welding.title || "용접 서비스",
+        primaryLabel: "전화",
+        primaryText: welding.phone || "",
+        primaryHref: welding.phone ? formatTelHref(welding.phone) : "",
+        kakaoUrl: welding.kakaoChannelUrl || defaultKakao,
+      })}
     </div>`;
 }
 

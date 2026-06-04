@@ -113,22 +113,8 @@ textarea {
   z-index: 1001;
 }
 
-.logo-image {
-  display: inline-flex;
-  align-items: center;
-  line-height: 0;
-}
-
-.logo-image img {
-  height: 26px;
-  width: auto;
-  max-width: 132px;
-  display: block;
-}
-
 .logo:hover {
   text-decoration: none;
-  opacity: 0.85;
 }
 
 .nav-toggle {
@@ -216,10 +202,13 @@ textarea {
 }
 
 .hero-logo img {
-  width: 56px;
-  height: 56px;
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: min(240px, 78vw);
+  max-height: 56px;
   margin: 0 auto;
-  border-radius: 14px;
+  object-fit: contain;
 }
 
 .hero-eyebrow {
@@ -321,6 +310,11 @@ textarea {
   font-size: clamp(15px, 3.8vw, 21px);
   color: var(--text-secondary);
   margin: 0;
+}
+
+/* ——— Home: Hero · Profile · Projects bands ——— */
+.home-projects-section {
+  background: var(--bg-subtle);
 }
 
 /* ——— Company Profile ——— */
@@ -767,6 +761,16 @@ textarea {
   margin-bottom: 28px;
 }
 
+.projects-stats--three {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 480px) {
+  .projects-stats--three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
 .about-project-stats {
   max-width: 1040px;
   margin: 0 auto 36px;
@@ -922,11 +926,25 @@ textarea {
   margin: 0 auto;
 }
 
+.about-page-section > .container {
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.about-prose-rail {
+  max-width: 720px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .about-section-head {
   text-align: center;
   max-width: 720px;
   margin: 0 auto 36px;
-  padding: 0 4px;
+  padding: 0;
 }
 
 .about-section-title {
@@ -950,8 +968,9 @@ textarea {
 }
 
 .about-section-body {
-  max-width: 720px;
-  margin: 0 auto;
+  width: 100%;
+  max-width: none;
+  margin: 0;
   text-align: left;
 }
 
@@ -967,8 +986,10 @@ textarea {
   margin-bottom: 0;
 }
 
-.about-page-section .founder-profile {
+.about-prose-rail .founder-profile {
   margin-top: 0;
+  max-width: none;
+  width: 100%;
 }
 
 .content-center-title {
@@ -1114,12 +1135,16 @@ textarea {
 }
 
 .contact-channel-card {
-  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 24px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--bg);
   text-align: center;
   transition: box-shadow 0.25s ease;
+  height: 100%;
 }
 
 .contact-channel-title {
@@ -1131,21 +1156,22 @@ textarea {
   line-height: 1.35;
 }
 
-.contact-channel-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.contact-channel-body {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  align-items: center;
+  align-items: stretch;
+  gap: 20px;
+  width: 100%;
+  max-width: 280px;
+  margin: 0 auto;
 }
 
-.contact-channel-list li {
+.contact-channel-row {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
+  text-align: center;
 }
 
 .contact-channel-label {
@@ -1155,32 +1181,30 @@ textarea {
   letter-spacing: 0.02em;
 }
 
-.contact-channel-list a,
-.contact-channel-phone {
+.contact-channel-value {
   font-size: 17px;
   font-weight: var(--fw-semibold);
   color: var(--text);
   text-decoration: none;
   word-break: break-all;
+  line-height: 1.4;
 }
 
-.contact-channel-list a:hover,
-.contact-channel-phone:hover {
+a.contact-channel-value:hover {
   color: var(--accent);
   text-decoration: none;
 }
 
-.contact-channel-actions {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 14px;
+.contact-channel-kakao,
+.btn-kakao.contact-channel-kakao {
+  width: 100%;
+  min-width: 0;
 }
 
 .btn-kakao {
   background: #fee500;
   color: #191919;
-  min-width: 200px;
+  font-weight: var(--fw-semibold);
 }
 
 .btn-kakao:hover {
@@ -1192,16 +1216,8 @@ textarea {
 .btn-kakao-pending {
   opacity: 0.92;
   cursor: default;
-  flex-direction: column;
-  gap: 2px;
   pointer-events: none;
-}
-
-.btn-kakao-note {
-  display: block;
-  font-size: 11px;
-  font-weight: var(--fw-regular);
-  opacity: 0.75;
+  width: 100%;
 }
 
 @media (min-width: 768px) {
@@ -1322,8 +1338,8 @@ textarea {
   }
 
   .hero-logo img {
-    width: 64px;
-    height: 64px;
+    max-width: min(280px, 70vw);
+    max-height: 64px;
   }
 
   .hero-eyebrow {
@@ -1386,8 +1402,13 @@ textarea {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .projects-stats {
+  .projects-stats:not(.projects-stats--three) {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 36px;
+  }
+
+  .projects-stats--three {
     gap: 16px;
     margin-bottom: 36px;
   }
@@ -1414,52 +1435,114 @@ textarea {
     --max-width: 1200px;
   }
 
-  .logo-image img {
-    height: 30px;
-    max-width: 156px;
-  }
-
   .nav-menu {
     gap: 36px;
   }
 
   .hero {
-    padding: 88px var(--container-pad) 96px;
+    padding: 80px var(--container-pad) 88px;
   }
 
   .hero-inner {
-    max-width: 760px;
+    max-width: 1040px;
+  }
+
+  .hero-logo img {
+    max-width: 320px;
+    max-height: 72px;
   }
 
   .hero h1 {
-    font-size: 48px;
-    margin-bottom: 32px;
+    font-size: 44px;
+    margin-bottom: 28px;
+    max-width: none;
+    white-space: nowrap;
+    text-wrap: unset;
   }
 
   .hero-lead {
-    font-size: 19px;
-    margin-bottom: 24px;
+    font-size: 18px;
+    margin-bottom: 20px;
+    max-width: none;
+    white-space: nowrap;
+    text-wrap: unset;
   }
 
   .hero-support {
-    font-size: 16px;
+    font-size: 15px;
+    max-width: none;
+    white-space: nowrap;
+    text-wrap: unset;
   }
 
   .profile-section {
-    padding: 64px 0 72px;
+    padding: 36px 0 44px;
   }
 
   .profile-section .container {
-    padding: 36px var(--container-pad);
+    padding: 16px var(--container-pad);
   }
 
   .profile-card {
-    padding: 48px 44px;
+    padding: 28px 40px 24px;
+  }
+
+  .profile-intro {
+    text-align: center;
+    padding-bottom: 4px;
+  }
+
+  .profile-headline {
+    max-width: 26em;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    line-height: 1.35;
+  }
+
+  .profile-summary {
+    max-width: 34em;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 18px;
+    line-height: 1.55;
   }
 
   .profile-facts {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    padding: 28px 24px;
+    gap: 10px;
+    margin: 16px 0;
+    padding: 14px 18px;
+  }
+
+  .profile-fact {
+    padding: 10px 12px;
+  }
+
+  .profile-fact-value {
+    font-size: 14px;
+  }
+
+  .profile-strengths {
+    margin-top: 0;
+    padding: 14px 18px 12px;
+    text-align: center;
+  }
+
+  .profile-strengths-title {
+    text-align: center;
+    margin-bottom: 12px;
+  }
+
+  .profile-strengths ul {
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+
+  .profile-cta {
+    margin-top: 16px;
+    padding-top: 14px;
+    justify-content: center;
   }
 
   .post-grid {
@@ -1654,10 +1737,9 @@ textarea {
 .founder-profile {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   gap: 40px;
-  max-width: 1040px;
-  margin: 0 auto;
+  margin: 0;
 }
 
 .founder-profile-visual {
@@ -1712,7 +1794,7 @@ textarea {
 
 .founder-profile-text {
   width: 100%;
-  max-width: 520px;
+  max-width: none;
   text-align: left;
 }
 
@@ -1755,29 +1837,27 @@ textarea {
 @media (min-width: 768px) {
   .founder-profile {
     flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 48px 56px;
+    align-items: flex-start;
+    gap: 40px 32px;
   }
 
   .founder-profile-visual {
     order: 1;
-    flex: 0 0 auto;
-    width: min(42%, 400px);
-    max-width: 420px;
+    flex: 0 0 200px;
+    width: 200px;
+    max-width: 200px;
   }
 
   .founder-profile-text {
     order: 0;
-    flex: 1 1 52%;
-    max-width: none;
+    flex: 1 1 auto;
     min-width: 0;
   }
 
   .founder-photo-frame img {
     width: 100%;
-    min-width: 320px;
-    max-width: 420px;
+    min-width: 0;
+    max-width: 100%;
   }
 }
 
@@ -1812,10 +1892,28 @@ textarea {
 
 .about-section-body .vision-list {
   margin: 24px 0 0;
-  padding-left: 1.2em;
+  padding: 0;
+  list-style: none;
   font-size: 16px;
   color: var(--text-secondary);
   line-height: 1.65;
+}
+
+.about-section-body .vision-list li {
+  margin: 0 0 12px;
+  padding: 0;
+  position: relative;
+  padding-left: 0;
+}
+
+.about-section-body .vision-list li::before {
+  content: "· ";
+  font-weight: var(--fw-bold);
+  color: var(--text-secondary);
+}
+
+.about-section-body .vision-list li:last-child {
+  margin-bottom: 0;
 }
 
 .vision-list {

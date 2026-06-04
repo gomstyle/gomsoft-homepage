@@ -238,7 +238,7 @@ async function renderPostDetail(category, slug) {
   const coverEl = document.getElementById("postCover");
   if (coverEl) {
     if (coverSrc) {
-      coverEl.innerHTML = `<img src="${coverSrc}" alt="" width="1200" height="675" loading="eager" decoding="async">`;
+      coverEl.innerHTML = `<img src="${coverSrc}" alt="" width="600" loading="eager" decoding="async">`;
       coverEl.className = "post-cover";
       coverEl.hidden = false;
     } else {
@@ -260,7 +260,7 @@ async function renderPostDetail(category, slug) {
   if (images.length && gallery) {
     gallery.innerHTML = images
       .filter(Boolean)
-      .map((src) => `<img src="${src}" alt="" width="720" height="405" loading="lazy" decoding="async">`)
+      .map((src) => `<img src="${src}" alt="" width="600" loading="lazy" decoding="async">`)
       .join("");
     gallery.className = "post-gallery";
   } else if (gallery) {

@@ -1157,8 +1157,14 @@ textarea {
   line-height: 1.55;
 }
 
+/* Contact: subtle → white → subtle → white → subtle */
 .contact-block {
   padding: var(--section-pad) 0;
+  background: var(--bg-subtle);
+}
+
+.contact-block.section-alt {
+  background: var(--bg);
 }
 
 .contact-block-head {

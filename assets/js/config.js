@@ -23,23 +23,15 @@ const GOMSOFT_CONFIG = {
     welding: { label: "Welding", category: "welding" },
   },
   companyProfile: {
-    title: "Company Profile",
-    oneLiner: "기획·개발·운영을 한 흐름으로 수행하는\n1인 디지털 프로덕트 스튜디오",
-    summary:
-      "모바일 앱, 게임, AI·디지털 미디어, 현장 서비스까지 아이디어를 직접 제품화합니다.\n정부지원사업·투자·B2B 협업 제안을 환영합니다.",
-    facts: [
-      { label: "상호", value: "곰소프트 (GOMSOFT)" },
-      { label: "대표", value: "허구슬" },
-      { label: "사업자등록번호", value: "110-33-91602" },
-      { label: "사업 영역", value: "앱 · 게임 · AI · 미디어 · 현장서비스" },
-      { label: "진행 프로젝트", value: "4개 (운영·개발 중)" },
-      { label: "개발 방식", value: "기획 → 설계 → 개발 → 배포 · 운영 일괄" },
-    ],
-    strengths: [
-      "End-to-End 제품 개발",
-      "모바일 앱 · 게임 출시 경험",
-      "AI·콘텐츠 기반 미디어 운영",
-      "현장 서비스 디지털 연계",
+    eyebrow: "Digital Product Studio",
+    headline: "아이디어를 직접 기획하고\n실제 서비스로 출시합니다.",
+    description:
+      "앱, 게임, 디지털 미디어, 현장 서비스를\n직접 운영하며 제품을 만드는 1인 디지털 프로덕트 스튜디오입니다.",
+    capabilities: [
+      { id: "plan", title: "서비스 기획", desc: "아이디어·MVP·로드맵" },
+      { id: "dev", title: "앱·게임 개발", desc: "기획부터 스토어 출시" },
+      { id: "media", title: "AI·미디어 운영", desc: "콘텐츠·채널·브랜딩" },
+      { id: "field", title: "현장 서비스 경험", desc: "O2O·현장 디지털 연계" },
     ],
   },
   about: {

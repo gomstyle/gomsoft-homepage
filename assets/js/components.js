@@ -193,30 +193,54 @@ function renderHeroActions() {
     </div>`;
 }
 
+function overviewCapabilityIcon(id) {
+  const icons = {
+    plan: `<svg class="overview-cap-icon" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>`,
+    dev: `<svg class="overview-cap-icon" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="18" r="1" fill="currentColor"/></svg>`,
+    media: `<svg class="overview-cap-icon" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><rect x="3" y="5" width="18" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 10h8M8 14h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>`,
+    field: `<svg class="overview-cap-icon" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 18h16M8 6l4 8 4-8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  };
+  return icons[id] || icons.plan;
+}
+
 function renderCompanyProfile() {
   const p = GOMSOFT_CONFIG.companyProfile;
-  const facts = p.facts
-    .map((f) => `<div class="profile-fact"><span class="profile-fact-label">${f.label}</span><span class="profile-fact-value">${f.value}</span></div>`)
+  const rep = GOMSOFT_CONFIG.about?.representative || {};
+  const caps = (p.capabilities || [])
+    .map(
+      (c) => `
+        <article class="overview-cap-card">
+          <span class="overview-cap-icon-wrap">${overviewCapabilityIcon(c.id)}</span>
+          <h3 class="overview-cap-title">${c.title}</h3>
+          ${c.desc ? `<p class="overview-cap-desc">${c.desc}</p>` : ""}
+        </article>`
+    )
     .join("");
-  const strengths = p.strengths.map((s) => `<li>${s}</li>`).join("");
 
   return `
-  <section class="section profile-section" id="company-profile">
-    <div class="container">
-      <div class="profile-card">
-        <div class="profile-intro">
-          <p class="profile-label">${p.title}</p>
-          <h2 class="profile-headline">${formatLineBreaks(p.oneLiner)}</h2>
-          <p class="profile-summary">${formatLineBreaks(p.summary)}</p>
+  <section class="section company-overview profile-section" id="company-profile" aria-labelledby="company-overview-heading">
+    <div class="container company-overview-inner">
+      <div class="company-overview-layout">
+        <div class="company-overview-visual">
+          <figure class="overview-portrait">
+            <div class="overview-portrait-frame">
+              <img src="${rep.photo || "/assets/images/founder.jpg"}" alt="${rep.name || GOMSOFT_CONFIG.founderName} 대표" width="360" height="480" loading="lazy" decoding="async">
+            </div>
+            <figcaption class="overview-portrait-caption">
+              <span class="overview-portrait-name">${rep.name || GOMSOFT_CONFIG.founderName}</span>
+              <span class="overview-portrait-role">${rep.roleTitle || "Founder · Developer"}</span>
+            </figcaption>
+          </figure>
         </div>
-        <div class="profile-facts">${facts}</div>
-        <div class="profile-strengths">
-          <p class="profile-strengths-title">핵심 강점</p>
-          <ul>${strengths}</ul>
-        </div>
-        <div class="profile-cta">
-          <a href="/about/" class="btn btn-secondary">About 전체 보기</a>
-          <a href="/projects/" class="btn btn-primary">Projects 보기</a>
+        <div class="company-overview-main">
+          <p class="overview-eyebrow">${p.eyebrow || "Digital Product Studio"}</p>
+          <h2 class="overview-headline" id="company-overview-heading">${formatLineBreaks(p.headline)}</h2>
+          <p class="overview-description">${formatLineBreaks(p.description)}</p>
+          <div id="homeOverviewStats" class="overview-kpi-grid" aria-live="polite"></div>
+          <div class="overview-capabilities">
+            <p class="overview-capabilities-label">핵심 역량</p>
+            <div class="overview-cap-grid">${caps}</div>
+          </div>
         </div>
       </div>
     </div>

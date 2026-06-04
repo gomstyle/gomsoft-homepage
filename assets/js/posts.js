@@ -156,6 +156,47 @@ function renderAboutStats(statsEl, stats) {
     </div>`;
 }
 
+function renderHomeOverviewStats(statsEl, stats) {
+  if (!statsEl) return;
+  const items = [
+    { value: stats.operating, label: "운영 프로젝트" },
+    { value: stats.launched, label: "출시 서비스" },
+    { value: stats.areas, label: "사업 분야" },
+    { value: stats.founder, label: "Founder" },
+  ];
+
+  statsEl.innerHTML = items
+    .map(
+      (item) => `
+      <div class="overview-kpi-card">
+        <span class="overview-kpi-value">${item.value}</span>
+        <span class="overview-kpi-label">${item.label}</span>
+      </div>`
+    )
+    .join("");
+}
+
+async function initHomeCompanyOverview() {
+  const statsEl = document.getElementById("homeOverviewStats");
+  if (!statsEl) return;
+  statsEl.innerHTML = Array(4)
+    .fill(
+      `<div class="overview-kpi-card overview-kpi-card--loading" aria-hidden="true">
+      <span class="overview-kpi-value">—</span>
+      <span class="overview-kpi-label">…</span>
+    </div>`
+    )
+    .join("");
+  try {
+    const data = await loadPostsIndex();
+    const allPosts = getAllProjectPosts(data);
+    const stats = computeAboutStats(allPosts);
+    renderHomeOverviewStats(statsEl, stats);
+  } catch {
+    statsEl.innerHTML = "";
+  }
+}
+
 async function initAboutBusinessStats() {
   const statsEl = document.getElementById("aboutProjectStats");
   if (!statsEl) return;

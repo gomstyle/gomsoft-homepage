@@ -297,9 +297,9 @@ body {
 
 /* ——— Hero (Aurora · OpenAI / Linear tone) ——— */
 :root {
-  --hero-aurora-blue: rgba(59, 130, 246, 0.24);
-  --hero-aurora-purple: rgba(139, 92, 246, 0.24);
-  --hero-aurora-cyan: rgba(6, 182, 212, 0.2);
+  --hero-aurora-blue: rgba(59, 130, 246, 0.11);
+  --hero-aurora-purple: rgba(139, 92, 246, 0.11);
+  --hero-aurora-cyan: rgba(6, 182, 212, 0.09);
 }
 
 @keyframes hero-aurora-blue {
@@ -410,22 +410,22 @@ body {
 .hero-aurora-layer--blue {
   background:
     radial-gradient(ellipse 92% 88% at 24% 36%, var(--hero-aurora-blue) 0%, transparent 74%),
-    radial-gradient(ellipse 70% 65% at 55% 70%, rgba(59, 130, 246, 0.14) 0%, transparent 72%);
-  animation: hero-aurora-blue 14s ease-in-out infinite;
+    radial-gradient(ellipse 70% 65% at 55% 70%, rgba(59, 130, 246, 0.06) 0%, transparent 72%);
+  animation: hero-aurora-blue 6s ease-in-out infinite;
 }
 
 .hero-aurora-layer--purple {
   background:
     radial-gradient(ellipse 90% 86% at 78% 32%, var(--hero-aurora-purple) 0%, transparent 74%),
-    radial-gradient(ellipse 72% 68% at 40% 88%, rgba(139, 92, 246, 0.12) 0%, transparent 70%);
-  animation: hero-aurora-purple 17s ease-in-out infinite;
+    radial-gradient(ellipse 72% 68% at 40% 88%, rgba(139, 92, 246, 0.05) 0%, transparent 70%);
+  animation: hero-aurora-purple 7s ease-in-out infinite;
 }
 
 .hero-aurora-layer--cyan {
   background:
     radial-gradient(ellipse 95% 90% at 52% 52%, var(--hero-aurora-cyan) 0%, transparent 76%),
-    radial-gradient(ellipse 80% 75% at 68% 68%, rgba(6, 182, 212, 0.11) 0%, transparent 72%);
-  animation: hero-aurora-cyan 16s ease-in-out infinite;
+    radial-gradient(ellipse 80% 75% at 68% 68%, rgba(6, 182, 212, 0.05) 0%, transparent 72%);
+  animation: hero-aurora-cyan 8s ease-in-out infinite;
 }
 
 .hero-inner {

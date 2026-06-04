@@ -191,17 +191,21 @@ function renderAboutPageContent() {
   const goals = a.vision.goals.map((g) => `<li>${g}</li>`).join("");
 
   return `
-    <section class="content-section">
-      <div class="container content-narrow">
-        <h2>${a.company.title}</h2>
-        ${companyParas}
+    <section class="content-section about-page-section">
+      <div class="container">
+        <header class="about-section-head">
+          <h2 class="about-section-title">${a.company.title}</h2>
+        </header>
+        <div class="about-section-body">${companyParas}</div>
       </div>
     </section>
-    <section class="content-section section-alt founder-section" id="founder-profile">
+    <section class="content-section section-alt founder-section about-page-section" id="founder-profile">
       <div class="container">
+        <header class="about-section-head">
+          <h2 class="about-section-title">${rep.title}</h2>
+        </header>
         <div class="founder-profile">
           <div class="founder-profile-text reveal-on-scroll">
-            <p class="founder-eyebrow">${rep.title}</p>
             <p class="founder-role-line">${rep.roleLine}</p>
             <div class="founder-bio">${repBio}</div>
           </div>
@@ -224,26 +228,33 @@ function renderAboutPageContent() {
         </div>
       </div>
     </section>
-    <section class="content-section">
+    <section class="content-section about-page-section">
       <div class="container">
-        <h2 class="content-center-title">${a.capabilities.title}</h2>
+        <header class="about-section-head">
+          <h2 class="about-section-title">${a.capabilities.title}</h2>
+        </header>
         <div class="capability-grid">${caps}</div>
       </div>
     </section>
-    <section class="content-section section-alt">
+    <section class="content-section section-alt about-page-section">
       <div class="container">
-        <div class="section-header">
-          <h2>${a.businesses.title}</h2>
-          <p>${a.businesses.intro}</p>
-        </div>
+        <header class="about-section-head">
+          <h2 class="about-section-title">${a.businesses.title}</h2>
+          <p class="about-section-lead">${a.businesses.intro}</p>
+        </header>
+        <div id="aboutProjectStats" class="about-project-stats" aria-live="polite"></div>
         <div class="project-grid">${renderProjectCards(true)}</div>
       </div>
     </section>
-    <section class="content-section">
-      <div class="container content-narrow">
-        <h2>${a.vision.title}</h2>
-        ${visionParas}
-        <ul class="vision-list">${goals}</ul>
+    <section class="content-section about-page-section">
+      <div class="container">
+        <header class="about-section-head">
+          <h2 class="about-section-title">${a.vision.title}</h2>
+        </header>
+        <div class="about-section-body">
+          ${visionParas}
+          <ul class="vision-list">${goals}</ul>
+        </div>
       </div>
     </section>`;
 }

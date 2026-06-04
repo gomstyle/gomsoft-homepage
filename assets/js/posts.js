@@ -76,10 +76,24 @@ function renderPostCards(posts, container) {
   container.appendChild(grid);
 }
 
-function renderProjectStats(statsEl, stats) {
+function renderProjectStats(statsEl, stats, options = {}) {
   if (!statsEl) return;
+  const { showFounder = true, showFilterNote = true } = options;
+  const founderStat = showFounder
+    ? `
+      <div class="stat-item">
+        <span class="stat-value">${stats.founder}</span>
+        <span class="stat-label">Founder</span>
+      </div>`
+    : "";
+  const statsClass = showFounder ? "projects-stats" : "projects-stats projects-stats--three";
+  const filterNote =
+    showFilterNote && stats.total !== stats.totalAll
+      ? `<p class="projects-stats-note">현재 필터: <strong>${stats.total}</strong>개 표시</p>`
+      : "";
+
   statsEl.innerHTML = `
-    <div class="projects-stats">
+    <div class="${statsClass}">
       <div class="stat-item">
         <span class="stat-value">${stats.totalAll}</span>
         <span class="stat-label">총 프로젝트 수</span>
@@ -92,12 +106,22 @@ function renderProjectStats(statsEl, stats) {
         <span class="stat-value">${stats.areas}</span>
         <span class="stat-label">서비스 분야</span>
       </div>
-      <div class="stat-item">
-        <span class="stat-value">${stats.founder}</span>
-        <span class="stat-label">Founder</span>
-      </div>
+      ${founderStat}
     </div>
-    ${stats.total !== stats.totalAll ? `<p class="projects-stats-note">현재 필터: <strong>${stats.total}</strong>개 표시</p>` : ""}`;
+    ${filterNote}`;
+}
+
+async function initAboutBusinessStats() {
+  const statsEl = document.getElementById("aboutProjectStats");
+  if (!statsEl) return;
+  try {
+    const data = await loadPostsIndex();
+    const allPosts = getAllProjectPosts(data);
+    const stats = computeProjectStats(allPosts, allPosts);
+    renderProjectStats(statsEl, stats, { showFounder: false, showFilterNote: false });
+  } catch {
+    statsEl.innerHTML = "";
+  }
 }
 
 function countOperatingProjects(posts) {

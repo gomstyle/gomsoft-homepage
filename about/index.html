@@ -27,12 +27,16 @@
   <div id="siteFooter"></div>
 
   <script src="/assets/js/config.js"></script>
+  <script src="/assets/js/project-types.js"></script>
+  <script src="/assets/js/post-links.js"></script>
   <script src="/assets/js/components.js"></script>
+  <script src="/assets/js/posts.js"></script>
   <script>
     document.getElementById("siteHeader").innerHTML = renderSiteHeader("about");
     document.getElementById("siteFooter").innerHTML = renderSiteFooter();
     document.getElementById("aboutContent").innerHTML = renderAboutPageContent();
     initRevealOnScroll();
+    initAboutBusinessStats();
     setPageMeta({
       title: "About",
       description: "GOMSOFT — 아이디어를 실제 서비스로 구현하는 디지털 프로덕트 스튜디오. 대표 허구슬 소개.",

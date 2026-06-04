@@ -582,6 +582,25 @@ textarea {
   margin-bottom: 28px;
 }
 
+.projects-stats--three {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 480px) {
+  .projects-stats--three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.about-project-stats {
+  max-width: 960px;
+  margin: 0 auto 32px;
+}
+
+.about-project-stats .projects-stats {
+  margin-bottom: 0;
+}
+
 .stat-item {
   text-align: center;
   padding: 20px 12px;
@@ -707,22 +726,61 @@ textarea {
   margin: 0 auto;
 }
 
-.content-narrow h2,
-.content-center-title {
-  font-size: clamp(24px, 5.5vw, 40px);
-  font-weight: var(--fw-bold);
-  margin: 0 0 20px;
-}
-
-.content-center-title {
+.about-section-head {
   text-align: center;
-  margin-bottom: 32px;
+  max-width: 720px;
+  margin: 0 auto 36px;
+  padding: 0 4px;
 }
 
+.about-section-title {
+  font-size: clamp(26px, 5.5vw, 40px);
+  font-weight: var(--fw-bold);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: var(--text);
+  margin: 0;
+}
+
+.about-section-lead {
+  font-size: 16px;
+  font-weight: var(--fw-regular);
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin: 12px 0 0;
+  max-width: 36em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.about-section-body {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.about-section-body p,
 .content-narrow p {
   font-size: 16px;
   color: var(--text-secondary);
-  line-height: 1.6;
+  line-height: 1.65;
+  margin: 0 0 16px;
+}
+
+.about-section-body p:last-child {
+  margin-bottom: 0;
+}
+
+.about-page-section .founder-profile {
+  margin-top: 0;
+}
+
+.content-center-title {
+  font-size: clamp(26px, 5.5vw, 40px);
+  font-weight: var(--fw-bold);
+  text-align: center;
+  margin: 0 0 32px;
+  color: var(--text);
 }
 
 .capability-grid {
@@ -1092,10 +1150,14 @@ textarea {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .projects-stats {
+  .projects-stats:not(.projects-stats--three) {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 16px;
     margin-bottom: 36px;
+  }
+
+  .projects-stats--three {
+    gap: 16px;
   }
 
   .inquiry-grid {
@@ -1326,7 +1388,11 @@ textarea {
 
 /* ——— Founder profile (About) ——— */
 .founder-section {
-  padding: calc(var(--section-pad) + 8px) 0;
+  padding: var(--section-pad) 0;
+}
+
+.founder-section .about-section-head {
+  margin-bottom: 40px;
 }
 
 .founder-profile {
@@ -1392,15 +1458,6 @@ textarea {
   width: 100%;
   max-width: 520px;
   text-align: left;
-}
-
-.founder-eyebrow {
-  font-size: 13px;
-  font-weight: var(--fw-semibold);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--text-secondary);
-  margin: 0 0 12px;
 }
 
 .founder-role-line {
@@ -1495,6 +1552,14 @@ textarea {
   .founder-profile-visual:hover .founder-photo-frame img {
     transform: scale(1.02);
   }
+}
+
+.about-section-body .vision-list {
+  margin: 24px 0 0;
+  padding-left: 1.2em;
+  font-size: 16px;
+  color: var(--text-secondary);
+  line-height: 1.65;
 }
 
 .vision-list {

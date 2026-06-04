@@ -310,6 +310,106 @@ function renderContactChannelCard({ id, title, primaryLabel, primaryText, primar
       </article>`;
 }
 
+function contactInquiryIcon(type) {
+  const icons = {
+    app: `<svg class="contact-inquiry-icon" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="18" r="1" fill="currentColor"/></svg>`,
+    ai: `<svg class="contact-inquiry-icon" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 3v3M12 18v3M5 5l2 2M17 17l2 2M3 12h3M18 12h3M5 19l2-2M17 7l2-2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>`,
+    media: `<svg class="contact-inquiry-icon" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><rect x="3" y="5" width="18" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 10h8M8 14h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>`,
+    welding: `<svg class="contact-inquiry-icon" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M4 18h16M8 6l4 8 4-8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  };
+  return icons[type] || icons.app;
+}
+
+function renderContactInquiryTypes() {
+  const items = GOMSOFT_CONFIG.contact?.inquiryTypes || [];
+  return `
+    <section class="contact-block section-alt">
+      <div class="container">
+        <header class="contact-block-head">
+          <h2 class="contact-block-title">문의 유형</h2>
+          <p class="contact-block-lead">관심 분야를 선택해 주세요. 아래 연락 방법으로 이어집니다.</p>
+        </header>
+        <div class="contact-inquiry-grid">
+          ${items
+            .map(
+              (item) => `
+          <button type="button" class="contact-inquiry-card" data-scroll="contact-methods">
+            <span class="contact-inquiry-icon-wrap">${contactInquiryIcon(item.icon)}</span>
+            <h3>${item.title}</h3>
+            <p>${item.desc}</p>
+          </button>`
+            )
+            .join("")}
+        </div>
+      </div>
+    </section>`;
+}
+
+function renderContactWhy() {
+  const why = GOMSOFT_CONFIG.contact?.why || {};
+  const items = (why.items || [])
+    .map(
+      (text) => `
+      <li class="contact-why-item">
+        <span class="contact-why-check" aria-hidden="true">✓</span>
+        <span>${text}</span>
+      </li>`
+    )
+    .join("");
+
+  return `
+    <section class="contact-block">
+      <div class="container">
+        <header class="contact-block-head">
+          <h2 class="contact-block-title">${why.title || "왜 곰소프트를 선택해야 할까요?"}</h2>
+        </header>
+        <div class="contact-why-panel">
+          <ul class="contact-why-list">${items}</ul>
+        </div>
+      </div>
+    </section>`;
+}
+
+function renderContactPageContent() {
+  const c = GOMSOFT_CONFIG.contact || {};
+  const hero = c.hero || {};
+  const closing = c.closing || {};
+
+  return `
+    <header class="contact-hero">
+      <div class="container">
+        <h1 class="contact-hero-title">${hero.title || "프로젝트를 함께 만들어보세요"}</h1>
+        <p class="contact-hero-lead">${hero.lead || ""}</p>
+        <p class="contact-hero-support">${hero.support || ""}</p>
+      </div>
+    </header>
+    ${renderContactInquiryTypes()}
+    ${renderContactWhy()}
+    <section class="contact-block section-alt" id="contact-methods">
+      <div class="container">
+        <header class="contact-block-head">
+          <h2 class="contact-block-title">${c.methodsTitle || "연락 방법"}</h2>
+        </header>
+        ${renderContactChannels()}
+      </div>
+    </section>
+    <section class="contact-closing">
+      <div class="container">
+        <p class="contact-closing-line">${closing.line1 || ""}</p>
+        <p class="contact-closing-line contact-closing-em">${closing.line2 || ""}</p>
+      </div>
+    </section>`;
+}
+
+function initContactInquiryScroll() {
+  document.querySelectorAll("[data-scroll='contact-methods']").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const target = document.getElementById("contact-methods");
+      if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+}
+
 function renderContactChannels() {
   const c = GOMSOFT_CONFIG.contact || {};
   const project = c.project || {};

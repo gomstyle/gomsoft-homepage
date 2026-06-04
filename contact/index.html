@@ -9,18 +9,7 @@
 <body>
   <div id="siteHeader"></div>
 
-  <header class="page-hero">
-    <div class="container">
-      <h1>Contact</h1>
-      <p>협업 · 지원사업 · 서비스 문의</p>
-    </div>
-  </header>
-
-  <section class="section">
-    <div class="container">
-      <div id="contactChannels"></div>
-    </div>
-  </section>
+  <div id="contactPageContent"></div>
 
   <div id="siteFooter"></div>
 
@@ -31,11 +20,12 @@
     document.getElementById("siteFooter").innerHTML = renderSiteFooter();
     setPageMeta({
       title: "Contact",
-      description: "GOMSOFT 문의 — 프로젝트·지원사업·협업, 용접 서비스",
+      description: "GOMSOFT 문의 — 앱·AI·미디어·용접. 아이디어를 실제 서비스로 구현합니다.",
       path: "/contact/",
     });
     initNavigation();
-    document.getElementById("contactChannels").innerHTML = renderContactChannels();
+    document.getElementById("contactPageContent").innerHTML = renderContactPageContent();
+    initContactInquiryScroll();
   </script>
 </body>
 </html>

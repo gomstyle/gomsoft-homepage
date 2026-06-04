@@ -149,6 +149,52 @@ const GOMSOFT_CONFIG = {
   ],
   contact: {
     kakaoChannelUrl: "https://pf.kakao.com/_TPxmGX",
+    hero: {
+      title: "프로젝트를 함께 만들어보세요",
+      lead: "앱 개발, AI 서비스, 미디어 운영, 현장 서비스까지",
+      support: "곰소프트는 아이디어를 실제 서비스로 구현합니다.",
+    },
+    inquiryTypes: [
+      {
+        id: "app",
+        title: "앱·게임 개발 문의",
+        desc: "생산성 앱, MVP, 서비스 개발",
+        icon: "app",
+      },
+      {
+        id: "ai",
+        title: "AI·자동화 문의",
+        desc: "AI 활용 서비스 및 업무 자동화",
+        icon: "ai",
+      },
+      {
+        id: "media",
+        title: "미디어·홍보 문의",
+        desc: "넥스트리뷰 기사 및 콘텐츠 협업",
+        icon: "media",
+      },
+      {
+        id: "welding",
+        title: "출장 용접 문의",
+        desc: "현장 용접 및 유지보수",
+        icon: "welding",
+      },
+    ],
+    why: {
+      title: "왜 곰소프트를 선택해야 할까요?",
+      items: [
+        "기획부터 개발까지 직접 수행",
+        "출시 경험 보유 (패밀리루틴, 바다동물의숲)",
+        "인터넷신문 운영 경험",
+        "빠른 MVP 제작 가능",
+        "1인 구조의 빠른 의사결정",
+      ],
+    },
+    methodsTitle: "연락 방법",
+    closing: {
+      line1: "작은 아이디어도 괜찮습니다.",
+      line2: "아이디어 단계부터 함께 고민하겠습니다.",
+    },
     project: {
       title: "프로젝트 · 지원사업 · 협업 문의",
       email: "soxos3339@naver.com",

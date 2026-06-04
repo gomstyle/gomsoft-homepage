@@ -2,8 +2,8 @@
   "posts": [
     {
       "id": "apps-2026-06-04-패밀리루틴",
-      "projectType": "app",
       "category": "apps",
+      "projectType": "app",
       "slug": "2026-06-04-패밀리루틴",
       "title": "패밀리루틴",
       "summary": "가족 루틴을 관리하는 생산성 앱",

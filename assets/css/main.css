@@ -314,13 +314,13 @@ textarea {
 
 /* ——— Home: Hero · Profile · Projects bands ——— */
 .home-projects-section {
-  background: var(--bg-subtle);
+  background: var(--bg);
 }
 
 /* ——— Company Profile ——— */
 .profile-section {
   padding: 48px 0 52px;
-  background: var(--bg);
+  background: var(--bg-subtle);
 }
 
 .profile-section .container {

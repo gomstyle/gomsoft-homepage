@@ -506,13 +506,17 @@ function renderContactPageContent() {
   const hero = c.hero || {};
   const closing = c.closing || {};
 
+  const heroSubtitle =
+    [hero.lead, hero.support].filter(Boolean).join(" · ") ||
+    hero.title ||
+    "앱 · AI · 미디어 · 현장 서비스 문의";
+
   return `
-    <header class="contact-hero">
+    <header class="page-hero">
       ${renderHeroAuroraMarkup()}
       <div class="container">
-        <h1 class="contact-hero-title">${hero.title || "프로젝트를 함께 만들어보세요"}</h1>
-        <p class="contact-hero-lead">${hero.lead || ""}</p>
-        <p class="contact-hero-support">${hero.support || ""}</p>
+        <h1>Contact</h1>
+        <p>${heroSubtitle}</p>
       </div>
     </header>
     ${renderContactInquiryTypes()}

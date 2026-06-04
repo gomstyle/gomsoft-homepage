@@ -286,10 +286,6 @@ body {
     padding-top: 28px;
   }
 
-  .contact-hero {
-    padding-top: 40px;
-  }
-
   .admin-wrap {
     padding-top: 24px;
   }
@@ -1484,21 +1480,16 @@ body {
   margin: 0;
 }
 
-.page-hero,
-.contact-hero {
+.page-hero {
   position: relative;
   overflow: hidden;
   text-align: center;
+  padding: 28px var(--container-pad) 32px;
   background: #ffffff;
   isolation: isolate;
 }
 
-.page-hero {
-  padding: 28px var(--container-pad) 32px;
-}
-
-.page-hero .container,
-.contact-hero .container {
+.page-hero .container {
   position: relative;
   z-index: 1;
 }
@@ -1506,45 +1497,21 @@ body {
 .page-hero h1 {
   font-size: clamp(30px, 7vw, 56px);
   font-weight: var(--fw-bold);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
   margin: 0 0 8px;
+  color: var(--text);
 }
 
 .page-hero p {
   font-size: 16px;
+  font-weight: var(--fw-regular);
   color: var(--text-secondary);
   margin: 0;
-}
-
-/* ——— Contact page ——— */
-.contact-hero {
-  padding: 40px var(--container-pad) 48px;
-}
-
-.contact-hero-title {
-  font-size: clamp(28px, 6vw, 44px);
-  font-weight: var(--fw-bold);
-  letter-spacing: -0.035em;
-  line-height: 1.15;
-  margin: 0 0 16px;
-  color: var(--text);
-}
-
-.contact-hero-lead {
-  font-size: clamp(16px, 2.8vw, 20px);
-  font-weight: var(--fw-regular);
-  color: var(--text);
-  margin: 0 0 8px;
   line-height: 1.5;
 }
 
-.contact-hero-support {
-  font-size: clamp(15px, 2.4vw, 18px);
-  font-weight: var(--fw-light);
-  color: var(--text-secondary);
-  margin: 0;
-  line-height: 1.55;
-}
-
+/* ——— Contact page ——— */
 /* Contact: subtle → white → subtle → white → subtle */
 .contact-block {
   padding: var(--section-pad) 0;
@@ -1703,10 +1670,6 @@ body {
 }
 
 @media (min-width: 768px) {
-  .contact-hero {
-    padding: 56px var(--container-pad) 64px;
-  }
-
   .contact-inquiry-grid {
     gap: 16px;
   }

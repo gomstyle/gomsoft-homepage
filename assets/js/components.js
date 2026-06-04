@@ -25,12 +25,92 @@ function renderSiteHeader(activePage) {
 </header>`;
 }
 
+function footerProjectHref(proj) {
+  if (proj.link && /^https?:\/\//i.test(proj.link)) return proj.link;
+  if (proj.postSlug && proj.postCategory) {
+    return `/post.html?category=${encodeURIComponent(proj.postCategory)}&slug=${encodeURIComponent(proj.postSlug)}`;
+  }
+  return proj.link || "/projects/";
+}
+
 function renderSiteFooter() {
+  const cfg = GOMSOFT_CONFIG;
+  const footer = cfg.footer || {};
+  const intro = footer.intro || [cfg.taglineSub];
+  const contact = footer.contact || {};
+  const company = footer.company || {};
+  const kakaoUrl = cfg.contact?.kakaoChannelUrl || "";
+  const email = contact.email || cfg.email;
+  const phone = contact.phone || cfg.phone;
+  const navPages = [
+    { label: "Home", href: "/" },
+    { label: "About", href: "/about/" },
+    { label: "Projects", href: "/projects/" },
+    { label: "Contact", href: "/contact/" },
+  ];
   const year = new Date().getFullYear();
+  const projectLinks = (cfg.projects || [])
+    .map(
+      (proj) =>
+        `<li><a href="${footerProjectHref(proj)}">${proj.name}</a></li>`
+    )
+    .join("");
+
   return `
-<footer class="site-footer">
-  <p>Copyright © ${year} ${GOMSOFT_CONFIG.siteName}</p>
-  <p>${GOMSOFT_CONFIG.businessInfo}</p>
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-main">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-brand">
+          <a href="/" class="footer-logo" aria-label="${cfg.siteName} 홈">
+            <img src="${cfg.logoImage}" alt="${cfg.siteName}" width="160" height="36" loading="lazy" decoding="async">
+          </a>
+          <p class="footer-intro">${intro.map((line) => `<span>${line}</span>`).join("<br>")}</p>
+        </div>
+        <div class="footer-col">
+          <h2 class="footer-heading">Quick Menu</h2>
+          <ul class="footer-links">
+            ${navPages.map((p) => `<li><a href="${p.href}">${p.label}</a></li>`).join("")}
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h2 class="footer-heading">대표 프로젝트</h2>
+          <ul class="footer-links">${projectLinks}</ul>
+        </div>
+        <div class="footer-col">
+          <h2 class="footer-heading">Contact</h2>
+          <ul class="footer-contact">
+            <li>
+              <span class="footer-contact-label">이메일</span>
+              <a href="mailto:${email}">${email}</a>
+            </li>
+            <li>
+              <span class="footer-contact-label">전화번호</span>
+              <a href="tel:${phone.replace(/\s/g, "")}">${phone}</a>
+            </li>
+            <li>
+              <span class="footer-contact-label">카카오톡</span>
+              ${
+                kakaoUrl
+                  ? `<a href="${kakaoUrl}" target="_blank" rel="noopener noreferrer">${contact.kakaoLabel || "카카오톡"}</a>`
+                  : `<span>${contact.kakaoLabel || "카카오톡"}</span>`
+              }
+              ${contact.kakaoNote ? `<span class="footer-contact-note">${contact.kakaoNote}</span>` : ""}
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-company" aria-label="회사정보">
+        <p><span class="footer-company-label">대표자</span> ${company.representative || cfg.founderName}</p>
+        <p><span class="footer-company-label">사업자등록번호</span> ${company.businessRegistrationNumber || "110-33-91602"}</p>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">
+      <p class="footer-copyright">© ${year} ${cfg.siteName}.<br class="footer-copyright-br"> All Rights Reserved.</p>
+    </div>
+  </div>
 </footer>`;
 }
 
@@ -272,6 +352,7 @@ function renderAboutPageContent() {
         <div class="about-prose-rail">
           <div class="about-section-body">
             ${visionParas}
+            <h3 class="vision-goals-title">${a.vision.goalsTitle || "주요 추진 계획"}</h3>
             <ul class="vision-list">${goals}</ul>
           </div>
         </div>

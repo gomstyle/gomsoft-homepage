@@ -85,15 +85,17 @@ const GOMSOFT_CONFIG = {
     vision: {
       title: "향후 비전",
       paragraphs: [
-        "단일 앱이 아닌 **지속 가능한 디지털 프로덕트 포트폴리오**를 구축합니다.",
-        "AI를 활용한 생산성 도구와 교육·가족 서비스를 결합한 **차세대 라이프스타일 플랫폼**을 목표로 합니다.",
-        "정부지원사업·지역 사업과 연계하여 **일자리 창출과 지역 서비스 디지털 전환**에 기여하겠습니다.",
+        "곰소프트는 단일 서비스에 의존하지 않고, 다양한 디지털 프로덕트를 직접 기획·개발·운영하는 지속 가능한 소프트웨어 스튜디오를 목표로 합니다.",
+        "AI 기술과 소프트웨어를 활용하여 생산성, 가족, 교육, 콘텐츠, 지역 서비스 분야의 문제를 해결하는 서비스를 지속적으로 출시하고 성장시켜 나갈 계획입니다.",
+        "또한 정부지원사업과 민간 협력을 적극 활용하여 새로운 서비스를 검증하고, 실제 사용자에게 가치를 제공하는 디지털 생태계를 구축하고자 합니다.",
       ],
+      goalsTitle: "주요 추진 계획",
       goals: [
         "패밀리루틴 사용자 확대 및 프리미엄 기능 고도화",
-        "바다동물의숲 리뉴얼 출시",
-        "넥스트리뷰 미디어 채널 브랜드 강화",
-        "출장 용접 서비스 온라인 예약·관리 시스템 구축",
+        "바다동물의숲 리뉴얼 및 콘텐츠 확장",
+        "넥스트리뷰 미디어 플랫폼 성장 및 콘텐츠 확대",
+        "출장 용접 서비스의 온라인 예약·관리 시스템 구축",
+        "AI 기반 신규 서비스 발굴 및 출시",
       ],
     },
   },
@@ -128,7 +130,7 @@ const GOMSOFT_CONFIG = {
       tag: "Digital Media",
       status: "운영 중",
       desc: "AI·Apps·Tech 트렌드를 다루는 디지털 미디어·리뷰 채널",
-      thumbnail: "/gomsoft_logo.png",
+      thumbnail: "/assets/images/nextreview-thumb.png",
       highlights: ["Tech 리뷰", "AI·앱 트렌드", "콘텐츠 IP"],
       link: "/projects/?type=media",
       postSlug: "2026-06-04-넥스트리뷰",
@@ -136,11 +138,11 @@ const GOMSOFT_CONFIG = {
     },
     {
       id: "welding24",
-      name: "24시 출장 용접",
+      name: "24시 출장용접",
       tag: "Field Service",
       status: "운영 중",
       desc: "공장·현장 긴급 보수를 위한 24시간 출장 용접·설비 서비스",
-      thumbnail: "/gomsoft_logo.png",
+      thumbnail: "/assets/images/welding-thumb.png",
       highlights: ["24시 상담", "출장 용접", "현장 맞춤 견적"],
       link: "/contact/",
       postSlug: "2026-06-04-24시출장용접",
@@ -202,6 +204,22 @@ const GOMSOFT_CONFIG = {
     welding: {
       title: "용접 서비스",
       phone: "010-7680-7581",
+    },
+  },
+  footer: {
+    intro: [
+      "아이디어를 실제 서비스로 구현하는",
+      "디지털 프로덕트 스튜디오",
+    ],
+    contact: {
+      email: "soxos3339@naver.com",
+      phone: "010-7680-7581",
+      kakaoLabel: "카카오톡",
+      kakaoNote: "추후 QR 연결 예정",
+    },
+    company: {
+      representative: "허구슬",
+      businessRegistrationNumber: "110-33-91602",
     },
   },
 };

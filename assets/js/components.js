@@ -185,7 +185,8 @@ function renderAboutPageContent() {
     .join("");
 
   const companyParas = a.company.paragraphs.map((p) => `<p>${formatRichText(p)}</p>`).join("");
-  const repBio = a.representative.bio.map((p) => `<p>${formatRichText(p)}</p>`).join("");
+  const rep = a.representative;
+  const repBio = rep.bio.map((p) => `<p>${formatRichText(p)}</p>`).join("");
   const visionParas = a.vision.paragraphs.map((p) => `<p>${formatRichText(p)}</p>`).join("");
   const goals = a.vision.goals.map((g) => `<li>${g}</li>`).join("");
 
@@ -196,11 +197,32 @@ function renderAboutPageContent() {
         ${companyParas}
       </div>
     </section>
-    <section class="content-section section-alt">
-      <div class="container content-narrow">
-        <h2>${a.representative.title}</h2>
-        <p class="rep-name">${a.representative.name} <span>${a.representative.role}</span></p>
-        ${repBio}
+    <section class="content-section section-alt founder-section" id="founder-profile">
+      <div class="container">
+        <div class="founder-profile">
+          <div class="founder-profile-text reveal-on-scroll">
+            <p class="founder-eyebrow">${rep.title}</p>
+            <h2 class="founder-name">${rep.name}</h2>
+            <p class="founder-role">${rep.roleTitle}</p>
+            <div class="founder-bio">${repBio}</div>
+          </div>
+          <figure class="founder-profile-visual reveal-on-scroll reveal-delay">
+            <div class="founder-photo-frame">
+              <img
+                src="${rep.photo}"
+                alt="${rep.name}"
+                width="360"
+                height="480"
+                loading="lazy"
+                decoding="async"
+              >
+            </div>
+            <figcaption class="founder-photo-caption">
+              <span class="founder-caption-name">${rep.name}</span>
+              <span class="founder-caption-role">${rep.roleTitle}</span>
+            </figcaption>
+          </figure>
+        </div>
       </div>
     </section>
     <section class="content-section">
@@ -238,6 +260,37 @@ function renderContactInquiryCards() {
       </button>`
     )
     .join("");
+}
+
+function initRevealOnScroll() {
+  const els = document.querySelectorAll(".reveal-on-scroll");
+  if (!els.length) return;
+
+  const show = (el) => el.classList.add("is-visible");
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    els.forEach(show);
+    return;
+  }
+
+  if (!("IntersectionObserver" in window)) {
+    els.forEach(show);
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          show(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12, rootMargin: "0px 0px -32px 0px" }
+  );
+
+  els.forEach((el) => observer.observe(el));
 }
 
 function initContactInquiryScroll() {

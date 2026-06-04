@@ -53,7 +53,8 @@ const GOMSOFT_CONFIG = {
     representative: {
       title: "대표 소개",
       name: "허구슬",
-      role: "1인 개발자이자 창업가",
+      roleTitle: "Founder & Developer",
+      photo: "/assets/images/founder.jpg",
       bio: [
         "Unity 기반 모바일 앱·게임 개발, 인터넷신문 운영, AI 활용 콘텐츠 제작, 현장 서비스 사업을 직접 수행하고 있습니다.",
         "기획 → 개발 → 운영 → 마케팅까지 **전 과정을 직접 수행**하는 것이 강점입니다.",

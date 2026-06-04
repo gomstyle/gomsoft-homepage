@@ -880,33 +880,34 @@ textarea {
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
 }
 
-/* ——— Post detail links ——— */
-.post-link-buttons {
+/* ——— Post detail actions ——— */
+.post-detail-actions {
   max-width: 720px;
-  margin: 40px auto 0;
-  padding: 28px var(--container-pad);
-  text-align: center;
-  border-top: 1px solid var(--border);
+  margin: 48px auto 0;
+  padding: 0 var(--container-pad);
 }
 
-.post-link-buttons-title {
-  font-size: 14px;
-  font-weight: var(--fw-semibold);
-  color: var(--text-secondary);
-  margin: 0 0 16px;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
-.post-link-buttons-row {
+.post-detail-actions-row {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 10px;
   justify-content: center;
+  align-items: center;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 4px 2px 8px;
 }
 
-.post-link-buttons-row .btn {
-  min-width: 140px;
+.post-detail-actions-row .btn {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  min-width: 0;
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+.post-detail-actions-row .btn-secondary {
+  flex-shrink: 0;
 }
 
 .section-footer-link {

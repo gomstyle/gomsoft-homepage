@@ -199,22 +199,21 @@ async function loadPostMarkdown(category, slug) {
   return res.text();
 }
 
-function renderDetailLinkButtons(links) {
-  if (!links.length) return "";
+function renderPostDetailActions(projectType, links) {
+  const backHref = projectType ? `/projects/?type=${encodeURIComponent(projectType)}` : "/projects/";
+  const linkBtns = (links || [])
+    .map((l) => {
+      const external = /^https?:\/\//i.test(l.url);
+      const safeUrl = String(l.url).replace(/"/g, "&quot;");
+      const targetAttr = external ? ' target="_blank" rel="noopener"' : "";
+      return `<a href="${safeUrl}" class="btn btn-primary"${targetAttr}>${escapeHtml(l.label)}</a>`;
+    })
+    .join("");
+
   return `
-    <div class="post-link-buttons">
-      <p class="post-link-buttons-title">프로젝트 링크</p>
-      <div class="post-link-buttons-row">
-        ${links
-          .map((l) => {
-            const external = /^https?:\/\//i.test(l.url);
-            const safeUrl = String(l.url).replace(/"/g, "&quot;");
-            const btnClass = external ? "btn-primary" : "btn-secondary";
-            const targetAttr = external ? ' target="_blank" rel="noopener"' : "";
-            return `<a href="${safeUrl}" class="btn ${btnClass}"${targetAttr}>${escapeHtml(l.label)}</a>`;
-          })
-          .join("")}
-      </div>
+    <div class="post-detail-actions-row">
+      <a href="${backHref}" class="btn btn-secondary">Projects 목록</a>
+      ${linkBtns}
     </div>`;
 }
 
@@ -267,14 +266,9 @@ async function renderPostDetail(category, slug) {
     gallery.innerHTML = "";
   }
 
-  const linkWrap = document.getElementById("postLinks");
-  if (linkWrap) {
-    linkWrap.innerHTML = renderDetailLinkButtons(links);
-  }
-
-  const back = document.getElementById("postBackLink");
-  if (back) {
-    back.href = projectType ? `/projects/?type=${projectType}` : "/projects/";
+  const actionsEl = document.getElementById("postDetailActions");
+  if (actionsEl) {
+    actionsEl.innerHTML = renderPostDetailActions(projectType, links);
   }
 }
 

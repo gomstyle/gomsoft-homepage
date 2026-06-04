@@ -202,8 +202,7 @@ function renderAboutPageContent() {
         <div class="founder-profile">
           <div class="founder-profile-text reveal-on-scroll">
             <p class="founder-eyebrow">${rep.title}</p>
-            <h2 class="founder-name">${rep.name}</h2>
-            <p class="founder-role">${rep.roleTitle}</p>
+            <p class="founder-role-line">${rep.roleLine}</p>
             <div class="founder-bio">${repBio}</div>
           </div>
           <figure class="founder-profile-visual reveal-on-scroll reveal-delay">

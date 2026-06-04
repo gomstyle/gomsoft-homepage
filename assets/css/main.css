@@ -1403,21 +1403,13 @@ textarea {
   margin: 0 0 12px;
 }
 
-.founder-name {
-  font-size: clamp(32px, 8vw, 48px);
-  font-weight: var(--fw-bold);
-  letter-spacing: -0.04em;
-  line-height: 1.1;
-  margin: 0 0 8px;
+.founder-role-line {
+  font-size: clamp(17px, 4vw, 20px);
+  font-weight: var(--fw-semibold);
+  letter-spacing: -0.02em;
+  line-height: 1.45;
   color: var(--text);
-}
-
-.founder-role {
-  font-size: 17px;
-  font-weight: var(--fw-medium);
-  color: var(--text-secondary);
-  margin: 0 0 24px;
-  letter-spacing: -0.01em;
+  margin: 0 0 28px;
 }
 
 .founder-bio p {

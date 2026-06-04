@@ -264,7 +264,7 @@ async function renderPostDetail(category, slug) {
   const title = meta.title || slug;
   const date = meta.date || "";
   const projectType = meta.projectType || projectTypeFromCategory(category);
-  const images = Array.isArray(meta.images) ? meta.images : meta.images ? [meta.images] : [];
+  const media = parseProjectMedia(meta);
   const links = parseProjectLinks(meta);
   const coverSrc = meta.coverImage || meta.thumbnail;
 
@@ -294,18 +294,18 @@ async function renderPostDetail(category, slug) {
     metaEl.innerHTML = `<span class="post-detail-type">${projectTypeLabel(projectType)}</span>${statusText} · ${formatDate(date)}`;
   }
 
-  document.getElementById("postContent").innerHTML = renderMarkdownSimple(body);
-
-  const gallery = document.getElementById("postGallery");
-  if (images.length && gallery) {
-    gallery.innerHTML = images
-      .filter(Boolean)
-      .map((src) => `<img src="${src}" alt="" width="600" loading="lazy" decoding="async">`)
-      .join("");
-    gallery.className = "post-gallery";
-  } else if (gallery) {
-    gallery.innerHTML = "";
+  const mediaEl = document.getElementById("postMediaGallery");
+  if (mediaEl) {
+    if (media.length) {
+      mediaEl.innerHTML = renderProjectMediaGallery(media, title);
+      mediaEl.hidden = false;
+    } else {
+      mediaEl.innerHTML = "";
+      mediaEl.hidden = true;
+    }
   }
+
+  document.getElementById("postContent").innerHTML = renderMarkdownSimple(body);
 
   const actionsEl = document.getElementById("postDetailActions");
   if (actionsEl) {

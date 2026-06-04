@@ -295,31 +295,49 @@ body {
   }
 }
 
-/* ——— Hero (Aurora · minimal motion) ——— */
-@keyframes hero-aurora-shift {
+/* ——— Hero (Aurora · OpenAI / Linear tone) ——— */
+:root {
+  --hero-aurora-blue: rgba(59, 130, 246, 0.24);
+  --hero-aurora-purple: rgba(139, 92, 246, 0.24);
+  --hero-aurora-cyan: rgba(6, 182, 212, 0.2);
+}
+
+@keyframes hero-aurora-blue {
   0% {
     transform: translate(0%, 0%) scale(1);
   }
   33% {
-    transform: translate(2%, -1.5%) scale(1.02);
+    transform: translate(3%, -2%) scale(1.04);
   }
   66% {
-    transform: translate(-1.5%, 2%) scale(1.01);
+    transform: translate(-2%, 2.5%) scale(1.02);
   }
   100% {
-    transform: translate(1%, -2%) scale(1.02);
+    transform: translate(2%, -2.5%) scale(1.05);
   }
 }
 
-@keyframes hero-aurora-shift-alt {
+@keyframes hero-aurora-purple {
   0% {
-    transform: translate(0%, 0%) scale(1.05);
+    transform: translate(0%, 0%) scale(1.02);
   }
   50% {
-    transform: translate(-2.5%, 1%) scale(1.08);
+    transform: translate(-3%, 1.5%) scale(1.06);
   }
   100% {
-    transform: translate(2%, -1%) scale(1.05);
+    transform: translate(2.5%, -2%) scale(1.03);
+  }
+}
+
+@keyframes hero-aurora-cyan {
+  0% {
+    transform: translate(0%, 0%) scale(1.03);
+  }
+  40% {
+    transform: translate(-2%, -2%) scale(1.05);
+  }
+  100% {
+    transform: translate(2%, 2%) scale(1.04);
   }
 }
 
@@ -361,32 +379,35 @@ body {
   overflow: hidden;
 }
 
-.hero-aurora::before,
-.hero-aurora::after {
-  content: "";
+.hero-aurora-layer {
   position: absolute;
-  width: 130%;
-  height: 130%;
-  left: -15%;
-  top: -15%;
+  width: 165%;
+  height: 165%;
+  left: -32%;
+  top: -32%;
   will-change: transform;
+  border-radius: 50%;
 }
 
-.hero-aurora::before {
+.hero-aurora-layer--blue {
   background:
-    radial-gradient(ellipse 55% 45% at 22% 38%, rgba(243, 247, 255, 0.95) 0%, transparent 68%),
-    radial-gradient(ellipse 50% 42% at 78% 62%, rgba(238, 244, 255, 0.9) 0%, transparent 65%),
-    radial-gradient(ellipse 48% 40% at 50% 88%, rgba(247, 245, 255, 0.85) 0%, transparent 62%);
-  animation: hero-aurora-shift 18s ease-in-out infinite alternate;
+    radial-gradient(ellipse 92% 88% at 24% 36%, var(--hero-aurora-blue) 0%, transparent 74%),
+    radial-gradient(ellipse 70% 65% at 55% 70%, rgba(59, 130, 246, 0.1) 0%, transparent 72%);
+  animation: hero-aurora-blue 18s ease-in-out infinite alternate;
 }
 
-.hero-aurora::after {
+.hero-aurora-layer--purple {
   background:
-    radial-gradient(ellipse 45% 38% at 65% 28%, rgba(238, 244, 255, 0.7) 0%, transparent 60%),
-    radial-gradient(ellipse 42% 36% at 35% 72%, rgba(243, 247, 255, 0.65) 0%, transparent 58%),
-    radial-gradient(ellipse 40% 35% at 88% 45%, rgba(247, 245, 255, 0.6) 0%, transparent 55%);
-  animation: hero-aurora-shift-alt 20s ease-in-out infinite alternate-reverse;
-  opacity: 0.85;
+    radial-gradient(ellipse 90% 86% at 78% 32%, var(--hero-aurora-purple) 0%, transparent 74%),
+    radial-gradient(ellipse 72% 68% at 40% 88%, rgba(139, 92, 246, 0.09) 0%, transparent 70%);
+  animation: hero-aurora-purple 20s ease-in-out infinite alternate-reverse;
+}
+
+.hero-aurora-layer--cyan {
+  background:
+    radial-gradient(ellipse 95% 90% at 52% 52%, var(--hero-aurora-cyan) 0%, transparent 76%),
+    radial-gradient(ellipse 80% 75% at 68% 68%, rgba(6, 182, 212, 0.08) 0%, transparent 72%);
+  animation: hero-aurora-cyan 19s ease-in-out infinite alternate;
 }
 
 .hero-inner {
@@ -465,8 +486,7 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-aurora::before,
-  .hero-aurora::after,
+  .hero-aurora-layer,
   .hero-logo img {
     animation: none;
   }
@@ -2383,6 +2403,14 @@ a.contact-channel-value:hover {
   color: var(--text-secondary);
 }
 
+.form-hint {
+  display: block;
+  margin-top: 8px;
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--text-secondary);
+}
+
 .form-group input,
 .form-group select,
 .form-group textarea {
@@ -2769,23 +2797,85 @@ a.contact-channel-value:hover {
 }
 
 
-.post-gallery {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  margin: 24px auto;
-  padding: 0 var(--container-pad);
+/* ——— Post detail media gallery ——— */
+.post-media-gallery-wrap {
   max-width: 600px;
+  width: 100%;
+  margin: 0 auto 32px;
+  padding: 0 var(--container-pad);
+}
+
+.post-media-gallery-wrap[hidden] {
+  display: none;
+}
+
+.post-media-gallery {
   width: 100%;
 }
 
-.post-gallery img {
-  display: block;
-  max-width: 600px;
+.post-media-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
   width: 100%;
+}
+
+.post-media-item {
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.post-media-item img {
+  display: block;
+  width: 100%;
+  max-width: 600px;
   height: auto;
-  border-radius: var(--radius-sm);
+  margin: 0 auto;
+}
+
+.post-media-video-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #0a0a0c;
+}
+
+.post-media-item video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  vertical-align: middle;
+}
+
+.post-media-caption {
+  padding: 10px 14px 12px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--text-secondary);
+  text-align: center;
+  border-top: 1px solid var(--border);
+}
+
+@media (min-width: 480px) {
+  .post-media-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .post-media-item--video {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 768px) {
+  .post-media-grid {
+    gap: 20px;
+  }
 }
 
 .post-external-link {

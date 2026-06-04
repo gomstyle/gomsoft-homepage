@@ -13,11 +13,15 @@ function parseFrontmatter(raw) {
     if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
       value = value.slice(1, -1);
     }
-    if (value.startsWith("[") && value.endsWith("]")) {
+    if ((value.startsWith("[") && value.endsWith("]")) || (value.startsWith("{") && value.endsWith("}"))) {
       try {
-        meta[key] = JSON.parse(value.replace(/'/g, '"'));
+        meta[key] = JSON.parse(value);
       } catch {
-        meta[key] = [];
+        try {
+          meta[key] = JSON.parse(value.replace(/'/g, '"'));
+        } catch {
+          meta[key] = value.startsWith("[") ? [] : value;
+        }
       }
     } else {
       meta[key] = value;
@@ -115,7 +119,8 @@ function renderMarkdownSimple(text) {
 }
 
 function buildFrontmatter(data) {
-  const images = Array.isArray(data.images) ? data.images : [];
+  const media = Array.isArray(data.media) ? data.media : [];
+  const imageUrls = media.filter((m) => m.type === "image").map((m) => m.url);
   const lines = [
     "---",
     `title: "${escapeYaml(data.title)}"`,
@@ -123,7 +128,8 @@ function buildFrontmatter(data) {
     `summary: "${escapeYaml(data.summary)}"`,
     `thumbnail: "${data.thumbnail || ""}"`,
     `coverImage: "${data.coverImage || ""}"`,
-    `images: ${JSON.stringify(images)}`,
+    `media: ${JSON.stringify(media)}`,
+    `images: ${JSON.stringify(imageUrls)}`,
     `status: "${escapeYaml(data.status || "")}"`,
     `link: "${data.link || (data.links && data.links[0] ? data.links[0].url : "")}"`,
     `links: ${JSON.stringify(data.links || [])}`,

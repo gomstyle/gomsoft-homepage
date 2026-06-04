@@ -254,7 +254,8 @@ async function publishPost(formData, existingSlug) {
     summary: formData.summary,
     thumbnail: formData.thumbnail,
     coverImage: formData.coverImage,
-    images: formData.images,
+    media: formData.media,
+    images: (formData.media || []).filter((m) => m.type === "image").map((m) => m.url),
     status: formData.status,
     link: links[0] ? links[0].url : "",
     links,
@@ -303,9 +304,13 @@ async function removePost(category, slug) {
   if (typeof invalidatePostsCache === "function") invalidatePostsCache();
 }
 
-async function uploadImageToRepo(file, projectType) {
+async function uploadMediaToRepo(file, projectType) {
+  const kind = typeof mediaKindFromFile === "function" ? mediaKindFromFile(file) : null;
+  if (!kind) {
+    throw new Error("지원 형식: jpg, png, webp, mp4, webm");
+  }
   const category = categoryFromProjectType(projectType || "app");
-  const ext = file.name.split(".").pop() || "png";
+  const ext = (file.name.split(".").pop() || "bin").toLowerCase();
   const name = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
   const path = `assets/uploads/${category}/${name}`;
 
@@ -320,11 +325,15 @@ async function uploadImageToRepo(file, projectType) {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      message: `CMS: 이미지 업로드 ${name}`,
+      message: `CMS: 미디어 업로드 ${name}`,
       content: base64,
       branch,
     }),
   });
 
   return `/${path}`;
+}
+
+async function uploadImageToRepo(file, projectType) {
+  return uploadMediaToRepo(file, projectType);
 }

@@ -117,9 +117,10 @@
           </div>
         </div>
         <div class="form-group">
-          <label>추가 이미지 URL (줄바꿈으로 구분)</label>
-          <textarea id="postImages" rows="3" placeholder="/ocean1.jpg"></textarea>
-          <input type="file" id="imageUpload" accept="image/*" multiple style="margin-top:8px">
+          <label>프로젝트 미디어 갤러리</label>
+          <textarea id="postMedia" rows="5" placeholder="미디어 URL 한 줄에 하나&#10;/assets/uploads/apps/demo.mp4&#10;/assets/uploads/apps/screen.webp"></textarea>
+          <input type="file" id="mediaUpload" accept=".jpg,.jpeg,.png,.webp,.mp4,.webm,image/jpeg,image/png,image/webp,video/mp4,video/webm" multiple style="margin-top:8px">
+          <small class="form-hint">jpg · png · webp · mp4 · webm — 앱·웹 시연 영상, 작업 사진 등 (상세 페이지 갤러리)</small>
         </div>
         <div class="form-group">
           <label>외부 링크</label>
@@ -137,6 +138,7 @@
   <script src="/assets/js/config.js"></script>
   <script src="/assets/js/project-types.js"></script>
   <script src="/assets/js/post-links.js"></script>
+  <script src="/assets/js/post-media.js"></script>
   <script src="/assets/js/components.js"></script>
   <script src="/assets/js/markdown.js"></script>
   <script src="/assets/js/github-cms.js"></script>
@@ -309,7 +311,7 @@
         document.getElementById("postThumbnail").value = "";
         document.getElementById("postCoverImage").value = "";
         document.getElementById("postBody").value = "";
-        document.getElementById("postImages").value = "";
+        document.getElementById("postMedia").value = "";
         document.getElementById("postLinksText").value = "";
         document.getElementById("postStatus").value = "운영 중";
         document.getElementById("postDate").value = new Date().toISOString().slice(0, 10);
@@ -330,8 +332,7 @@
           document.getElementById("postCoverImage").value = meta.coverImage || "";
           document.getElementById("postBody").value = body;
           document.getElementById("postLinksText").value = linksToText(parseProjectLinks(meta));
-          const imgs = Array.isArray(meta.images) ? meta.images : [];
-          document.getElementById("postImages").value = imgs.join("\n");
+          document.getElementById("postMedia").value = mediaListToTextareaValue(parseProjectMedia(meta));
         })
         .catch((e) => showMsg(e.message, "error"));
     }
@@ -367,7 +368,7 @@
       }
     };
 
-    document.getElementById("imageUpload").onchange = async (e) => {
+    document.getElementById("mediaUpload").onchange = async (e) => {
       const files = [...e.target.files];
       if (!files.length) return;
       const pt = document.getElementById("postProjectType").value;
@@ -375,11 +376,11 @@
       try {
         for (const file of files) {
           showMsg(`${file.name} 업로드 중…`, "success");
-          urls.push(await uploadImageToRepo(file, pt));
+          urls.push(await uploadMediaToRepo(file, pt));
         }
-        const prev = document.getElementById("postImages").value.trim();
-        document.getElementById("postImages").value = (prev ? prev + "\n" : "") + urls.join("\n");
-        showMsg("이미지 업로드 완료", "success");
+        const prev = document.getElementById("postMedia").value.trim();
+        document.getElementById("postMedia").value = (prev ? prev + "\n" : "") + urls.join("\n");
+        showMsg("미디어 업로드 완료", "success");
       } catch (err) {
         showMsg(err.message, "error");
       }
@@ -391,11 +392,7 @@
         showMsg("제목을 입력해 주세요.", "error");
         return;
       }
-      const images = document
-        .getElementById("postImages")
-        .value.split("\n")
-        .map((s) => s.trim())
-        .filter(Boolean);
+      const media = mediaListFromTextarea(document.getElementById("postMedia").value);
 
       const links = parseLinksText(document.getElementById("postLinksText").value);
 
@@ -409,7 +406,7 @@
         thumbnail: document.getElementById("postThumbnail").value.trim(),
         coverImage: document.getElementById("postCoverImage").value.trim(),
         body: document.getElementById("postBody").value,
-        images,
+        media,
         links,
       };
 

@@ -58,8 +58,8 @@
     },
     {
       "id": "welding-2026-06-04-24시출장용접",
-      "projectType": "welding",
       "category": "welding",
+      "projectType": "welding",
       "slug": "2026-06-04-24시출장용접",
       "title": "24시 출장 용접",
       "summary": "긴급 현장 대응이 가능한 출장 용접·보수 서비스",
@@ -68,11 +68,11 @@
       "status": "운영 중",
       "links": [
         {
-          "label": "문의하기",
+          "label": "출장용접문의",
           "url": "/contact/#contact-welding"
         },
         {
-          "label": "전화걸기",
+          "label": "전화상담",
           "url": "tel:01076807581"
         }
       ],

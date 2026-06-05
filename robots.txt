@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /admin/
 
 Sitemap: https://gomsoft.kr/sitemap.xml

@@ -270,7 +270,7 @@ async function renderPostDetail(category, slug) {
 
   setPageMeta({
     title,
-    description: meta.summary || GOMSOFT_CONFIG.headline,
+    description: meta.summary || GOMSOFT_CONFIG.seo.siteDescription,
     path: `/post.html?category=${category}&slug=${slug}`,
     image: coverSrc || meta.thumbnail,
   });

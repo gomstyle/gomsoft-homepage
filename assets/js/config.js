@@ -2,6 +2,14 @@ const GOMSOFT_CONFIG = {
   siteName: "GOMSOFT",
   logoImage: "/assets/images/gomsoft-logo.png",
   tagline: "Goal Oriented Maker",
+  seo: {
+    siteTitle: "곰소프트 GOMSOFT | 앱·웹·AI 서비스를 만드는 개발 스튜디오",
+    siteDescription:
+      "곰소프트 GOMSOFT는 앱, 웹사이트, AI 서비스를 직접 기획하고 개발하는 독립 개발 스튜디오입니다. 아이디어를 실제 서비스로 구현하며 다양한 디지털 프로젝트를 운영하고 있습니다.",
+    ogTitle: "곰소프트 GOMSOFT | 앱·웹·AI 서비스를 만드는 개발 스튜디오",
+    ogDescription:
+      "아이디어를 앱, 웹, AI 서비스로 구현합니다. GOMSOFT는 기획부터 개발, 출시와 운영까지 직접 수행하는 독립 개발 스튜디오입니다.",
+  },
   taglineSub: "아이디어를 실제 서비스로 구현하는 디지털 프로덕트 스튜디오",
   headline: "우리는 아이디어를 실제 서비스로 만듭니다.",
   subHeadline: "앱, 게임, 디지털 미디어, 현장 서비스를 직접 기획하고 운영합니다.",

@@ -139,10 +139,14 @@ function initNavigation() {
   /* 모바일: mobile-category-nav · PC: nav-menu */
 }
 
-function setPageMeta({ title, description, path, image }) {
+function setPageMeta({ title, description, path, image, ogTitle, ogDescription }) {
   const base = GOMSOFT_CONFIG.domain;
-  const fullTitle = title ? `${title} | ${GOMSOFT_CONFIG.siteName}` : `${GOMSOFT_CONFIG.siteName} | ${GOMSOFT_CONFIG.tagline}`;
-  const desc = description || GOMSOFT_CONFIG.headline;
+  const seo = GOMSOFT_CONFIG.seo;
+  const brandLabel = "곰소프트 GOMSOFT";
+  const fullTitle = title ? `${title} | ${brandLabel}` : seo.siteTitle;
+  const desc = description || seo.siteDescription;
+  const resolvedOgTitle = ogTitle || (title ? fullTitle : seo.ogTitle);
+  const resolvedOgDesc = ogDescription || description || seo.ogDescription;
   const url = path ? `${base}${path}` : base;
   const ogImage = image ? (image.startsWith("http") ? image : `${base}${image}`) : `${base}/gomsoft_logo.png`;
 
@@ -161,8 +165,8 @@ function setPageMeta({ title, description, path, image }) {
   };
 
   setMeta('meta[name="description"]', "name=description", desc);
-  setMeta('meta[property="og:title"]', "property=og:title", fullTitle);
-  setMeta('meta[property="og:description"]', "property=og:description", desc);
+  setMeta('meta[property="og:title"]', "property=og:title", resolvedOgTitle);
+  setMeta('meta[property="og:description"]', "property=og:description", resolvedOgDesc);
   setMeta('meta[property="og:url"]', "property=og:url", url);
   setMeta('meta[property="og:image"]', "property=og:image", ogImage);
   setMeta('meta[property="og:type"]', "property=og:type", "website");

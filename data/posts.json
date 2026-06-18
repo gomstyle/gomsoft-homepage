@@ -12,8 +12,12 @@
       "status": "운영 중",
       "links": [
         {
-          "label": "플레이스토어 방문",
+          "label": "Google Play Store",
           "url": "https://play.google.com/store/apps/details?id=com.gomsoft.familyroutine"
+        },
+        {
+          "label": "App Store",
+          "url": "https://apps.apple.com/kr/app/6757383092"
         }
       ],
       "date": "2026-06-04",

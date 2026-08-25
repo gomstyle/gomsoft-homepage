@@ -2,42 +2,50 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://gomsoft.kr/</loc>
+    <lastmod>2026-08-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://gomsoft.kr/about/</loc>
+    <lastmod>2026-08-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
     <loc>https://gomsoft.kr/projects/</loc>
+    <lastmod>2026-08-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
     <loc>https://gomsoft.kr/contact/</loc>
+    <lastmod>2026-08-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://gomsoft.kr/post.html?category=apps&amp;slug=2026-06-04-패밀리루틴</loc>
+    <lastmod>2026-08-25</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://gomsoft.kr/post.html?category=apps&amp;slug=2026-06-04-바다동물의숲</loc>
+    <lastmod>2026-08-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://gomsoft.kr/post.html?category=media&amp;slug=2026-06-04-넥스트리뷰</loc>
+    <lastmod>2026-08-25</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://gomsoft.kr/post.html?category=welding&amp;slug=2026-06-04-24시출장용접</loc>
+    <lastmod>2026-08-25</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
 </urlset>

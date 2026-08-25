@@ -167,6 +167,8 @@ function setPageMeta({ title, description, path, image, ogTitle, ogDescription }
   setMeta('meta[name="description"]', "name=description", desc);
   setMeta('meta[property="og:title"]', "property=og:title", resolvedOgTitle);
   setMeta('meta[property="og:description"]', "property=og:description", resolvedOgDesc);
+  setMeta('meta[property="og:site_name"]', "property=og:site_name", "곰소프트 GOMSOFT");
+  setMeta('meta[property="og:locale"]', "property=og:locale", "ko_KR");
   setMeta('meta[property="og:url"]', "property=og:url", url);
   setMeta('meta[property="og:image"]', "property=og:image", ogImage);
   setMeta('meta[property="og:type"]', "property=og:type", "website");

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>곰소프트 GOMSOFT</title>
+    <link>https://gomsoft.kr/</link>
+    <description>곰소프트(GOMSOFT)는 앱, 게임, AI·디지털 미디어, 현장 서비스를 직접 기획·개발·운영하는 독립 개발 스튜디오입니다.</description>
+    <language>ko</language>
+    <lastBuildDate>Mon, 25 Aug 2026 02:00:00 +0000</lastBuildDate>
+    <atom:link href="https://gomsoft.kr/rss.xml" rel="self" type="application/rss+xml"/>
+    <image>
+      <url>https://gomsoft.kr/favicon.png</url>
+      <title>곰소프트 GOMSOFT</title>
+      <link>https://gomsoft.kr/</link>
+    </image>
+
+    <item>
+      <title>곰소프트 GOMSOFT | 앱·웹·AI 서비스를 만드는 개발 스튜디오</title>
+      <link>https://gomsoft.kr/</link>
+      <guid isPermaLink="true">https://gomsoft.kr/</guid>
+      <pubDate>Wed, 04 Jun 2026 00:00:00 +0000</pubDate>
+      <description><![CDATA[
+        <p><strong>곰소프트(GOMSOFT)</strong>는 아이디어를 실제 서비스로 구현하는 독립 개발 스튜디오입니다.</p>
+        <p>앱, 게임, 디지털 미디어, 현장 서비스를 직접 기획하고 운영합니다.</p>
+        <p><img src="https://gomsoft.kr/gomsoft_logo.png" alt="곰소프트 GOMSOFT 로고" /></p>
+        <p><a href="https://gomsoft.kr/">홈페이지 바로가기</a></p>
+      ]]></description>
+    </item>
+
+    <item>
+      <title>About | 곰소프트 GOMSOFT</title>
+      <link>https://gomsoft.kr/about/</link>
+      <guid isPermaLink="true">https://gomsoft.kr/about/</guid>
+      <pubDate>Wed, 04 Jun 2026 00:00:00 +0000</pubDate>
+      <description><![CDATA[
+        <p>곰소프트(GOMSOFT) 회사 소개, 대표 허구슬, 주요 역량과 향후 비전을 안내합니다.</p>
+        <p><a href="https://gomsoft.kr/about/">About 페이지</a></p>
+      ]]></description>
+    </item>
+
+    <item>
+      <title>Projects | 곰소프트 GOMSOFT</title>
+      <link>https://gomsoft.kr/projects/</link>
+      <guid isPermaLink="true">https://gomsoft.kr/projects/</guid>
+      <pubDate>Wed, 04 Jun 2026 00:00:00 +0000</pubDate>
+      <description><![CDATA[
+        <p>곰소프트가 직접 기획·개발·운영하는 App, Media, Welding 프로젝트를 소개합니다.</p>
+        <p><a href="https://gomsoft.kr/projects/">Projects 페이지</a></p>
+      ]]></description>
+    </item>
+
+    <item>
+      <title>Contact | 곰소프트 GOMSOFT</title>
+      <link>https://gomsoft.kr/contact/</link>
+      <guid isPermaLink="true">https://gomsoft.kr/contact/</guid>
+      <pubDate>Wed, 04 Jun 2026 00:00:00 +0000</pubDate>
+      <description><![CDATA[
+        <p>곰소프트에 앱·AI·미디어·출장용접 문의하기. 기획부터 개발·출시까지 함께합니다.</p>
+        <p><a href="https://gomsoft.kr/contact/">Contact 페이지</a></p>
+      ]]></description>
+    </item>
+
+    <item>
+      <title>패밀리루틴 | 곰소프트 GOMSOFT</title>
+      <link>https://gomsoft.kr/post.html?category=apps&amp;slug=2026-06-04-패밀리루틴</link>
+      <guid isPermaLink="true">https://gomsoft.kr/post.html?category=apps&amp;slug=2026-06-04-패밀리루틴</guid>
+      <pubDate>Wed, 04 Jun 2026 00:00:00 +0000</pubDate>
+      <description><![CDATA[
+        <p>가족의 일정, 메모, 가계부를 하나로 관리하는 가족 생활 통합 플랫폼 — 곰소프트 앱 서비스.</p>
+        <p><img src="https://gomsoft.kr/familyroutine_icon.png" alt="패밀리루틴" /></p>
+        <p><a href="https://gomsoft.kr/post.html?category=apps&amp;slug=2026-06-04-패밀리루틴">프로젝트 상세</a></p>
+      ]]></description>
+    </item>
+
+    <item>
+      <title>바다동물의숲 | 곰소프트 GOMSOFT</title>
+      <link>https://gomsoft.kr/post.html?category=apps&amp;slug=2026-06-04-바다동물의숲</link>
+      <guid isPermaLink="true">https://gomsoft.kr/post.html?category=apps&amp;slug=2026-06-04-바다동물의숲</guid>
+      <pubDate>Wed, 04 Jun 2026 00:00:00 +0000</pubDate>
+      <description><![CDATA[
+        <p>다양한 바다 생물을 수집하고 성장시키는 유아 대상 힐링 캐주얼 게임 — 곰소프트.</p>
+        <p><img src="https://gomsoft.kr/ocean_forest_icon.png" alt="바다동물의숲" /></p>
+      ]]></description>
+    </item>
+
+    <item>
+      <title>넥스트리뷰 | 곰소프트 GOMSOFT</title>
+      <link>https://gomsoft.kr/post.html?category=media&amp;slug=2026-06-04-넥스트리뷰</link>
+      <guid isPermaLink="true">https://gomsoft.kr/post.html?category=media&amp;slug=2026-06-04-넥스트리뷰</guid>
+      <pubDate>Wed, 04 Jun 2026 00:00:00 +0000</pubDate>
+      <description><![CDATA[
+        <p>AI, 앱, 스타트업, 기술 산업의 변화를 전하는 디지털 미디어 — 곰소프트 운영.</p>
+        <p><img src="https://gomsoft.kr/assets/images/nextreview-thumb.png" alt="넥스트리뷰" /></p>
+        <p><a href="https://www.nextreview.kr/">넥스트리뷰 홈페이지</a></p>
+      ]]></description>
+    </item>
+
+    <item>
+      <title>24시 출장 용접 | 곰소프트 GOMSOFT</title>
+      <link>https://gomsoft.kr/post.html?category=welding&amp;slug=2026-06-04-24시출장용접</link>
+      <guid isPermaLink="true">https://gomsoft.kr/post.html?category=welding&amp;slug=2026-06-04-24시출장용접</guid>
+      <pubDate>Wed, 04 Jun 2026 00:00:00 +0000</pubDate>
+      <description><![CDATA[
+        <p>구조물 제작·보수·수리 작업에 신속 대응하는 현장 맞춤형 출장 용접 서비스 — 곰소프트.</p>
+        <p><img src="https://gomsoft.kr/assets/images/welding-thumb.png" alt="24시 출장용접" /></p>
+      ]]></description>
+    </item>
+  </channel>
+</rss>
